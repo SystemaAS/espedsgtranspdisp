@@ -171,7 +171,7 @@
 						        </span>   		
 			    				<font class="text14User" >${user.user}&nbsp;</font>${user.usrLang}</font>
 			    				<font color="#FFFFFF"; style="font-weight: bold;">&nbsp;|&nbsp;&nbsp;</font>
-				    			<a tabindex=-1 href="logoutSporringOppdrag.do">
+				    			<a tabindex=-1 href="logout.do">
 				    				<font class="headerMenuGreen"><img src="resources/images/home.gif" border="0">&nbsp;
 				    					<font class="text14User" onMouseOver="style='color:lemonchiffon;'" onMouseOut="style='color:black;'"><spring:message code="dashboard.menu.button"/>&nbsp;</font>
 				    				</font>
