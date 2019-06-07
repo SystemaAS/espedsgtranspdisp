@@ -84,6 +84,8 @@ public class JsonResponseOutputterController {
 				sb.append(JSON_FIELD_SEPARATOR );
 				sb.append(JSON_QUOTES + "serviceName" + JSON_QUOTES + ":" + JSON_QUOTES + jsonFixMgr.cleanRecord(record.getServiceName()) + JSON_QUOTES);
 				sb.append(JSON_FIELD_SEPARATOR );
+				sb.append(JSON_QUOTES + "description" + JSON_QUOTES + ":" + JSON_QUOTES + jsonFixMgr.cleanRecord(record.getDescription()) + JSON_QUOTES);
+				sb.append(JSON_FIELD_SEPARATOR );
 				sb.append(JSON_QUOTES + "errMsg" + JSON_QUOTES + ":" + JSON_QUOTES + jsonFixMgr.cleanRecord(record.getErrMsg()) + JSON_QUOTES);
 				sb.append(JSON_CLOSE_LIST_RECORD);
 				counter++;
@@ -172,9 +174,11 @@ public class JsonResponseOutputterController {
 		
 		urlStoreObj = new TransportDispUrlDataStore();
 		listObj.add(urlStoreObj);
+		
+		/* ?
 		urlStoreObj = new MainUrlDataStore();
 		listObj.add(urlStoreObj);
-		
+		*/
 		
 			
 		return listObj;
@@ -189,9 +193,10 @@ public class JsonResponseOutputterController {
 		
 		urlStoreObj = new SporringOppdragUrlDataStore();
 		listObj.add(urlStoreObj);
+		/* ?
 		urlStoreObj = new MainUrlDataStore();
 		listObj.add(urlStoreObj);
-		
+		*/
 		
 			
 		return listObj;
