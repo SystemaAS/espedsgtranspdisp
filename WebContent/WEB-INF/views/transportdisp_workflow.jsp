@@ -279,25 +279,19 @@
 		                    <th title="Resultat i %" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.res"/>&nbsp;</th>
 		                    <th title="Rundtur" width="2%" align="right" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.roundTrip"/>&nbsp;</th>
 		                    <th title="Kopi Tur" width="2%" width="1%" align="left" class="text14">&nbsp;</th>
-		                    
-		                    <th title="Close/Open" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.closeopen"/>&nbsp;</th>
-	                    	<%--
-		                    <c:if test="${empty searchFilter.wssst || searchFilter.wssst != 'Z'}"> 
-		                    	<th width="2%" class=text14>
-			            			<input style="cursor:pointer;" type="button" value="<spring:message code="systema.transportdisp.workflow.trip.list.search.label.closeopen"/>" name="currenttripsColumnHeaderButtonCloseOpen" id="currenttripsColumnHeaderButtonCloseOpen" onClick="getValidCheckis(this);">
-			                    </th>
-		                    </c:if>
-		                    <th class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.glist"/>&nbsp;</th>
-		                     --%>
-		                    <th title="Godsliste print status" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.gp"/>&nbsp;</th>
+
 		                    <%--
-		                    <th class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.llist"/>&nbsp;</th>
+		                    <th title="Close/Open" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.closeopen"/>&nbsp;</th>
 		                     --%>
+		                    <th title="Steng en eller flere" width="2%" class="text14" align="center">
+		                    		<input title="Steng en eller flere" style="cursor:pointer;" type="button" value="S." name="currentordersColumnHeaderButtonClose" id="currentordersColumnHeaderButtonClose" onClick="getValidCheckisCloseOpen(this);">
+		                    </th>		
+	                    
+		                    <th title="Godsliste print status" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.gp"/>&nbsp;</th>
+		                    
 		                    <th title="Print" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.printDocs"/>&nbsp;</th>
 		                    <th title="Upload" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.upl"/>&nbsp;</th>
-		                    <%--
-		                    <th class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.upl"/>&nbsp;2</th>
-		                     --%>
+		                    
 		                </tr> 
 		                </thead>
 		                <tbody>
@@ -314,19 +308,15 @@
 			               		${record.tuavd}
 			               </td>
 			               <td width="3%" nowrap align="left" class="textMediumBlue tableCellGray" id="htmlpost_${counter.count}">
-			               <%--OLD before upgrade to Spring 4 OBS:remove if the above is working
-			               	<td nowrap align="left" style="width: 100px;" class="text11MediumBlue tableCellGray" id="avd_${record.tuavd}@tripnr_${record.tupro}@statusA_${record.turclose}@${counter.count}"> 
-			               --%>
-				               <c:choose>
+			               	   <c:choose>
 				               <c:when test="${record.turclose=='close'}"> 
-				               		<a id="alinkTripListId_${counter.count}" onClick="setBlockUI(this);" style="display:block;" href="transportdisp_mainorderlist.do?action=doFind&wssavd=${record.tuavd}&wstur=${record.tupro}">
+			               			<a id="alinkTripListId_${counter.count}" onClick="setBlockUI(this);" style="display:block;" href="transportdisp_mainorderlist.do?action=doFind&wssavd=${record.tuavd}&wstur=${record.tupro}">
 										<div style="line-height: 25px;line-width: 100px;" id="dtuavd${record.tuavd}_dtupro${record.tupro}_onlistA${counter.count}" ondrop="drop(event)" ondragenter="highlightDropArea(event)" ondragleave="noHighlightDropArea(event)" ondragover="allowDrop(event)" > 
 										<img title="Trip planning" src="resources/images/math.png" width="14px" height="14px" border="0" alt="planning">
 										<font class="textMediumBlue">${record.tupro}</font>
 										</div>
-			            	       </a>
-			            	     
-				               </c:when>
+			            	       		</a>
+			            	       </c:when>
 				               <c:otherwise>
 				               		<span title="record.turclose is not = close...">&nbsp;${record.tupro}</span>
 				               </c:otherwise>
@@ -407,6 +397,7 @@
 									</form>
 								</div>
 	            		   </td>
+	            		   <%-- Close Open one-on-one --> REPLACE with bulk-close-open in next cell
 	            		   <td width="3%" align="center" class="text14 tableCellGray">
 	            		   		<c:choose>	
 		            		   		<c:when test="${record.turclose=='close'}">
@@ -421,25 +412,19 @@
 			   					</c:otherwise>
 		   					</c:choose>
 	            		   	</td>
-	            		   <%--	
-	            		   <c:if test="${empty searchFilter.wssst || searchFilter.wssst != 'Z'}"> 
-	            		   		<td width="3%" class="text14 tableCellGray" align="center"><input class="clazz_checkis_currenttrips" type="checkbox" id="checkis_currenttrips${counter.count}@user=${user.user}&tuavd=${record.tuavd}&tupro=${record.tupro}&tust=<c:if test="${record.turclose=='close'}">A</c:if>"></td>
-	            		   </c:if>
-	            		   <td width="3%" align="center" class="text14 tableCellGray">
-	            		   		<a target="_new" href="transportdisp_workflow_renderGodsOrLastlist.do?user=${user.user}&tupro=${record.tupro}&type=G">
-    		    					<img title="Glist" style="vertical-align:bottom;" src="resources/images/pdf.png" width="16" height="16" border="0" alt="Glist PDF">
-		   						</a>
-	            		   </td>
-	            		   --%>
-	            		   <td width="3%" align="center" class="text14 tableCellGray">&nbsp;${record.tutst1}&nbsp;</td>
-	            		   <%--
-		               	   <td width="3%" align="center" class="text14 tableCellGray">
-	            		   		<a target="_new" href="transportdisp_workflow_renderGodsOrLastlist.do?user=${user.user}&tupro=${record.tupro}&type=L">
-    		    					<img title="Llist" style="vertical-align:bottom;" src="resources/images/pdf.png" width="16" hight="16" border="0" alt="Llist PDF">
-	   							</a>
-	            		   </td>
-	            		    --%>
+	            		   	--%>
+	            		   	<td width="2%" class="text14 tableCellGray" align="center">
+	            		   		<c:choose>	
+		            		   		<c:when test="${record.turclose=='close'}">
+					           		<input class="clazz_checkis_closeOpen" type="checkbox" id="checkis_closeOpen${counter.count}@user=${user.user}&tuavd=${record.tuavd}&tupro=${record.tupro}&tust=A" >
+			   					</c:when>
+			   					<c:otherwise>
+									<input class="clazz_checkis_closeOpen" type="checkbox" id="checkis_closeOpen${counter.count}@user=${user.user}&tuavd=${record.tuavd}&tupro=${record.tupro}&tust=" >
+			   					</c:otherwise>
+		   					</c:choose>	            		   	
+			             </td>
 	            		   
+	            		   <td width="3%" align="center" class="text14 tableCellGray">&nbsp;${record.tutst1}&nbsp;</td>
 	            		   <td width="3%" align="center" class="textMediumBlue">
 			               		<a title="print Tur.&nbsp;${record.tupro}" class="printLink" id="printLink${counter.count}" runat="server" href="#">
 									<img style="vertical-align: middle;" src="resources/images/printer3.png" width="20px" height="20px" border="0" alt="Print">

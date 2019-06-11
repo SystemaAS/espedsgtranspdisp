@@ -380,6 +380,70 @@ public class TransportDispAjaxHandlerController {
 	}
 	
 	
+	@RequestMapping(value = "updateMainTurListCloseOpenTrip_TransportDisp.do", method = RequestMethod.GET)
+    public @ResponseBody Set<JsonTransportDispWorkflowSpecificTripRecord> updateMainTurList
+	  						(@RequestParam String applicationUser, @RequestParam String requestString){
+		 logger.info("Inside: updateMainTurListCloseOpenTrip_TransportDisp");
+		 RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
+		 
+		 Set<JsonTransportDispWorkflowSpecificTripRecord> result = new HashSet<JsonTransportDispWorkflowSpecificTripRecord>();
+		 //logger.info(requestString);
+		 if(requestString!=null && !"".equals(requestString)){
+			 String [] requestRecord = requestString.split("@");
+			 List<String> requestParams = Arrays.asList(requestRecord);
+			 for (String record : requestParams){
+				 final String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_ClOSE_SPECIFIC_TRIP_URL;
+				 //add URL-parameters
+				 StringBuffer urlRequestParams = new StringBuffer();
+				 urlRequestParams.append(record);
+				 logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+				 logger.info("URL: " + BASE_URL);
+				 logger.info("URL PARAMS: " + urlRequestParams);
+				 
+				 String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+				 
+				 //Debug --> 
+				 logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+				 //we must evaluate a return RPG code in order to know if the Update was OK or not
+				 if(rpgReturnPayload!=null){
+					 rpgReturnResponseHandler.evaluateRpgResponseOnTripUpdate(rpgReturnPayload);
+					 if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+						 rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+						 logger.info(rpgReturnResponseHandler.getErrorMessage());
+					 }
+				 }
+				 
+				 //Now break the record in order to fill the return object for further handling on GUI (jQuery)
+				 String[] tmp = record.split("&");
+				 List<String> fields = Arrays.asList(tmp);
+				 JsonTransportDispWorkflowSpecificTripRecord trip = new JsonTransportDispWorkflowSpecificTripRecord();
+				 
+				 String redirectAvd = "";
+				 for (String field: fields){
+					 if(field.contains("tuavd")){
+						 //logger.info("FIELD:" + field);	
+						 redirectAvd = field.replace("tuavd=", "");
+						 //logger.info("REDIRECT AVD:" + redirectAvd);
+						 trip.setTuavd(redirectAvd);
+					 }
+					 
+				 }
+				//error handling
+				 if(strMgr.isNotNull(rpgReturnResponseHandler.getErrorMessage()) ){
+					 trip.setErrMsg(rpgReturnResponseHandler.getErrorMessage());
+					 //we must break the loop otherwise it creates confusion for the ajax call on jQuery ...
+					 result = new HashSet<JsonTransportDispWorkflowSpecificTripRecord>();
+					 result.add(trip);
+					 break;
+				 }else{
+					 result.add(trip);
+				 }
+			 }	 
+		 }
+		 return result;
+	}
+	
+	
 	/**
 	 * 
 	 * @param applicationUser

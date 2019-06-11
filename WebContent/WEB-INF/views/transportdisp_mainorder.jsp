@@ -597,7 +597,7 @@
 						 			</td>
 						 			<td align="right" class="text14">&nbsp;<span title="hebodt"><spring:message code="systema.transportdisp.orders.form.update.label.booking.date"/></span></td>
 						 			<td class="text14">
-					 					<input type="text" class="inputTextMediumBlue" name="hebodt" id="hebodt" size="9" maxlength="8" value="${model.record.hebodt}">
+					 					<input autocomplete="off" type="text" class="inputTextMediumBlue" name="hebodt" id="hebodt" size="9" maxlength="8" value="${model.record.hebodt}">
 						    				
 										&nbsp;<span title="wsbotm"><spring:message code="systema.transportdisp.orders.form.update.label.booking.time"/></span>
 						 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="wsbotm" id="wsbotm" size="4" maxlength="4" value="${model.record.wsbotm}">
@@ -712,16 +712,16 @@
 									<td class="text14Bold"><spring:message code="systema.transportdisp.orders.form.update.label.shippingDates"/></td>
 									<td class="text14">&nbsp;<font class="text14RedBold" >*</font><span title="wsetdd/wsetdk"><spring:message code="systema.transportdisp.orders.form.update.label.shippingDates.etd"/></span></td>
 									<td class="text14">
-										<input type="text" class="inputTextMediumBlueMandatoryField" name="wsetdd" id="wsetdd" size="9" maxlength="8" value="${model.record.wsetdd}">
+										<input autocomplete="off" type="text" class="inputTextMediumBlueMandatoryField" name="wsetdd" id="wsetdd" size="9" maxlength="8" value="${model.record.wsetdd}">
 									</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="wsetdk" id="wsetdk" size="4" maxlength="4" value="${model.record.wsetdk}"></td>
 									
 									<td class="text14">&nbsp;<span title="wsatdd/wsatdk"><spring:message code="systema.transportdisp.orders.form.update.label.shippingDates.atd"/></span></td>
 									<td class="text14">
-										<input type="text" readonly class="inputTextReadOnly" name="wsatdd" id="wsatdd" size="9" maxlength="8" value="${model.record.wsatdd}">
+										<input autocomplete="off" tabindex=-1 type="text" readonly class="inputTextReadOnly" name="wsatdd" id="wsatdd" size="9" maxlength="8" value="${model.record.wsatdd}">
 						    			</td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" readonly class="inputTextReadOnly" name="wsatdk" id="wsatdk" size="4" maxlength="4" value="${model.record.wsatdk}"></td>
-									<td class="text14"><input type="checkbox" id="ownATDcb" name="ownATDcb" value="1" >
+									<td class="text14"><input tabindex=-1 onKeyPress="return numberKey(event)" type="text" readonly class="inputTextReadOnly" name="wsatdk" id="wsatdk" size="4" maxlength="4" value="${model.record.wsatdk}"></td>
+									<td class="text14"><input tabindex=-1 type="checkbox" id="ownATDcb" name="ownATDcb" value="1" >
 									
 									<c:if test="${not empty model.record.etdWarning}">
 										<td>
@@ -738,16 +738,16 @@
 									<td class="text14Bold"><spring:message code="systema.transportdisp.orders.form.update.label.arrivalDates"/></td>
 									<td class="text14">&nbsp;<font class="text14RedBold" >*</font><span title="wsetad/wsetak"><spring:message code="systema.transportdisp.orders.form.update.label.arrivalDates.eta"/></span></td>
 									<td class="text14">
-										<input type="text" class="inputTextMediumBlueMandatoryField" name="wsetad" id="wsetad" size="9" maxlength="8" value="${model.record.wsetad}">
+										<input autocomplete="off" type="text" class="inputTextMediumBlueMandatoryField" name="wsetad" id="wsetad" size="9" maxlength="8" value="${model.record.wsetad}">
 									</td>
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="wsetak" id="wsetak" size="4" maxlength="4" value="${model.record.wsetak}"></td>
 									
 									<td class="text14">&nbsp;<span title="wsatad/wsatak"><spring:message code="systema.transportdisp.orders.form.update.label.arrivalDates.ata"/></span></td>
 									<td class="text14">
-										<input type="text" readonly class="inputTextReadOnly" name="wsatad" id="wsatad" size="9" maxlength="8" value="${model.record.wsatad}">
+										<input autocomplete="off" tabindex=-1 type="text" readonly class="inputTextReadOnly" name="wsatad" id="wsatad" size="9" maxlength="8" value="${model.record.wsatad}">
 									</td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" readonly class="inputTextReadOnly" name="wsatak" id="wsatak" size="4" maxlength="4" value="${model.record.wsatak}"></td>
-									<td class="text14"><input type="checkbox" id="ownATAcb" name="ownATAcb" value="1" >
+									<td class="text14"><input tabindex=-1 onKeyPress="return numberKey(event)" type="text" readonly class="inputTextReadOnly" name="wsatak" id="wsatak" size="4" maxlength="4" value="${model.record.wsatak}"></td>
+									<td class="text14"><input tabindex=-1 type="checkbox" id="ownATAcb" name="ownATAcb" value="1" >
 									<c:if test="${not empty model.record.etaWarning}">
 										<td>
 											<font class="inputText11" style="background-color: #FFBABA;color: #D8000C;">&nbsp;<spring:message code="systema.transportdisp.orders.form.warning.label.ETA.abovelimit.30" /></font>

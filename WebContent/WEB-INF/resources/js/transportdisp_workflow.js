@@ -2087,3 +2087,69 @@
   //----------------------------
   //END Model dialog Print docs
   //----------------------------
+  
+  
+  
+  
+//----------------------------------------
+  //Iterate through check-boxes to update
+  //----------------------------------------
+  function getValidCheckisCloseOpen(record) {
+	  var FIELD_SEPARATOR = "@";
+	  var requestString = "";
+	  
+	  //Check current orders
+	  jq( ".clazz_checkis_closeOpen" ).each(function( i ) {
+		  var id = this.id;
+		  if (jq(this).is(":checked")) {
+			  //DEBUG alert("checked:" + id);
+			  var rawString = id.split(FIELD_SEPARATOR);
+			  if(requestString==""){ requestString = rawString[1]; }
+			  else{ requestString += FIELD_SEPARATOR + rawString[1]; }
+		  }
+	  });
+	  //Check open orders
+	  if(requestString==""){
+		  jq( ".clazz_checkis_closeOpen" ).each(function( i ) {
+			  var id = this.id;
+			  if (jq(this).is(":checked")) {
+				  //DEBUG alert("checked:" + id);
+				  var rawString = id.split(FIELD_SEPARATOR);
+				  if(requestString==""){ requestString = rawString[1]; }
+				  else{ requestString += FIELD_SEPARATOR + rawString[1]; }
+			  }
+		  });
+	  }
+	  //DEBUG alert(requestString);
+	  //Now update all trips with checked check boxes if any
+	  if(requestString!="" && requestString!=null){
+		  console.log(requestString);
+		  
+		  jq.ajax({
+		  	  type: 'GET',
+		  	  url: 'updateMainTurListCloseOpenTrip_TransportDisp.do',
+		  	  data: { applicationUser : jq('#applicationUser').val(), 
+		  		  	  requestString : requestString }, 
+		  	  dataType: 'json',
+		  	  cache: false,
+		  	  contentType: 'application/json',
+		  	  async: false, //only way to make synchronous calls. Otherwise will all ajax dependent functions will execute asynchronously
+		  	  success: function(data) {
+		  		var len = data.length;
+		  		for ( var i = 0; i < len; i++) {
+		  			var redirectParams = "&wssavd=" + data[i].tuavd;
+		  			if(data[i].errMsg != null){
+		  				redirectParams = redirectParams + "&err=" + data[i].errMsg;
+		  			}
+		  			//we send the redirect after all updates in order to refresh...
+		  			window.location = "transportdisp_workflow.do?action=doFind&user=" + jq('#applicationUser').val() + redirectParams;
+		  			
+		  		}
+		  	  },
+		  	  error: function() {
+			  	    alert('Error loading ...');
+		  	  }
+		  });
+		  
+	  }
+  }
