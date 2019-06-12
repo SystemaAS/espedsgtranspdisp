@@ -36,6 +36,8 @@
 	    	jq('#vfbnrIdLink').attr('target','_blank');
 	    	window.open('transportdisp_workflow_childwindow_bilnr.do?action=doInit&unbiln=' + jq('#vfbnr').val() + '&ctype=vfbnr', "bilnrWin", "top=300px,left=350px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
+	  
+	  
 	  //PRINT popup
 	  jq("#alinkFraktbrevPdf").click(function() {
 		  renderFraktBrev();
@@ -56,6 +58,15 @@
 	  //END PRINT
 	  
   });
+  
+//Flere farl.gods linjer
+  function openFlereFarlGodsLinjer(element){
+	var id = element.id;
+	alert(id);
+	/*if(jq('#tuproJS').text()!=''){
+		window.open('TODOtransportdisp_workflow_frisokvei.do?avd='+ jq('#heavd').val() + '&opd=' + jq('#heopd').val() + "&tur=" + jq('#tripNr').val(), 'flereFarlGodsLinjerWin','top=120px,left=100px,height=600px,width=900px,scrollbars=no,status=no,location=no');
+	}*/
+  };
   
   function renderFraktBrev(){
 	window.open('transportdisp_mainorderlist_renderFraktbrev.do?user=' + jq('#applicationUser').val() + '&wsavd=' + jq('#heavd').val() + '&wsopd=' + jq('#heopd').val(), '_blank');

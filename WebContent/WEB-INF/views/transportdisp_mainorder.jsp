@@ -1929,6 +1929,7 @@
 						 				<td width="2%" align="right" class="tableCellDangerousGoods" >${fraktbrevRecord.ffante}</td>
 						 				<td width="2%" align="right" class="tableCellDangerousGoods">${fraktbrevRecord.ffenh}</td>
 						 				<td width="2%" align="right" class="tableCellDangerousGoods" >${fraktbrevRecord.ffpoen}</td>
+					 					
 					 					<td width="2%" align="center" class="tableCell" >
 						               		<c:if test="${not empty fraktbrevRecord.fvlinr}">
 						               			<%--
@@ -1948,82 +1949,16 @@
 					 			</c:forEach>
 					 			</tbody>
 					 			<input type="hidden" name="lineCounterNum" id="lineCounterNum" value="${lineCounter}" >   
-							 		
-				 				<%--
-			 					<tr class="tableHeaderField" style="background-color: #F2F5EF ;border-width: 0px 0px 0px 0px;">	
-									<td width="2%" align="left" class="tableCell">&nbsp;</td>
-									<td width="2%" align="left" class="tableCell">
-										<%--this hidden field is crucial for ADD NEW line functionality. We will send the new line = upperCurrentItemlineNr + 1 
-										<input type="hidden" id="upperCurrentItemlineNr" name="upperCurrentItemlineNr" value="${upperCurrentItemlineNr}">
-										<input type="hidden" id="hent" name="hent" value="${model.record.hent}">
-										<input type="hidden" id="hevkt" name="hevkt" value="${model.record.hevkt}">
-										<input type="hidden" id="hem3" name="hem3" value="${model.record.hem3}">
-										<input type="hidden" id="helm" name="helm" value="${model.record.helm}">
-										<input type="hidden" id="helmla" name="helmla" value="${model.record.helmla}">
-										
-										<b>TOT</b>
-									</td>
-									
-									<td  width="7%" align="left" class="tableCell">
-										<input class="inputTextMediumBlue" style="font-weight:bold;"type="text" name="hegm1" id="hegm1" value="${model.record.hegm1}"> 
-									</td>
-						
-						 			<td width="5%" align="right" class="tableCell"><b>${model.record.hent}</b></td>
-						 			<td width="7%" align="left" class="tableCell">&nbsp;</td>
-						 			<td width="7%" align="left" class="tableCell">
-						 				<input class="inputTextMediumBlue" style="font-weight:bold;" type="text" name="hevs1" id="hevs1" value="${model.record.hevs1}">
-						 			</td>
-						 			<td width="7%" align="right" class="tableCell"><b>${model.record.hevkt}</b></td>
-						 			<td width="5%" align="left" class="tableCell">&nbsp;</td>
-						 			<td width="5%" align="left" class="tableCell">&nbsp;</td>
-						 			<td width="5%" align="left" class="tableCell">&nbsp;</td>
-						 			<td width="5%" align="right" class="tableCell"><span title="hem3"><b>${fn:replace(model.record.hem3,'.',',')}</b></span></td>
-						 			<td width="5%" align="right" class="tableCell"><span title="helm"><b>${fn:replace(model.record.helm,'.',',')}</b></span></td>
-						 			<td width="5%" align="right" class="tableCell"><span title="helmla"><b>${fn:replace(model.record.helmla,'.',',')}</b></span></td>
-						 			<td width="6%" align="right" class="tableCellDangerousGoods">&nbsp;</td>
-						 			<td width="4%" align="right" class="tableCellDangerousGoods">&nbsp;</td>
-						 			<td width="4%" align="right" class="tableCellDangerousGoods">&nbsp;</td>
-						 			<td width="2%" align="right" class="tableCellDangerousGoods">&nbsp;</td>
-						 			<td width="2%" align="right" class="tableCellDangerousGoods">&nbsp;</td>
-						 			<td width="2%" align="right" class="tableCellDangerousGoods">&nbsp;</td>
-						 			<td width="2%" align="right" class="tableCellDangerousGoods"><span title="hepoen"><b>${model.record.hepoen}</b></span></td>
-						 			
-						 			<td width="2%" align="left" class="tableCell">${model.record.hestl4}</td>
-						 			<%--
-						 				<img onMouseOver="showPop('psum_info');" onMouseOut="hidePop('psum_info');" style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-						 				<span title="hestl4">P</span>
-						 				<input type="checkbox" id="hestl4" name="hestl4" value="P" <c:if test="${model.record.hestl4 == 'P'}"> checked </c:if>>
-						 				<div class="text11" style="position: relative;" align="left">
-											<span style="position:absolute; left:-50px; top:10px; width:200" id="psum_info" class="popupWithInputText"  >
-												<font class="text11">
-							           			<b>P (Protect)</b>
-							           			<div>
-							           			<p> Protect sumlinje<br/> 
-												</p>
-							           			</div>
-						           			</font>
-											</span>
-										</div>
-						 			</td>
-						 			  
-						 		</tr>
-					 			 --%>
-					 			 
-					 			 
+							 	 
 						 		</table>
 						 		
 							</td>
 						</tr>
-						
 						</c:if>
 						
-						
-						
 						<tr height="1"><td ></td></tr>
-						
-						 
-						
-				 			<tr height="10"><td ></td></tr>
+							
+							<tr height="10"><td ></td></tr>
 					 		<%-- Create new Line / Update Line SECTION --%> 
 					 		<tr>
 								<td colspan="2" style="padding: 3px;">
@@ -2067,11 +2002,11 @@
 							 			<td align="right" valign="bottom" class="tableHeaderField" style="font-size: 12px"><span title="ffante">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.mengd"/>&nbsp;</span></td>
 							 			<td align="right" valign="bottom" class="tableHeaderField" style="font-size: 12px"><span title="ffenh">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unit"/>&nbsp;</span></td>
 							 			
-							 			<%-- ADR COVI on-going JOVO är skyldig några service-pgm för att ändra Controller + Model i Spring ! 
+							 			<%-- ADR COVI on-going JOVO är skyldig några service-pgm för att ändra Controller + Model i Spring ! --%> 
 							 			<td align="center" class="tableHeaderField" style="font-size: 12px">
 							 				<input id="dangerousGoodsButton" tabindex=-1 class="inputFormSubmitStd11" style="background-color:darkgrey;color:yellow" type="button" value='ADR (flere)'>
 							 			</td>
-							 			--%>
+							 			
 							 		</tr>
 							 		<tr >
 							 			<td align="center" class="text14">
