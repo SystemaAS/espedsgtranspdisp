@@ -27,7 +27,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		
-		<title>eSpedsg - <spring:message code="systema.transportdisp.title"/> - <spring:message code="systema.transportdisp.workflow.frisokvei.label"/></title>
+		<title>eSpedsg - <spring:message code="systema.transportdisp.title"/> - <spring:message code="systema.transportdisp.workflow.dangerousgoods.label"/></title>
 	</head>
 	<body>
 	<%-- include som javascript functions --%>

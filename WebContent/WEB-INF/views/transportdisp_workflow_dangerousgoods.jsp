@@ -36,10 +36,13 @@
  	<table width="100%" class="tableBorderWithRoundCorners3D_RoundOnlyOnBottom" border="0" cellspacing="0" cellpadding="0">
 		<tr height="3"><td colspan="2">&nbsp;</td></tr>
 		<tr>
-			<td colspan="3" class="text16Bold">&nbsp;&nbsp;&nbsp;
+			<td colspan="3" class="text16Bold">&nbsp;
 				<spring:message code="systema.transportdisp.title"/> - <spring:message code="systema.transportdisp.workflow.dangerousgoods.label"/>
-				&nbsp;<font class="text16MediumBlue">Avd/Opd&nbsp;&nbsp;&nbsp;<b>${model.avd}</b>/<b>${model.opd}</b> &nbsp;&nbsp;&nbsp;Linjenr&nbsp;<b>${model.linNr}</b></font>	
+			
+				&nbsp;&nbsp;<font class="text16MediumBlue">Avd/Opd&nbsp;<b>${model.avd}</b>/<b>${model.opd}</b> &nbsp;Linjenr&nbsp;<b>${model.linNr}</b></font>	
+				<font class="text16MediumBlue">&nbsp;/&nbsp;<b>${model.container.fvant}</b>&nbsp;<b>${model.container.fvpakn}</b> &nbsp;<b>${model.container.fvvt}</b>&nbsp;<b>${model.container.fvvkt}</b></font>	
 			</td>
+			
 		</tr>
 		<tr height="5"><td colspan="2">&nbsp;</td></tr>
 			
@@ -62,23 +65,30 @@
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
 									<tr class="tableHeaderField" height="20" valign="left">
 										<td width="2%" class="tableHeaderFieldFirst" title="Update"></td>
-										<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="ffunnr">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unNr"/>&nbsp;</span></td>
-							 			<td width="2%" align="right" class="tableHeaderField" style="font-size: 12px"><span title="ffembg">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg"/>&nbsp;</span></td>
-							 			<td width="2%" align="right" class="tableHeaderField" style="font-size: 12px"><span title="ffindx">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg.index"/>&nbsp;</span></td>
+										<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="fflin2">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.linnr"/>&nbsp;</span></td>
+							 			<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="ffunnr">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unNr"/>&nbsp;</span></td>
+							 			<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="ffembg">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg"/>&nbsp;</span></td>
 							 			<td width="2%" align="right" class="tableHeaderField" style="font-size: 12px"><span title="ffantk">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.ant2"/>&nbsp;</span></td>
 							 			<td width="2%" align="right" class="tableHeaderField" style="font-size: 12px"><span title="ffante">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.mengd"/>&nbsp;</span></td>
-							 			<td width="2%" align="right" class="tableHeaderField" style="font-size: 12px"><span title="ffenh">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unit"/>&nbsp;</span></td>
+							 			<td width="2%" align="left" class="tableHeaderField" style="font-size: 12px"><span title="ffenh">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unit"/>&nbsp;</span></td>
+					        				
+					        				<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="ffklas">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.fklas"/>&nbsp;</span></td>
+					        				<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="ffsedd">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.fsedd"/>&nbsp;</span></td>
+					        				<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="fftres">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.ftres"/>&nbsp;</span></td>
+					        				<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px"><span title="fffakt">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.ffakt"/>&nbsp;</span></td>
+					        				
+					        				
 					        				<td width="2%" align="right" class="tableHeaderField" style="font-size: 12px"><span title="ffpoen/hepoen(Tot)">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.adr"/>&nbsp;</span></td>
 						 				<td width="2%" align="center" class="tableHeaderField" style="font-size: 12px">&nbsp;<spring:message code="systema.transportdisp.delete" />&nbsp;</td>
 					               </tr> 
 					               
-				 					  <c:forEach items="${Xmodel.list}" var="record" varStatus="counter">    
+				 					  <c:forEach items="${model.list}" var="record" varStatus="counter">    
 							               <tr class="tableRow" >
 							                   
 							               <td align="center" width="2%" class="tableCellFirst" >
-							     				<a id="recordUpdate_${Xrecord.fskode}@${Xrecord.fssok}" href="#" onClick="getItemData(this);">
+							     				<a id="recordUpdate_${record.fflin2}" href="#" onClick="getItemData(this);">
 							     					<c:choose>
-								     					<c:when test="${not empty Xrecord.fskode}">
+								     					<c:when test="${not empty record.fflin2}">
 						               						<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="update">&nbsp;
 						               					</c:when>
 						               					<c:otherwise>
@@ -87,18 +97,24 @@
 					               					</c:choose>
 					               				</a>
 						               	   </td>
-						               	   <td width="2%" align="right"></td>
-						               	   <td width="2%" align="right"></td>
-						               	   <td width="2%" align="right"></td>
-						               	   <td width="2%" align="right"></td>
-						               	   <td width="2%" align="right"></td>
-						               	   <td width="2%" align="right"></td>
-						               	   <td width="2%" align="right"></td>
+						               	   <td class="tableCell" width="2%" align="center">${record.fflin2}</td>
+						               	   <td class="tableCell" width="2%" align="center">${record.ffunnr}</td>
+						               	   <td class="tableCell" width="2%" align="center">${record.ffembg}</td>
+						               	   <td class="tableCell" width="2%" align="right">${record.ffantk}</td>
+						               	   <td class="tableCell" width="2%" align="right">${record.ffante}</td>
+						               	   <td class="tableCell" width="2%" align="left">${record.ffenh}</td>
+						               	   
+						               	   <td class="tableCell" width="2%" align="center">${record.ffklas}</td>
+						               	   <td class="tableCell" width="2%" align="center">${record.ffsedd}</td>
+						               	   <td class="tableCell" width="2%" align="center">${record.fftres}</td>
+						               	   <td class="tableCell" width="2%" align="center">${record.fffakt}</td>
+						               	   
+						               	   <td class="tableCell" width="2%" align="right">${record.ffpoen}</td>
 						               	   
 						               	   <%-- DELETE cell --%>							           
 							               <td width="2%" class="tableCell" align="center">
-							               	   <c:if test="${not empty Xrecord.fskode && not empty Xrecord.fssok}">
-							                   		<a style="cursor:pointer;" id="avd_${Xrecord.fsavd}@opd_${Xrecord.fsopd}@kode_${Xrecord.fskode}@sok_${Xrecord.fssok}" onClick="doDeleteItemLine(this);" tabindex=-1 >
+							               	   <c:if test="${not empty record.fflin2}">
+							                   		<a style="cursor:pointer;" id="lin2_${record.fflin2}" onClick="doDeleteItemLine(this);" tabindex=-1 >
 									               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 									               	</a>&nbsp;
 								               	</c:if>
@@ -142,14 +158,14 @@
 			<%-- -------------------------- --%>
 			<%-- Validation errors on model --%>
 			<%-- -------------------------- --%>
-			<c:if test="${not empty Xmodel.errorMessage}">
+			<c:if test="${not empty model.errorMessage}">
 				<tr>
 				<td>
 		           	<table class="tabThinBorderWhiteWithSideBorders" width="90%" align="left" border="0" cellspacing="0" cellpadding="0">
 		           	<tr>
 					<td valign="bottom" class="textError">					
 			            <ul>
-			            	<li >${Xmodel.errorMessage}</li>
+			            	<li >${model.errorMessage}</li>
 			            </ul>
 					</td>
 					</tr>
@@ -175,17 +191,21 @@
 					<input type="hidden" name="avd" id="avd" value='${model.avd}'>
 					<input type="hidden" name="opd" id="opd" value='${model.opd}'>
 					<input type="hidden" name="linNr" id="linNr" value='${model.linNr}'>
-					<input type="hidden" name="isModeUpdate" id="isModeUpdate" value="${Xmodel.record.isModeUpdate}">
+					<input type="hidden" name="fflin2" id="fflin2" value='${model.record.fflin2}'>
+					<input type="hidden" name="ffklas" id="ffklas" value='${model.record.ffklas}'>
+					<input type="hidden" name="ffsedd" id="ffsedd" value='${model.record.ffsedd}'>
+					<input type="hidden" name="fftres" id="fftres" value='${model.record.fftres}'>
+					<input type="hidden" name="fffakt" id="fffakt" value='${model.record.fffakt}'>
 					
-				 	<%-- <input type="hidden" name="numberOfItemLinesInTopic" id="numberOfItemLinesInTopic" value="${numberOfItemLinesInTopic}" /> --%>
-				 	
+					<input type="hidden" name="isModeUpdate" id="isModeUpdate" value="${model.record.isModeUpdate}">
+					
 				 	<%-- Topic ITEM CREATE --%>
 	 				<table width="90%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 	 					
 				 		<tr height="15">
 				 			<td class="text14White" align="left" >
 				 				<b>&nbsp;&nbsp;<spring:message code="systema.transportdisp.itemline"/>&nbsp;</b>
- 								<img onClick="showPop('updateInfo');" src="resources/images/update.gif" border="0" alt="edit">&nbsp;&nbsp;<font id="editLineNr"></font>
+ 								<img onClick="showPop('updateInfo');" src="resources/images/update.gif" border="0" alt="edit">&nbsp;&nbsp;<b><label id="editLineNr">${model.record.fflin2}</label></b>
 			 				</td>
 		 				</tr>
 	 				</table>
@@ -196,37 +216,35 @@
 						 		<table  class="tableBorderWithRoundCornersGray" width="90%" border="0" cellspacing="0" cellpadding="0">
 						 			<tr height="5"><td class="text" align="left"></td></tr>
 						 			<tr >
-							 			<td class="text14" align="left">&nbsp;<font class="text14RedBold" >*</font><span title="todo">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unNr"/></span></td>
-								        <td class="text14" align="left">&nbsp;<span title="todo">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg"/></span></td>
-								        <td class="text14" align="left">&nbsp;<span title="todo">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg.index"/></span></td>
-								        <td class="text14" align="left">&nbsp;<span title="todo">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.ant2"/></span></td>
-								        <td class="text14" align="left">&nbsp;<span title="todo">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.mengd"/></span></td>
-								        <td class="text14" align="left">&nbsp;<span title="todo">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unit"/></span></td>
-								        
+							 			<td class="text14" align="left">&nbsp;<font class="text14RedBold" >*</font><span title="ffunnr">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unNr"/></span></td>
+								        <td class="text14" align="left">&nbsp;<span title="ffembg">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg"/></span></td>
+								        <td class="text14" align="left">&nbsp;<span title="ffindx">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg.index"/></span></td>
+								        <td class="text14" align="left">&nbsp;<span title="ffantk">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.ant2"/></span></td>
+								        <td class="text14" align="left">&nbsp;<span title="ffante">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.mengd"/></span></td>
+								        <td class="text14" align="left">&nbsp;<span title="ffenh">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unit"/></span></td>
 							        </tr>
 							        <tr>
 							        		<td class="text14" align="left" >
-							        			<input type="text" class="inputTextMediumBlueMandatoryField" name="ffunnr" id="ffunnr" size="5" maxlength="4" value="${Xmodel.record.ffunnr}">
+							        			<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="ffunnr" id="ffunnr" size="5" maxlength="4" value="${model.record.ffunnr}">
 								        </td>
 						        			<td class="text14" align="left" >
-							        			<input type="text" class="inputTextMediumBlue" name="ffembg" id="ffembg" size="4" maxlength="3" value="${Xmodel.record.ffembg}">
+							        			<input type="text" class="inputTextMediumBlue" name="ffembg" id="ffembg" size="4" maxlength="3" value="${model.record.ffembg}">
 								        </td>
 								        <td class="text14" align="left" >
-							        			<input type="text" class="inputTextMediumBlue" name="ffindx" id="ffindx" size="3" maxlength="2" value="${Xmodel.record.ffindx}">
+							        			<input type="text" class="inputTextMediumBlue" name="ffindx" id="ffindx" size="3" maxlength="2" value="${model.record.ffindx}">
 								        </td>
 								        <td class="text14" align="left" >
-							        			<input type="text" class="inputTextMediumBlue" name="ffantk" id="ffantk" size="6" maxlength="5" value="${Xmodel.record.ffantk}">
+							        			<input onKeyPress="return amountKey(event)" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="ffantk" id="ffantk" size="6" maxlength="5" value="${model.record.ffantk}">
 								        </td>
 								        <td class="text14" align="left" >
-							        			<input type="text" class="inputTextMediumBlue" name="ffante" id="ffante" size="13" maxlength="12" value="${Xmodel.record.ffante}">
+							        			<input onKeyPress="return amountKey(event)" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="ffante" id="ffante" size="13" maxlength="12" value="${model.record.ffante}">
 								        </td>
 								        <td class="text14" align="left" >
-							        			<select class="inputTextMediumBlue" onChange="TODOvalidateDangerousGoodsUnnrNewLine();" name="ffenh" id="ffenh">
+							        			<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" onChange="TODOvalidateDangerousGoodsUnnrNewLine();" name="ffenh" id="ffenh">
 					 							<option value="">?</option>
-					 							<option value="KG" <c:if test="${Xmodel.record.fraktbrevRecord.ffenh == 'KG'}"> selected </c:if> >KG</option>
-					 							<option value="LTR" <c:if test="${Xmodel.record.fraktbrevRecord.ffenh == 'LTR'}"> selected </c:if> >LTR</option>
-					 							<option value="GR" <c:if test="${Xmodel.record.fraktbrevRecord.ffenh == 'GR'}"> selected </c:if> >GR</option>
-					 							
+					 							<option value="KG" <c:if test="${model.record.ffenh == 'KG'}"> selected </c:if> >KG</option>
+					 							<option value="LTR" <c:if test="${model.record.ffenh == 'LTR'}"> selected </c:if> >LTR</option>
+					 							<option value="GR" <c:if test="${model.record.ffenh == 'GR'}"> selected </c:if> >GR</option>
 											</select>
 								        </td>
 							        </tr>
@@ -239,9 +257,7 @@
 					    <tr>	
 						    <td align="left" colspan="5">
 								<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.submit.save"/>'>
-								<%-- 
-								&nbsp;&nbsp;<input class="inputFormSubmitGray" type="button" name="updCancelButton" id="updCancelButton" value='<spring:message code="systema.transportdisp.cancel"/>'>
-								--%>
+								
 							</td>
 														        	
 				        </tr>

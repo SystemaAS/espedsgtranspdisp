@@ -53,6 +53,9 @@ import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWork
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispCustomerContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispCustomerRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsContainer;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsRecord;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousGoodsRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.invoice.childwindow.JsonTransportDispSupplierContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.invoice.childwindow.JsonTransportDispSupplierRecord;
 
@@ -73,13 +76,11 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDi
 import no.systema.transportdisp.model.jsonjackson.workflow.order.frisokvei.JsonTransportDispWorkflowSpecificOrderFrisokveiContainer;
 
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispSendSmsContainer;
-import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispPackingCodesContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispPackingCodesRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispTollstedCodesContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispTollstedCodesRecord;
-
-
+import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer;
 import no.systema.transportdisp.model.workflow.order.OrderLineValidationObject;
 
 import no.systema.main.model.jsonjackson.general.postalcodes.JsonPostalCodesContainer;
@@ -1690,7 +1691,41 @@ public class TransportDispAjaxHandlerController {
 			    	  }
 				 }
 				 return result;
-			}	
+			}
+			
+			/**
+			 * 
+			 * @param applicationUser
+			 * @param requestString
+			 * @return
+			 */
+			@RequestMapping(value = "getDangerousGoodsDetailLine_TransportDisp.do", method = RequestMethod.GET)
+		    public @ResponseBody List<JsonTransportDispWorkflowSpecificOrderDangerousGoodsRecord> getDangerousGoodsDetailLine
+			  						(@RequestParam String applicationUser, @RequestParam String requestString){
+				 logger.info("Inside: getDangerousGoodsDetailLine");
+				 List<JsonTransportDispWorkflowSpecificOrderDangerousGoodsRecord> result = new ArrayList<JsonTransportDispWorkflowSpecificOrderDangerousGoodsRecord>();
+				 //logger.info(requestString);
+				 if(requestString!=null && !"".equals(requestString)){
+				 	 final String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_WORKFLOW_FETCH_MAIN_ORDER_DANGEROUSGOODS_URL;
+				 	 
+					 //add URL-parameters
+					 String urlRequestParams = requestString;
+					 logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+					 logger.info("URL: " + BASE_URL);
+					 logger.info("URL PARAMS: " + urlRequestParams);
+					 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+					 
+					 if(jsonPayload!=null){
+						 JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer container = this.transportDispWorkflowSpecificOrderService.getOrderDangerousGoodsContainer(jsonPayload);
+			    		if(container!=null){
+			    			for(JsonTransportDispWorkflowSpecificOrderDangerousGoodsRecord rec: container.getAdrlinelist()){
+			    				result.add(rec);
+			    			}
+			    		}
+			    	  }
+				 }
+				 return result;
+			}
 		
 			/**
 			 * 

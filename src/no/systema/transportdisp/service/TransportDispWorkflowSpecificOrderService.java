@@ -16,7 +16,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.invoice.JsonTra
 import no.systema.transportdisp.model.jsonjackson.workflow.order.logging.JsonTransportDispWorkflowSpecificOrderLoggingContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.validationbackend.JsonTransportDispWorkflowSpecificOrderValidationBackendContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.frisokvei.JsonTransportDispWorkflowSpecificOrderFrisokveiContainer;
-import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousgoodsContainer;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer;
 
 
 /**
@@ -42,7 +42,7 @@ public interface TransportDispWorkflowSpecificOrderService {
 	//Order Logging
 	public JsonTransportDispWorkflowSpecificOrderLoggingContainer getOrderLoggingContainer(String utfPayload);
 	//Dangerous goods
-	public JsonTransportDispWorkflowSpecificOrderDangerousgoodsContainer getOrderDangerousgoodsContainer(String utfPayload);
+	public JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer getOrderDangerousGoodsContainer(String utfPayload);
 	
 }
 

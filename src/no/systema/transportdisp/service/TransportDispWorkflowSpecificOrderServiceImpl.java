@@ -22,7 +22,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDi
 import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDispWorkflowSpecificOrderFraktbrevPdfContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDispWorkflowSpecificOrderMessageNoteContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispFrisokveiGiltighetsListContainer;
-import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousgoodsContainer;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.frisokvei.JsonTransportDispWorkflowSpecificOrderFrisokveiContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.invoice.JsonTransportDispWorkflowSpecificOrderInvoiceContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.invoice.JsonTransportDispWorkflowSpecificOrderInvoiceReadyMarkContainer;
@@ -226,8 +226,8 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 	/**
 	 * 
 	 */
-	public JsonTransportDispWorkflowSpecificOrderDangerousgoodsContainer getOrderDangerousgoodsContainer(String utfPayload){
-		JsonTransportDispWorkflowSpecificOrderDangerousgoodsContainer container = null;
+	public JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer getOrderDangerousGoodsContainer(String utfPayload){
+		JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer container = null;
 		try{
 			JsonTransportDispWorkflowSpecificOrderDangerousgoodsMapper mapper = new JsonTransportDispWorkflowSpecificOrderDangerousgoodsMapper();
 			container = mapper.getContainer(utfPayload);

@@ -428,6 +428,15 @@ public final class TransportDispUrlDataStore {
 	//http://gw.systema.no/sycgip/TSYFAPR1.pgm?user=OSCAR&wsavd=1&wssg=OT ... etc
 	@UrlDataStoreAnnotationForField (name="@TransportDispPrintController - transportdisp_mainorderlist_fellesutskrift.do ", description=" --> TRANSPORT_DISP_EXECUTE_FELLESUTSKRIFT_URL")
 	static public String TRANSPORT_DISP_EXECUTE_FELLESUTSKRIFT_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TSYFAPR1.pgm";
-			
+	
+	
+	//Dangerous goods
+	@UrlDataStoreAnnotationForField (name="@TransportDispMainDangerousGoodsController - transportdisp_workflow_dangerousgoods.do ", description=" --> TRANSPORT_DISP_BASE_WORKFLOW_FETCH_MAIN_ORDER_DANGEROUSGOODS_URL")
+	static public String TRANSPORT_DISP_BASE_WORKFLOW_FETCH_MAIN_ORDER_DANGEROUSGOODS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TJGE21RF.pgm";
+	//http://gw.systema.no/sycgip/tjge21RF.pgm?user=JOVO&avd=75&opd=113&lin=2
+	
+	@UrlDataStoreAnnotationForField (name="@TransportDispMainDangerousGoodsController - transportdisp_mainorder_update.do ", description=" --> TRANSPORT_DISP_BASE_WORKFLOW_UPDATE_LINE_MAIN_ORDER_DANGEROUSGOODS_URL")
+	static public String TRANSPORT_DISP_BASE_WORKFLOW_UPDATE_LINE_MAIN_ORDER_DANGEROUSGOODS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TJGE23RF.pgm";
+	//http://gw.systema.no/sycgip/tjge23RF.pgm?user=JOVO&mode=U&avd=75&opd=113&lin=2&lin2=4&ffunnr=1049&ffembg=&ffindx=&ffklas=1A&ffsedd=2.1&fftres=(%20B/D%20)&fffakt=3&ffantk=1&ffante=15,000&ffenh=KG&ffpoen=45
 	
 }

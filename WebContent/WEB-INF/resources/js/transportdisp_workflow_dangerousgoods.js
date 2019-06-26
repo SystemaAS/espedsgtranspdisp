@@ -17,6 +17,30 @@
 	  if (currentMonth < 10) { currentMonthStr = '0' + currentMonth; }
 	  return currentMonthStr;
   }
+  
+  jq(function() {
+	  jq('#ffunnr').focus(function() {
+		  if(jq('#ffunnr').val()!=''){
+			  refreshCustomValidity(jq('#ffunnr')[0]);
+		  }
+	  });
+	  jq('#ffante').focus(function() {
+		  if(jq('#ffante').val()!=''){
+			  refreshCustomValidity(jq('#ffante')[0]);
+		  }
+	  });
+	  jq('#ffantk').focus(function() {
+		  if(jq('#ffantk').val()!=''){
+			  refreshCustomValidity(jq('#ffantk')[0]);
+		  }
+	  });
+	  jq('#ffenh').focus(function() {
+		  if(jq('#ffenh').val()!=''){
+			  refreshCustomValidity(jq('#ffenh')[0]);
+		  }
+	  });
+  });
+  
   /*
   jq(function() {
 	  jq("#bufedt").datepicker({ 
@@ -51,16 +75,21 @@
   */
   jq(function() {
 	  jq('#newRecordButton').click(function() {
-		  jq('#fskode').val("");
-		  jq('#fskode').prop("readonly", false);
-		  jq('#fskode').removeClass("inputTextReadOnly");
-		  jq('#fskode').addClass("inputTextMediumBlueMandatoryField");
-		  
-		  //rest of the gang
-		  jq('#fssok').val("");
-		  jq('#fsdokk').val("");
-		  //
 		  jq('#isModeUpdate').val("");
+		  //HIDDEN
+		  jq('#editLineNr').text("");
+		  jq('#fflin2').val("");
+		  jq('#ffklas').val("");
+		  jq('#ffsedd').val("");
+		  jq('#fftres').val("");
+		  jq('#fffakt').val("");
+		  //REST of FIELDS
+		  jq('#ffunnr').val("");
+		  jq('#ffembg').val("");
+		  jq('#ffindx').val("");
+		  jq('#ffantk').val("");
+		  jq('#ffante').val("");
+		  jq('#ffenh').val("");
 		  
 	  });
   });
@@ -178,20 +207,15 @@
   //Fetch specific line
   //-------------------
   function getItemData(record) {
-		var FIELD_SEPARATOR = "@";
-	  	var htmlValue = record.id;
+		var lin2 = record.id;
 	  	var applicationUser = jq('#applicationUser').val();
 	  	//alert(htmlValue);
-	  	htmlValue = htmlValue.replace("recordUpdate_","");
-	  	var fields = htmlValue.split(FIELD_SEPARATOR);
-	  	var requestString = "user=" + jq('#applicationUser').val() + "&avd=" + jq('#avd').val() + "&opd=" + jq('#opd').val() + "&mode=I" +
-	  						"&o_fskode=" + fields[0] + "&o_fssok=" + fields[1];
-	  	//DEBUG--> alert(requestString);
-	  	//http://user=JOVO&avd=75&opd=103&mode=I&o_fskode=IFB&o_fssok=70701550001424817 
-	  	
+	  	lin2 = lin2.replace("recordUpdate_","");
+	  	var requestString = "user=" + jq('#applicationUser').val() + "&avd=" + jq('#avd').val() + "&opd=" + jq('#opd').val() + "&mode=U" +
+	  						"&lin=" + jq('#linNr').val() + "&lin2=" + lin2; 
 	  	jq.ajax({
 	  	  type: 'GET',
-	  	  url: 'getFrisokveiDetailLine_TransportDisp.do',
+	  	  url: 'getDangerousGoodsDetailLine_TransportDisp.do',
 	  	  data: { applicationUser : applicationUser, 
 	  		  	  requestString : requestString }, 
 	  	  dataType: 'json',
@@ -200,27 +224,18 @@
 	  	  success: function(data) {
 	  		var len = data.length;
 			for ( var i = 0; i < len; i++) {
-				//alert(data[i].fask);
-				
+				//Update / Create
 				jq('#isModeUpdate').val("");jq('#isModeUpdate').val("true");
-				jq('#fskodeKey').val("");jq('#fskodeKey').val(data[i].kode); //hidden field
-				jq('#fssokKey').val("");jq('#fssokKey').val(data[i].sok); //hidden field
-				//read only field(s)
-				jq('#fskode').val("");
-				jq('#fskode').prop("readonly", true);
-				jq('#fskode').removeClass("inputTextMediumBlueMandatoryField");
-				jq('#fskode').addClass("inputTextReadOnly");
-				//fields
-				jq('#fskode').val("");jq('#fskode').val(data[i].kode);
-				jq('#fssok').val("");jq('#fssok').val(data[i].sok);
-				jq('#fsdokk').val("");jq('#fsdokk').val(data[i].dokk);
-				/*
-				jq('#buoavd').val("");
-				if(data[i].buoavd!='0'){
-					jq('#buoavd').val(data[i].buoavd);
-				}
-				*/
-					
+				//KEY
+				jq('#editLineNr').text("");jq('#editLineNr').text(data[i].fflin2);
+				jq('#fflin2').val("");jq('#fflin2').val(data[i].fflin2);
+				//REST of FIELDS
+				jq('#ffunnr').val("");jq('#ffunnr').val(data[i].ffunnr);
+				jq('#ffembg').val("");jq('#ffembg').val(data[i].ffembg);
+				jq('#ffindx').val("");jq('#ffindx').val(data[i].ffindx);
+				jq('#ffantk').val("");jq('#ffantk').val(data[i].ffantk);
+				jq('#ffante').val("");jq('#ffante').val(data[i].ffante);
+				jq('#ffenh').val("");jq('#ffenh').val(data[i].ffenh);
 			}
 	  	  },
 	  	  error: function() {
@@ -237,23 +252,20 @@
 	//----------------------------------------
 	function doDeleteItemLine(element){
 	  //start
-		//avd_${record.fsavd}@opd_${record.fsopd}@kode_${record.fskode}@sok_${record.fssok}
-		var record = element.id.split('@');
-		var avd = record[0].replace("avd_","");
-		var opd = record[1].replace("opd_","");
-		var kode = record[2].replace("kode_","");
-		var sok = record[3].replace("sok_","");
+		var lin2 = element.id;
+		lin2 = lin2.replace("lin2_","");
 		
 	  //Start dialog
 	  jq('<div></div>').dialog({
       modal: true,
-      title: "Dialog - Slett kode: " + kode + " " + sok,
+      title: "Dialog - Slett linje: " + lin2,
       buttons: {
 	        Fortsett: function() {
       		jq( this ).dialog( "close" );
 	            //do delete
 	            jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
-	            window.location = "transportdisp_workflow_frisokvei_edit.do?action=doDelete" + "&avd=" + avd + "&opd=" + opd + "&fskode=" + kode + "&fssok=" + sok;
+	            window.location = "transportdisp_workflow_dangerousgoods_edit.do?action=doDelete" + "&avd=" + jq('#avd').val() + "&opd=" + jq('#opd').val() + "&linNr=" + jq('#linNr').val() + "&fflin2=" + lin2;
+	            
 	        },
 	        Avbryt: function() {
 	            jq( this ).dialog( "close" );

@@ -193,7 +193,7 @@
   	
   	jq('#dangerousGoodsButton').click(function() {
   		if(jq('#linNr').text()!=''){
-  			window.open('transportdisp_workflow_dangerousgoods.do?avd='+ jq('#heavd').val() + '&opd=' + jq('#heopd').val() + "&linNr=" + jq('#linNr').text(), 'DangerousgoodsWin','top=120px,left=100px,height=600px,width=900px,scrollbars=no,status=no,location=no');
+  			window.open('transportdisp_workflow_dangerousgoods.do?avd='+ jq('#heavd').val() + '&opd=' + jq('#heopd').val() + "&linNr=" + jq('#linNr').text(), 'DangerousgoodsWin','top=120px,left=100px,height=600px,width=1100px,scrollbars=no,status=no,location=no');
   		}
   	});
   	
