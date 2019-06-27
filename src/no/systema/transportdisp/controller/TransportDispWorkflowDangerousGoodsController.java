@@ -40,6 +40,8 @@ import no.systema.transportdisp.mapper.url.request.UrlRequestParameterMapper;
 
 import no.systema.transportdisp.util.manager.CodeDropDownMgr;
 import no.systema.transportdisp.util.manager.ControllerAjaxCommonFunctionsMgr;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsContainer;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousGoodsContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.JsonTransportDispWorkflowSpecificOrderDangerousGoodsRecord;
 
@@ -112,6 +114,8 @@ public class TransportDispWorkflowDangerousGoodsController {
 		}else{
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 			this.fetchItemLines(appUser, avd, opd, linNr, model, session);
+			//aux find floating window
+			this.getFindDangerousList(appUser, model);
 			model.put("record", recordToValidate);
 	    	//
 	    	successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
@@ -272,6 +276,42 @@ public class TransportDispWorkflowDangerousGoodsController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param appUser
+	 * @param model
+	 */
+	private void getFindDangerousList(SystemaWebUser appUser, Map model){
+		
+		Collection<JsonTransportDispDangerousGoodsRecord> outputList = new ArrayList<JsonTransportDispDangerousGoodsRecord>();
+		String DATATABLE_DANGEROUS_GOODS_LIST = "findDangerousGoodsList";
+			
+		String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_CHILDWINDOW_DANGEROUS_GOODS_URL;
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		//user=JOVO&unnr=1950=&embg=&indx=&getval=&fullinfo=J
+		urlRequestParamsKeys.append("&fullinfo=J"); //always the max. nr of columns (as default)
+		
+		
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+		//Debug -->
+		logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		
+		if(jsonPayload!=null){
+			JsonTransportDispDangerousGoodsContainer container = this.transportDispChildWindowService.getDangerousGoodsContainer(jsonPayload);
+				if(container!=null){
+					outputList = container.getUnNumbers();
+				}
+		}
+	
+		model.put(DATATABLE_DANGEROUS_GOODS_LIST, outputList);
+	}
 	
 	/**
 	 * 

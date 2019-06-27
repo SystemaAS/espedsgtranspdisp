@@ -3,9 +3,7 @@
   var counterIndex = 0;
   var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
   
-  jq(document).ready(function() {
-		//jq('#updCancelButton').hide();
-  });
+  
   
   //Global functions
   function g_getCurrentYearStr(){
@@ -279,5 +277,59 @@
 	     }
 	  });  //end dialog
 	}
+	
+		  //-------------------
+		  //Datatables jquery
+		  //-------------------
+		  //private function
+		  function filtersInit () {
+		    jq('#tblAdrItemLines').DataTable().search(
+		    		jq('#tblAdrItemLines_filter').val()
+		    ).draw();
+		    
+		  }
+		  
+		  //---------
+		  //READY
+		  //---------
+		  jq(document).ready(function() {
+		    //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
+			jq('#tblAdrItemLines').dataTable( {
+			  "searchHighlight": true,
+			  "jQueryUI": false,
+			  "dom": '<"adrFilter"f>t<"bottom"lirp><"clear">',
+			  "scrollY": "250px",
+			  "scrollX":true,
+			  //"scrollCollapse": false,
+			  //"autoWidth": false, //for optimization purposes when initializing the table
+			  "lengthMenu": [ 50, 75, 100],
+			  "fnDrawCallback": function( oSettings ) {
+				  jq('.dataTables_filter input').addClass("inputText12LightYellow");
+		      }
+			} );
+			//css styling
+		    jq('.dataTables_filter input').addClass("inputText12LightYellow");
+		    
+		    //event on input field for search
+		    jq('input.tblAdrItemLines_filter').on( 'keyup click', function () {
+		    		filtersInit();
+		    } );
+		    
+		  });
 	 
+		  
+		 //Select Dangerous unnr.
+			jq(function() {
+				jq('#tblAdrItemLines').on('click', 'td', function(){
+				  var id = this.id;
+				  var record = id.split('@');
+				  var unnr = record[0].replace("unnr_", "");
+				  var embg = record[1].replace("embg_", "");
+				  var indx = record[2].replace("indx_", "");
+				  var fakt = record[3].replace("fakt_", "");
+				  jq('#ffunnr').val(unnr);
+				  //close
+				  jq('#allItemsButtonClose').click();
+				});
+			});
   

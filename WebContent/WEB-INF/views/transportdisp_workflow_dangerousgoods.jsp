@@ -27,6 +27,8 @@
 	.ui-timepicker-rtl dl dt{ float: right; clear: right; }
 	.ui-timepicker-rtl dl dd { margin: 0 40% 10px 10px; }
 	
+	/* this line will align the datatable search field in the left */
+	.dataTables_wrapper .adrFilter .dataTables_filter{float:left}
 	</style>
 	
 	
@@ -216,7 +218,63 @@
 						 		<table  class="tableBorderWithRoundCornersGray" width="90%" border="0" cellspacing="0" cellpadding="0">
 						 			<tr height="5"><td class="text" align="left"></td></tr>
 						 			<tr >
-							 			<td class="text14" align="left">&nbsp;<font class="text14RedBold" >*</font><span title="ffunnr">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unNr"/></span></td>
+							 			<td class="text14" align="left">&nbsp;<font class="text14RedBold" >*</font><span title="ffunnr">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.unNr"/></span>
+							 			<img id="imgAdrSearch" onClick="showPop('allItems');" align="bottom" style="cursor:pointer;" src="resources/images/find2.png" height="11px" width="11px" border="0" alt="search"> 
+											        <span style="background-color:#EEEEEE; position:absolute; left:80px; top:5px; width:900px; height:450px;" id="allItems" class="popupWithInputTextThickBorder"  >
+										           			<table id="containerdatatableTable" align="left" >
+										           			<tr>
+											           			<td colspan="3" class="text14"><b>ADR</b></td>
+											           		</tr>
+												           	<tr>	
+																<td class="text14" >
+																<table id="tblAdrItemLines" class="display compact cell-border" >
+																	<thead> 
+																	<tr class="tableHeaderField">
+																		<th class="text12" title="adunnr">&nbsp;UnNr&nbsp;</th>
+													                    <th class="text12" title="adembg">&nbsp;Emb.g&nbsp;</th>
+													                    <th class="text12" title="adindx">&nbsp;Indx.&nbsp;</th>
+													                    <th class="text12" title="adklas">&nbsp;FareK&nbsp;</th>
+													                    <th class="text12" title="adsedd">&nbsp;Fareseddel&nbsp;</th>
+													                    <th class="text12" title="adtres">&nbsp;Tunnerllrest&nbsp;</th>
+													                    <th class="text12" title="adfakt">&nbsp;Fakt&nbsp;</th>
+													                    <th class="text12" title="adtextK">&nbsp;Beskrivelse&nbsp;</th>
+													                </tr>  
+													               </thead>
+													               <tbody>
+													                <c:forEach var="record" items="${model.findDangerousGoodsList}" varStatus="counter">    
+														               <tr class="text12">
+														                   
+													               	   <td nowrap style="cursor:pointer;" class="textMediumBlue" 
+															               		id="unnr_${record.adunnr}@embg_${record.adembg}@indx_${record.adindx}@fakt_${record.adfakt}@dt_${counter.count}" >
+															               		&nbsp;<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+															               		&nbsp;&nbsp;${record.adunnr}
+														               </td>
+													               	   
+													               	   <td class="text12">&nbsp;${record.adembg}</td>
+													               	   <td class="text12">&nbsp;${record.adindx}</td>
+													               	   <td class="text12">&nbsp;${record.adklas}</td>
+														               <td class="text12">&nbsp;${record.adsedd}</td>
+														               <td class="text12">&nbsp;${record.adtres}</td>
+														               <td class="text12">&nbsp;${record.adfakt}</td>
+														               <td class="text12">&nbsp;${record.adtextK}</td>
+														            </tr> 
+														            </c:forEach>
+														            </tbody>
+														      </table>   
+							 								</td>
+							 								</tr>
+							 								</table>
+							 								<div>
+													         <table>
+													         	
+										           				<tr align="left" >
+																	<td class="text12"><button name="allItemsButtonClose" id="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button></td>
+																</tr>
+															</table>
+											   				</div>
+							 						</span>
+
+							 			</td>
 								        <td class="text14" align="left">&nbsp;<span title="ffembg">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg"/></span></td>
 								        <td class="text14" align="left">&nbsp;<span title="ffindx">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.emg.index"/></span></td>
 								        <td class="text14" align="left">&nbsp;<span title="ffantk">&nbsp;<spring:message code="systema.transportdisp.orders.form.detail.update.label.ant2"/></span></td>
