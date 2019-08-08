@@ -111,13 +111,16 @@ public class SpecificOrderValidatorBackend {
 				JsonTransportDispWorkflowSpecificOrderValidationBackendContainer container = this.transportDispWorkflowSpecificOrderService.getOrderValidationBackendContainer(jsonPayload);
 				if(container!=null){
 					this.validationOutputContainer = container;
+					logger.info("ERROR-msg:" + container.getErrMsg());
+					logger.info("INFO-msg:" + container.getInfoMsg());
 					//(1) Extract the errMsg if needed
 					if(container.getErrMsg()!=null && !"".equals(container.getErrMsg())){
 						this.validationOutputErrMsgList = this.parseErrMsg(container.getErrMsg());
-						this.validationOutputInfoMsgList = this.parseErrMsg(container.getInfoMsg());
 						this.validationOutputContainer.setErrMsgListFromValidationBackend(this.validationOutputErrMsgList);
-						this.validationOutputContainer.setInfoMsgListFromValidationBackend(this.validationOutputInfoMsgList);
 						
+					}else if(container.getInfoMsg()!=null && !"".equals(container.getInfoMsg())){
+						this.validationOutputInfoMsgList = this.parseErrMsg(container.getInfoMsg());
+						this.validationOutputContainer.setInfoMsgListFromValidationBackend(this.validationOutputInfoMsgList);
 						
 					}
 					//(2) Extract the return record (for further use at the callers domain...if applicable)

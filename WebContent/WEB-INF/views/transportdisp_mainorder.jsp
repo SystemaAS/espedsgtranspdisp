@@ -137,6 +137,27 @@
 		</tr>		
 	</c:if>
 	
+	<%-- -------------------------- --%>
+	<%-- Validation info BACK END --%>
+	<%-- -------------------------- --%>
+	<c:if test="${not empty model.containerValidationBackend && not empty model.containerValidationBackend.infoMsgListFromValidationBackend}">
+		<tr>
+		<td>
+           	<table class="tabThinBorderWhiteWithSideBorders" width="100%" align="left" border="0" cellspacing="0" cellpadding="0">
+           	<tr>
+			<td valign="bottom" class="inputTextMediumBlue" style="background-color: lightyellow; color:dodgerblue">					
+	            <ul>
+	            <c:forEach var="infoMsg" items="${model.containerValidationBackend.infoMsgListFromValidationBackend}">
+	                <li ><b>${infoMsg}</b></li>
+	            </c:forEach>
+	            </ul>
+			</td>
+			</tr>
+			</table>
+		</td>
+		</tr>		
+	</c:if>
+	
 	<%-- -------------------------------------- --%>
 	<%-- Validation errors BACK END independent --%>
 	<%-- Usually Frie sokveier eller DUP        --%>
@@ -247,7 +268,7 @@
 			<input type="hidden" name="hedtr" id="hedtr" value="${model.record.hedtr}">
 		
 			<table style="width:100%" id="wrapperTable" class="tabThinBorderWhite" cellspacing="0">
-			<tr height="10"><td>&nbsp;</td></tr> 
+			<tr height="5"><td>&nbsp;</td></tr> 
 			<%-- FORM HEADER --%>
 	 		<tr>
             		<td>

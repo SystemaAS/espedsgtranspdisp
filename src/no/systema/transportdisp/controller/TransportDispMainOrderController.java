@@ -439,7 +439,7 @@ public class TransportDispMainOrderController {
 						
 		    		}else{
 		    			//At this point all validation (at an ORDER-HEADER level) has been successfully passed.
-						//CREATE NEW (ADD)
+		    			//CREATE NEW (ADD)
 				    	if(this.isNewRecord(recordToValidate)){
 			    			logger.info("PURE CREATE NEW transaction...");
 							//Create new order
@@ -482,6 +482,16 @@ public class TransportDispMainOrderController {
 					    	}else{
 					    		//Update successfully done!
 					    		logger.info("[INFO] Record successfully updated, OK ");
+					    		
+					    		//Add info message if needed before going on with the updates
+					    		if (strMgr.isNotNull(this.specificOrderValidatorBackend.getValidationOutputContainer().getInfoMsg()) ){
+					    			//ERRORs at the frisokvei back-end. Abort everything and return to the end-user with the clear error messages
+						    		logger.info("VALIDATION BACK-END has INFO MESSAGES to display (ORDER)");
+						    		//logger.info(" size:" + validationOutputContainer.getInfoMsgListFromValidationBackend().size());
+						    		model.put(TransportDispConstants.DOMAIN_CONTAINER_VALIDATION_BACKEND, this.specificOrderValidatorBackend.getValidationOutputContainer());
+					    		}
+								
+					    		//Continue with lines
 					    		logger.info("[START]: process children <meessageNotes>, <itemLines>, etc update... ");
 					    		//Update the message notes (2 steps: 1.Delete the original ones, 2.Create the new ones)
 					    		this.processNewMessageNotes(model, recordToValidate, appUser, request, null );
