@@ -530,7 +530,16 @@
     //init economy-matrix draggable poput 
     showDialogMatrixDraggable();
     
+    // to prevent hiding datepicker behind the autocomplete function
+    jq('.datepicker').on('click', function(e) {
+	   e.preventDefault();
+	   jq(this).attr("autocomplete", "off");  
+    });
+    
   });
+  
+  
+  
   //draggable window
   function showDialogMatrixDraggable(){
 	  //jq( "#dialogDraggableMatrix" ).removeClass("popup");
