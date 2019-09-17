@@ -417,59 +417,6 @@
 							 	
 							</td>
 							
-							<%--
-							<td valign="top">
-								<table >
-								<tr>
-				 					<td class="text14">
-				 						<img onMouseOver="showPop('iu_info');" onMouseOut="hidePop('iu_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-						 				<span title="travd1-tropd1/travd2-tropd2"><spring:message code="systema.transportdisp.orders.form.update.label.iu.order"/>&nbsp;</span>
-						 				<div class="text11" style="position: relative;" align="left">
-											<span style="position:absolute; left:0px; top:0px; width:250px" id="iu_info" class="popupWithInputText"  >
-												<font class="text11">
-							           			<b>Innh./Utkj.oppdrag</b>
-							           			<div>
-							           			<p>Dersom utfylt peker det på avdeling og oppdragsnummer for evt. <b>innhenting</b> (foran streken)
-													og/eller <b>utkjøring</b> som er "satt bort" til annen avdeling.
-							           			</p>
-							           			</div>
-						           			</font>
-										</span>
-										</div>
-				 					</td>
-				 					<td class="text14">
-				 						<input readonly tabindex=-1 type="text" class="inputTextReadOnly" name="travd1" id="travd1" size="4" value="${model.record.travd1}">
-				 						<input readonly tabindex=-1 type="text" class="inputTextReadOnly" name="tropd1" id="tropd1" size="7" value="${model.record.tropd1}">
-				 						&nbsp;/&nbsp;
-				 						<input readonly tabindex=-1 type="text" class="inputTextReadOnly" name="travd2" id="travd2" size="3" value="${model.record.travd2}">
-				 						<input readonly tabindex=-1 type="text" class="inputTextReadOnly" name="tropd2" id="tropd2" size="7" value="${model.record.tropd2}">
-				 						<span title="travd0-tropd0" >&nbsp;Opphav.</span>
-				 						<input readonly tabindex=-1 type="text" class="inputTextReadOnly" name="travd0" id="travd0" size="3" value="${model.record.travd0}">
-				 						<input readonly tabindex=-1 type="text" class="inputTextReadOnly" name="tropd0" id="tropd0" size="7" value="${model.record.tropd0}">
-			 						</td>
-			 						
-			 						
-				 				</tr>
-				 				<tr>
-				 					<td colspan="6" class="text14">
-				 						<c:if test="${not empty model.record.heopd}">
-					 						<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
-					 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
-					 						<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
-									   		&nbsp;<button name="planleggingButton" id="planleggingButton" class="buttonGrayWithGreenFrame" type="button" >Til planlegging</button>
-									   		&nbsp;&nbsp;<button tabindex=-1 name="trackAndTraceButton" id="trackAndTraceButton" class="inputFormSubmitStd" type="button" >Hend.logg</button>
-									   		<c:if test="${ not empty model.record.heavd && not empty model.record.heopd }">
-						 				    	<input tabindex=-1 class="inputFormSubmit submitSaveClazz" type="submit" name="submit2" id="submit2" onClick="javascript: form.action='transportdisp_mainorder_update.do';" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
-						 				    	<input title="Lagre og Lukk" onMouseOver="style='cursor:pointer;box-shadow: 0 0 5px rgba(66, 148, 255, 1);border: 5px solid rgba(66, 148, 255, 1);'" onMouseOut="style=''" type="checkbox" name="savecloseFlag2" id="savecloseFlag2" value="1" <c:if test="${model.record.savecloseFlag2 == '1'}"> checked </c:if>></span>						 	
-						 				    	
-						 				    </c:if>
-										</c:if>
-				 					</td>
-				 				</tr>
-				 			
-				 				</table>
-							</td>
-							 --%>
 						</tr>
 						
 						<tr height="5"><td ></td></tr>
