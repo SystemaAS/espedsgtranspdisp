@@ -1408,9 +1408,13 @@ public class TransportDispAjaxHandlerController {
 		    
 		    
 		    if (file!=null && !file.isEmpty()) {
-        		String fileName = file.getOriginalFilename();
-        		logger.info("FILE NAME:" + fileName);
-        		if(fileNameNew!=null && !"".equals(fileNameNew)){ fileName = fileNameNew; }
+        		String fileNameRaw = file.getOriginalFilename();
+        		if(fileNameNew!=null && !"".equals(fileNameNew)){ fileNameRaw = fileNameNew; }
+        		logger.info("FILE NAME (raw):" + fileNameRaw);
+        		//remove all invalid file name characters: ASCII: 1-31 + " *, :, <, >, ?, \, /, | "
+        		String fileName = strMgr.replaceInvalidCharsForFilename(fileNameRaw);
+        		logger.info("FILE NAME (clean):" + fileName);
+        		
                 //validate file
                 JsonTransportDispFileUploadValidationContainer uploadValidationContainer = this.validateFileUpload(fileName, applicationUser);
                 //if valid
@@ -1496,9 +1500,14 @@ public class TransportDispAjaxHandlerController {
 			}
 		    
 		    if (file!=null && !file.isEmpty()) {
-        		String fileName = file.getOriginalFilename();
-        		logger.info("FILE NAME:" + fileName);
-        		if(fileNameNew!=null && !"".equals(fileNameNew)){ fileName = fileNameNew; }
+        		String fileNameRaw = file.getOriginalFilename();
+        		logger.info("FILE NAME:" + fileNameRaw);
+        		if(fileNameNew!=null && !"".equals(fileNameNew)){ fileNameRaw = fileNameNew; }
+        		logger.info("FILE NAME (raw):" + fileNameRaw);
+        		//remove all invalid file name characters: ASCII: 1-31 + " *, :, <, >, ?, \, /, | "
+        		String fileName = strMgr.replaceInvalidCharsForFilename(fileNameRaw);
+        		logger.info("FILE NAME (clean):" + fileName);
+        		
                 //validate file
                 JsonTransportDispFileUploadValidationContainer uploadValidationContainer = this.validateFileUpload(fileName, applicationUser);
                 //if valid
