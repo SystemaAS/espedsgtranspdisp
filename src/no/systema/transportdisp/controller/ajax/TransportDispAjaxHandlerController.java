@@ -1408,7 +1408,16 @@ public class TransportDispAjaxHandlerController {
 		    
 		    
 		    if (file!=null && !file.isEmpty()) {
+		    	//default
         		String fileNameRaw = file.getOriginalFilename();
+		    	//extra round in order to catch non-ASCII chars
+        		try{
+		    		fileNameRaw = new String(file.getOriginalFilename().getBytes("iso-8859-1"), "UTF-8");
+		    	}catch(Exception e){
+		    		logger.info(e.toString());
+		    		e.printStackTrace();
+		    	}
+        		//proceed
         		if(fileNameNew!=null && !"".equals(fileNameNew)){ fileNameRaw = fileNameNew; }
         		logger.info("FILE NAME (raw):" + fileNameRaw);
         		//remove all invalid file name characters: ASCII: 1-31 + " *, :, <, >, ?, \, /, | "
@@ -1501,6 +1510,14 @@ public class TransportDispAjaxHandlerController {
 		    
 		    if (file!=null && !file.isEmpty()) {
         		String fileNameRaw = file.getOriginalFilename();
+        		//extra round in order to catch non-ASCII chars
+        		try{
+		    		fileNameRaw = new String(file.getOriginalFilename().getBytes("iso-8859-1"), "UTF-8");
+		    	}catch(Exception e){
+		    		logger.info(e.toString());
+		    		e.printStackTrace();
+		    	}
+        		//proceed
         		logger.info("FILE NAME:" + fileNameRaw);
         		if(fileNameNew!=null && !"".equals(fileNameNew)){ fileNameRaw = fileNameNew; }
         		logger.info("FILE NAME (raw):" + fileNameRaw);
