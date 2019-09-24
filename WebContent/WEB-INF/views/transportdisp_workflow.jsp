@@ -167,14 +167,14 @@
 					<td align="left" >&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wtubiln" id="wtubiln" size="10" maxlength="10" value='${searchFilter.wtubiln}'>&nbsp;</td>
 					<td align="left" >&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wtustef" id="wtustef" size="6" maxlength="5" value='${searchFilter.wtustef}'>&nbsp;</td>
 					<td align="left" >&nbsp;
-						<input type="text" class="inputTextMediumBlue" name="wtudt" id="wtudt" size="9" maxlength="8" value='${searchFilter.wtudt}'>
-						-<input type="text" class="inputTextMediumBlue" name="wtudt2" id="wtudt2" size="9" maxlength="8" value='${searchFilter.wtudt2}'>
+						<input autocomplete="off" type="text" class="inputTextMediumBlue" name="wtudt" id="wtudt" size="9" maxlength="8" value='${searchFilter.wtudt}'>
+						-<input autocomplete="off" type="text" class="inputTextMediumBlue" name="wtudt2" id="wtudt2" size="9" maxlength="8" value='${searchFilter.wtudt2}'>
 						
 					</td>
 					<td align="left" >&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wtustet" id="wtustet" size="6" maxlength="5" value='${searchFilter.wtustet}'>&nbsp;</td>
 					<td align="left" >&nbsp;
-						<input type="text" class="inputTextMediumBlue" name="wtudtt" id="wtudtt" size="9" maxlength="8" value='${searchFilter.wtudtt}'>
-						-<input type="text" class="inputTextMediumBlue" name="wtudtt2" id="wtudtt2" size="9" maxlength="8" value='${searchFilter.wtudtt2}'>
+						<input autocomplete="off" type="text" class="inputTextMediumBlue" name="wtudtt" id="wtudtt" size="9" maxlength="8" value='${searchFilter.wtudtt}'>
+						-<input autocomplete="off" type="text" class="inputTextMediumBlue" name="wtudtt2" id="wtudtt2" size="9" maxlength="8" value='${searchFilter.wtudtt2}'>
 					</td>
 					<td valign="bottom" align="left" >&nbsp;
 						<input class="inputFormSubmit" type="submit" name="submitSearch" id="submitSearch" name="submitSearch" value='<spring:message code="systema.transportdisp.search"/>'>
@@ -997,7 +997,7 @@
 								    		<td>
 							    				<c:choose>
 								    				<c:when test="${not empty model.record.tudt && !fn:contains(model.record.tudt,'yyyy')}">
-								    					<input type="text" class="inputTextMediumBlue" name="tudt" id="tudt" size="9" maxlength="8" value="${model.record.tudt}">
+								    					<input autocomplete="off" type="text" class="inputTextMediumBlue" name="tudt" id="tudt" size="9" maxlength="8" value="${model.record.tudt}">
 							    					</c:when>
 							    					<c:otherwise>
 							    						<input onfocus="if (this.value==this.defaultValue) this.value = ''" type="text" class="inputTextMediumBlue" style="color:#CCCCCC;" name="tudt" id="tudt" size="9" maxlength="8" value="">
@@ -1070,7 +1070,7 @@
 								    		<td>
 								    			<c:choose>
 								    				<c:when test="${not empty model.record.tudtt && !fn:contains(model.record.tudtt,'yyyy')}">
-								    					<input type="text" class="inputTextMediumBlue" name="tudtt" id="tudtt" size="9" maxlength="8" value="${model.record.tudtt}">
+								    					<input autocomplete="off" type="text" class="inputTextMediumBlue" name="tudtt" id="tudtt" size="9" maxlength="8" value="${model.record.tudtt}">
 							    					</c:when>
 							    					<c:otherwise>
 							    						<input onfocus="if (this.value==this.defaultValue) this.value = ''" type="text" class="inputTextMediumBlue" style="color:#CCCCCC;" name="tudtt" id="tudtt" size="9" maxlength="8" value="">

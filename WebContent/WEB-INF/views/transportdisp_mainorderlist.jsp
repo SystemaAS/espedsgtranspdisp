@@ -578,8 +578,8 @@
 				        </td>
 				        
 				        <td>	
-			        		<input type="text" class="inputTextMediumBlue" name="fromDateF" id="fromDateF" size="9" maxlength="8" value='${searchFilter.fromDateF}'>
-				        	-<input type="text" class="inputTextMediumBlue" name="fromDateT" id="fromDateT" size="9" maxlength="8" value='${searchFilter.fromDateT}'>
+			        		<input autocomplete="off" type="text" class="inputTextMediumBlue" name="fromDateF" id="fromDateF" size="9" maxlength="8" value='${searchFilter.fromDateF}'>
+				        	-<input autocomplete="off" type="text" class="inputTextMediumBlue" name="fromDateT" id="fromDateT" size="9" maxlength="8" value='${searchFilter.fromDateT}'>
 				        </td>
 				        
 				        
@@ -636,8 +636,8 @@
 				        </td>
 				        
 				        <td>	
-			        		<input type="text" class="inputTextMediumBlue" name="toDateF" id="toDateF" size="9" maxlength="8" value='${searchFilter.toDateF}'>
-				        	-<input type="text" class="inputTextMediumBlue" name="toDateT" id="toDateT" size="9" maxlength="8" value='${searchFilter.toDateT}'>
+			        		<input autocomplete="off" type="text" class="inputTextMediumBlue" name="toDateF" id="toDateF" size="9" maxlength="8" value='${searchFilter.toDateF}'>
+				        	-<input autocomplete="off" type="text" class="inputTextMediumBlue" name="toDateT" id="toDateT" size="9" maxlength="8" value='${searchFilter.toDateT}'>
 				        </td>
 				        <td >	
 				        	<input onClick="setBlockUI(this);" class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.search"/>'>

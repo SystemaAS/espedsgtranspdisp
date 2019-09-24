@@ -212,8 +212,8 @@
 				        </td>
 				        
 				        <td>	
-			        		<input type="text" class="inputText" name="wopdtf" id="wopdtf" size="9" maxlength="8" value='${searchFilter.wopdtf}'>
-			        		<input type="text" class="inputText" name="wopdtt" id="wopdtt" size="9" maxlength="8" value='${searchFilter.wopdtt}'>
+			        		<input autocomplete="off" type="text" class="inputText" name="wopdtf" id="wopdtf" size="9" maxlength="8" value='${searchFilter.wopdtf}'>
+			        		<input autocomplete="off" type="text" class="inputText" name="wopdtt" id="wopdtt" size="9" maxlength="8" value='${searchFilter.wopdtt}'>
 				        </td>
 				        
 				        <td>	
