@@ -18,6 +18,7 @@ import no.systema.main.util.AppConstants;
 import no.systema.main.util.AppResources;
 import no.systema.main.util.ApplicationPropertiesUtil;
 import no.systema.main.util.io.PayloadContentFlusher;
+import no.systema.transportdisp.util.manager.Log4jMgr;
 import no.systema.main.util.StringManager;
 import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
@@ -63,10 +64,19 @@ public class GeneralTextRenderController {
 		logger.info("Inside doRenderLocalLog4j...");
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		
+		Log4jMgr log4jMgr = new Log4jMgr();
+		
 		if(appUser==null){
 			return this.loginView;
 			
 		}else{
+			
+			try{
+				log4jMgr.doLevelUpdate(request, response);
+			}catch(Exception e){
+				e.toString();
+			}
+			
 			String path = TdsServletContext.getTdsServletContext().getRealPath("/");
 			//logger.info("ServletContext:" + path);
 			int pathRootIndex = path.indexOf(SERVLET_CONTEXT_WEBAPPS_ROOT);
