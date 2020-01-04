@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import no.systema.main.cookie.SessionCookieManager;
 //application imports
 import no.systema.main.util.AppConstants;
 import no.systema.transportdisp.util.manager.Log4jMgr;
@@ -26,6 +27,9 @@ public class LogoutController {
 			
 			Log4jMgr log4jMgr = new Log4jMgr();
 			log4jMgr.doLogoutLogger();
+			
+			//remove token cookie (init)
+			new SessionCookieManager().removeLocalCookie(response);
 			
             session.removeAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
             session.invalidate();

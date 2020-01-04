@@ -35,7 +35,7 @@ import org.springframework.validation.BindingResult;
 
 //import no.systema.tds.service.MainHdTopicService;
 import no.systema.main.validator.UserValidator;
-
+import no.systema.main.cookie.SessionCookieManager;
 //application imports
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.model.jsonjackson.JsonSystemaUserContainer;
@@ -94,6 +94,19 @@ public class DashboardController {
 	public ModelAndView logon(@ModelAttribute (AppConstants.SYSTEMA_WEB_USER_KEY) SystemaWebUser appUser, BindingResult bindingResult, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttr){
 		ModelAndView successView = new ModelAndView("redirect:transportdisp_mainorderlist.do?action=doFind");
 		Map model = new HashMap();
+		SessionCookieManager cookieMgr = new SessionCookieManager();
+		
+		//Init cookie token since this page is excluded in the interceptor
+		cookieMgr.removeLocalCookie(response);
+		
+		//Encrypt user credentials 
+		appUser.setEncryptedUser(appUser.getUser());
+		appUser.setUser(this.aesManager.decrypt(appUser.getUser()));
+		appUser.setEncryptedPassword(appUser.getPassword());
+    	appUser.setPassword(this.aesManager.decrypt(appUser.getPassword()));
+		appUser.setEncryptedToken(this.aesManager.encrypt(request.getSession().getId() + "&" + appUser.getUser()));
+    	
+		
 		logger.info("Inside logon...");
 		
 		if(appUser==null){
@@ -117,13 +130,6 @@ public class DashboardController {
 		    	return loginView;
 	
 		    }else{
-		    	//Decrypt password to be able to work with it. 
-		    	//All sub-modules will be passed an encrypted password (from the dashboard). ALWAYS!
-		    	appUser.setEncryptedUser(appUser.getUser());
-		    	appUser.setUser(this.aesManager.decrypt(appUser.getUser()));
-		    	appUser.setEncryptedPassword(appUser.getPassword());
-		    	appUser.setPassword(this.aesManager.decrypt(appUser.getPassword()));
-		    	//logger.info("DECRYPT...:" + appUser.getPassword());
 		    	
 		    	//get the company code for the coming user
 		    	//this routine was triggered by Totens upgrade (Jan-2017 V12). Ref. JOVOs requirement
@@ -182,6 +188,8 @@ public class DashboardController {
 	    					return loginView;
 				    	}
 				    	
+				    	//create cookie for security token
+				    	cookieMgr.addLocalCookieToken( appUser.getEncryptedToken(), response);
 				    	session.setAttribute(AppConstants.SYSTEMA_WEB_USER_KEY, appUser);
 			    	
 			    	}catch(Exception e){
