@@ -3,6 +3,7 @@ package no.systema.main.controller;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -20,7 +21,7 @@ public class LogoutController {
 	private static final Logger logger = Logger.getLogger(LogoutController.class.getName());
 	
 	@RequestMapping("logout.do")
-	public void logout(HttpSession session, HttpServletResponse response){
+	public void logout(HttpSession session, HttpServletResponse response, HttpServletRequest request){
 		
 		
 		if (session!=null){ 
@@ -29,7 +30,7 @@ public class LogoutController {
 			log4jMgr.doLogoutLogger();
 			
 			//remove token cookie (init)
-			new SessionCookieManager().removeLocalCookie(response);
+			new SessionCookieManager(request).removeLocalCookie(response);
 			
             session.removeAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
             session.invalidate();
