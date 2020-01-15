@@ -4,7 +4,7 @@
 
 <html>
 	<head>
-		<link href="resources/${user.cssEspedsg}?ver=${user.versionEspedsg}" rel="stylesheet" type="text/css"/>
+		<link href="/espedsg2/resources/${user.cssEspedsg}?ver=${user.versionEspedsg}" rel="stylesheet" type="text/css"/>
 		<link href="resources/jquery.calculator.css" rel="stylesheet" type="text/css"/>
 		
 		<%-- datatables grid CSS --%>
