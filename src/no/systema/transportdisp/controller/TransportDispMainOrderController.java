@@ -186,6 +186,7 @@ public class TransportDispMainOrderController {
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 			if(recordToValidate.getHeavd()!=null && !"".equals(recordToValidate.getHeavd()) && 
 				recordToValidate.getHeopd()!=null && !"".equals(recordToValidate.getHeopd())){
+				logger.warn("Update Order record");
 		    	final String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_WORKFLOW_FETCH_MAIN_ORDER_URL;
 	    		//add URL-parameters
 	    		StringBuffer urlRequestParams = new StringBuffer();
@@ -224,7 +225,7 @@ public class TransportDispMainOrderController {
 	    		}
 			}else{ //prepare for create new
 				//Default values (always when doFind)
-				logger.info("New Order record");
+				logger.warn("New Order record");
 				DateTimeManager dateMgr = new DateTimeManager();
 				recordToValidate.setWsetdd(dateMgr.getCurrentDate_ISO());
 				recordToValidate.setHebodt(dateMgr.getCurrentDate_ISO());
