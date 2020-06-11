@@ -52,6 +52,7 @@ import no.systema.transportdisp.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.transportdisp.util.RpgReturnResponseHandler;
 import no.systema.transportdisp.validator.TransportDispWorkflowSpecificTripValidator;
 import no.systema.transportdisp.util.TransportDispDateTimeFormatter;
+import no.systema.transportdisp.util.TransportDispJspViewManager;
 import no.systema.transportdisp.util.manager.CodeDropDownMgr;
 import no.systema.transportdisp.util.manager.ControllerAjaxCommonFunctionsMgr;
 
@@ -70,6 +71,8 @@ import no.systema.external.tvinn.sad.z.maintenance.service.MaintSadImportKodts4S
 public class TransportDispWorkflowHeaderController {
 	
 	private static Logger logger = Logger.getLogger(TransportDispWorkflowHeaderController.class.getName());
+	
+	private TransportDispJspViewManager jspMgr = new TransportDispJspViewManager();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
 	private TransportDispDateTimeFormatter dateTimeFormatter = new TransportDispDateTimeFormatter();
@@ -101,6 +104,12 @@ public class TransportDispWorkflowHeaderController {
 		 logger.info("Inside: doTranspDispGetTrip");
 		 ModelAndView successView = new ModelAndView("transportdisp_workflow");
 		 SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//0004009901RAMB = RAMBERG
+		logger.warn("Insid:" + appUser.getInsid());
+		//adaptations
+		this.jspMgr.getSuccessView(appUser, successView);
+				
+		 
 		 SearchFilterTransportDispWorkflowTripList tripListSearchFilter = new SearchFilterTransportDispWorkflowTripList();
 		 
 		 Map model = new HashMap();
@@ -218,6 +227,10 @@ public class TransportDispWorkflowHeaderController {
 		this.controllerAjaxCommonFunctionsMgr = new ControllerAjaxCommonFunctionsMgr(this.urlCgiProxyService, this.transportDispWorkflowSpecificTripService);
 
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		//adaptations
+		this.jspMgr.getSuccessView(appUser, successView);
+				
+		
 		logger.info("Method: " + method);
 		//required params for a specific trip
 		String originalAvdOnCopyRundtur = request.getParameter("originalAvd");

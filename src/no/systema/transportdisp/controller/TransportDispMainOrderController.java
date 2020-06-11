@@ -49,6 +49,7 @@ import no.systema.transportdisp.util.manager.ControllerAjaxCommonFunctionsMgr;
 //TRANSPDISP
 import no.systema.transportdisp.util.RpgReturnResponseHandler;
 import no.systema.transportdisp.util.TransportDispDateTimeFormatter;
+import no.systema.transportdisp.util.TransportDispJspViewManager;
 import no.systema.transportdisp.util.TransportDispPercentageFormatter;
 import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
 import no.systema.transportdisp.util.TransportDispConstants;
@@ -102,6 +103,7 @@ public class TransportDispMainOrderController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(1000);
 	private static Logger logger = Logger.getLogger(TransportDispMainOrderController.class.getName());
 	
+	private TransportDispJspViewManager jspMgr = new TransportDispJspViewManager();
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();
 	private ModelAndView loginView = new ModelAndView("login");
 	private ApplicationContext context;
@@ -153,8 +155,9 @@ public class TransportDispMainOrderController {
 		
 		ModelAndView successView = new ModelAndView("transportdisp_mainorder");
 		ModelAndView errorView = new ModelAndView("transportdisp_mainorderlist");
-		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//adaptations
+		this.jspMgr.getSuccessView(appUser, successView);
 		
 		//check user (should be in session already)
 		if(appUser==null){

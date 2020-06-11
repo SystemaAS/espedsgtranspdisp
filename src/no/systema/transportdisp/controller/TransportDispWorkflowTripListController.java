@@ -54,6 +54,7 @@ import no.systema.transportdisp.validator.TransportDispWorkflowTripListValidator
 import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
 import no.systema.transportdisp.util.RpgReturnResponseHandler;
 import no.systema.transportdisp.util.TransportDispConstants;
+import no.systema.transportdisp.util.TransportDispJspViewManager;
 import no.systema.transportdisp.util.manager.CodeDropDownMgr;
 
 
@@ -70,6 +71,8 @@ import no.systema.transportdisp.util.manager.CodeDropDownMgr;
 @Scope("session")
 public class TransportDispWorkflowTripListController {
 	private static Logger logger = Logger.getLogger(TransportDispWorkflowTripListController.class.getName());
+	
+	private TransportDispJspViewManager jspMgr = new TransportDispJspViewManager();
 	private RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(1000);
@@ -103,11 +106,12 @@ public class TransportDispWorkflowTripListController {
 		
 		ModelAndView successView = new ModelAndView("transportdisp_workflow");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		
+		//adaptations
+		this.jspMgr.getSuccessView(appUser, successView);
+				
 		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
-			
 		}else{
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 			//-----------

@@ -451,6 +451,7 @@
 	  				//proceed to the redirect for validate=OK
 	  				jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 	  				window.location = "transportdisp_mainorder.do?user=" + jq('#applicationUser').val() + "&hepro=" + hepro + "&heavd=" + heavd + "&heopd=" + heopd;
+	  				
 	  			}
 	  		}
 	  	  },

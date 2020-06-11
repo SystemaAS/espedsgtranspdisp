@@ -103,5 +103,7 @@ public final class TransportDispConstants {
 	public static final String ASPECT_ERROR_META_INFO = "errorInfo";
 	
 
+	//adaptations
+	public static final String ADAPTATION_JSP_RAMBERG = "0004009901RAMB";
 	   
 }
