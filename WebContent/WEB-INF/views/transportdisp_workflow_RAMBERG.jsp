@@ -7,7 +7,7 @@
 	<%-- specific jQuery functions for this JSP (must reside under the resource map since this has been
 		specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/transportdispglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
-	<SCRIPT type="text/javascript" src="resources/js/transportdisp_workflow.js?ver=${user.versionEspedsg}"></SCRIPT>	
+	<SCRIPT type="text/javascript" src="resources/js/transportdisp_workflow_RAMBERG.js?ver=${user.versionEspedsg}"></SCRIPT>	
 	
 	<SCRIPT type="text/javascript" src="resources/js/jquery-ui-timepicker-addon.js"></SCRIPT>
 	
@@ -178,6 +178,7 @@
 					</td>
 					<td valign="bottom" align="left" >&nbsp;
 						<input class="inputFormSubmit" type="submit" name="submitSearch" id="submitSearch" name="submitSearch" value='<spring:message code="systema.transportdisp.search"/>'>
+						
 	                </td>
 				</tr>
 				</table>
@@ -729,7 +730,7 @@
 											</div>
 								    			
 							    			</td>
-								    		<td>
+								    		<td colspan="2">
 								    			<select class="inputTextMediumBlueMandatoryField" name="centuryYearTurccTuraar" id="centuryYearTurccTuraar">
 							            		<option value=""><spring:message code="systema.transportdisp.dropdown.default"></spring:message></option>
 							 				  	<c:forEach var="record" items="${model.yearList}" >
@@ -743,6 +744,7 @@
 						                       	 	<option value="${record}"<c:if test="${model.record.turmnd == record}"> selected </c:if> >${record}</option>
 												</c:forEach> 
 											</select>
+											RAMBERG
 								    		</td>
 								    	</tr>
 								    	<tr height="5"><td ></td></tr>

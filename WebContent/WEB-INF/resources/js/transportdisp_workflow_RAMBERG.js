@@ -1100,7 +1100,7 @@
 			  				if(status=='close'){ //only the active trips are allowed to have this option (tur planning)
 			  					jq('.clazzAvdCreateNew').css('visibility', 'collapse');
 			  					jq('.clazzOrderTripTab').css('visibility', 'visible');
-			  					jq('.ordersTripOpen').attr('href', 'transportdisp_mainorderlist.do?action=doFind&wssavd='+ data[i].tuavd + '&wstur=' + data[i].tupro);
+			  					jq('.ordersTripOpen').attr('href', 'transportdisp_mainorderlist_RAMBERG.do?action=doFind&wssavd='+ data[i].tuavd + '&wstur=' + data[i].tupro);
 			  					jq('#tuproTab').text(data[i].tupro);jq('#tuproTab').addClass('text14MediumBlue');
 			  					//Info fields on EDIT
 			  					//jq('#tuavdJS').text(""); jq('#tuavdJS').text(data[i].tuavd);

@@ -157,7 +157,7 @@ public class TransportDispMainOrderController {
 		ModelAndView errorView = new ModelAndView("transportdisp_mainorderlist");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//adaptations
-		this.jspMgr.getSuccessView(appUser, successView);
+		successView = this.jspMgr.getSuccessView(appUser, successView);
 		
 		//check user (should be in session already)
 		if(appUser==null){

@@ -104,10 +104,10 @@ public class TransportDispWorkflowHeaderController {
 		 logger.info("Inside: doTranspDispGetTrip");
 		 ModelAndView successView = new ModelAndView("transportdisp_workflow");
 		 SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		//0004009901RAMB = RAMBERG
+		//0004009901RAMB = _RAMBERG
 		logger.warn("Insid:" + appUser.getInsid());
 		//adaptations
-		this.jspMgr.getSuccessView(appUser, successView);
+		successView = this.jspMgr.getSuccessView(appUser, successView);
 				
 		 
 		 SearchFilterTransportDispWorkflowTripList tripListSearchFilter = new SearchFilterTransportDispWorkflowTripList();
@@ -166,7 +166,8 @@ public class TransportDispWorkflowHeaderController {
 			 successView.addObject(TransportDispConstants.DOMAIN_LIST,outputList);
 			 successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);	
 			 successView.addObject("searchFilter", tripListSearchFilter);
-		} 
+		}
+		logger.warn("Here:" + successView.getViewName());
 		return successView;
 		 
 	}
@@ -228,7 +229,7 @@ public class TransportDispWorkflowHeaderController {
 
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		//adaptations
-		this.jspMgr.getSuccessView(appUser, successView);
+		successView = this.jspMgr.getSuccessView(appUser, successView);
 				
 		
 		logger.info("Method: " + method);

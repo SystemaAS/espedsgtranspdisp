@@ -104,6 +104,7 @@ public final class TransportDispConstants {
 	
 
 	//adaptations
-	public static final String ADAPTATION_JSP_RAMBERG = "0004009901RAMB";
+	public static final String ADAPTATION_RAMBERG_INSID = "0004009901RAMB";
+	public static final String ADAPTATION_RAMBERG_JSP_CODE = "_RAMBERG";
 	   
 }

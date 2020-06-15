@@ -107,7 +107,7 @@ public class TransportDispWorkflowTripListController {
 		ModelAndView successView = new ModelAndView("transportdisp_workflow");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//adaptations
-		this.jspMgr.getSuccessView(appUser, successView);
+		successView = this.jspMgr.getSuccessView(appUser, successView);
 				
 		//check user (should be in session already)
 		if(appUser==null){
