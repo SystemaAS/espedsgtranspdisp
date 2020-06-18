@@ -283,6 +283,7 @@
 								<img style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
 								<c:if test="${not empty model.record.heopd}">
 									<font style="color:yellow;font-size:12px">&nbsp;Reg.date:&nbsp;${model.record.hedtr}</font>
+									&nbsp;&nbsp;Ramberg
 								</c:if>
 								
 								<c:if test="${not empty model.record.hepro}">

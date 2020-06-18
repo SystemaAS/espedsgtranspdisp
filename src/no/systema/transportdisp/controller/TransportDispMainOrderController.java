@@ -330,9 +330,11 @@ public class TransportDispMainOrderController {
 		
 		ModelAndView returnView = new ModelAndView("transportdisp_mainorder");
 		ModelAndView getoutView = new ModelAndView("redirect:transportdisp_mainorderlist.do?action=doFind&avd=" + recordToValidate.getHeavd());
-		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		
+		//adaptations
+		returnView = this.jspMgr.getSuccessView(appUser, returnView);
+						
+				
 		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
