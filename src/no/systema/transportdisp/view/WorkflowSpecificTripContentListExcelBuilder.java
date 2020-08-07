@@ -10,14 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.view.document.AbstractXlsView;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.hssf.util.*;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.*;
 
 import no.systema.transportdisp.model.jsonjackson.workflow.shippinglists.JsonTransportDispWorkflowShippingPlanningCurrentOrdersListRecord;
 
@@ -49,10 +43,10 @@ public class WorkflowSpecificTripContentListExcelBuilder extends AbstractXlsView
         CellStyle style = workbook.createCellStyle();
         Font font = workbook.createFont();
         font.setFontName("Arial");
-        style.setFillForegroundColor(HSSFColor.BLUE.index);
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-        font.setColor(HSSFColor.WHITE.index);
+        style.setFillForegroundColor(HSSFColor.HSSFColorPredefined.BLUE.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        font.setBold(true);
+        font.setColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
         style.setFont(font);
 
         //Note: the locale must be fetched from the response since we are working with the Spring Interceptor.
