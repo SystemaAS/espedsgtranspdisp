@@ -428,6 +428,221 @@ public class TransportDispWorkflowHeaderController {
 	}
 	
 	/**
+	 * RAMBERG adaptation for CREATE/UPDATE/DELETE
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="transportdisp_workflow_edit_rbg.do")
+	public ModelAndView doTransportDispEdit_RAMBERG(@ModelAttribute ("record") JsonTransportDispWorkflowSpecificTripRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		ModelAndView successView = new ModelAndView("transportdisp_workflow");
+		String method = "doTransportDispEdit";
+		this.controllerAjaxCommonFunctionsMgr = new ControllerAjaxCommonFunctionsMgr(this.urlCgiProxyService, this.transportDispWorkflowSpecificTripService);
+
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		//adaptations
+		successView = this.jspMgr.getSuccessView(appUser, successView);
+				
+		
+		logger.info("Method: " + method);
+		//required params for a specific trip
+		String originalAvdOnCopyRundtur = request.getParameter("originalAvd");
+		logger.info("Avd original:" + originalAvdOnCopyRundtur);
+		logger.info("Avd:" + recordToValidate.getTuavd());
+		logger.info("Trip No.:" + recordToValidate.getTupro());
+		String[] messageNote = this.getChunksOfMessageNote(recordToValidate);
+		//---------------------------------
+		//Crucial request parameters (Keys)
+		//---------------------------------
+		String action = request.getParameter("action");
+		//Action (doFetch, doUpdate, doCreate)
+		logger.info("Action:" + action);
+		Map model = new HashMap();
+		
+		if(appUser==null){
+			return this.loginView;
+		}else{
+			if(action!=null){
+				//Get Lorry-Capacity-Matrix params since there are hidden fields that must be fetched manually
+				recordToValidate.setTukvkt(request.getParameter("own_tukvkt"));
+				recordToValidate.setTutara(request.getParameter("own_tutara"));
+				recordToValidate.setTukam3(request.getParameter("own_tukam3"));
+				recordToValidate.setTukalM(request.getParameter("own_tukalM"));
+				
+				
+				//----------------------------
+				//CREATE and/or UPDATE RECORD
+				//----------------------------	
+				if(TransportDispConstants.ACTION_UPDATE.equals(action)){
+					//-----------
+					//Validation
+					//-----------
+					logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
+					TransportDispWorkflowSpecificTripValidator validator = new TransportDispWorkflowSpecificTripValidator();
+					//adjust some fields
+					this.adjustFields(recordToValidate);
+					//validate
+					validator.validate(recordToValidate, bindingResult);
+					logger.info("After validation:tuavd" + recordToValidate.getTuavd());
+					//----------------------------
+				    //check for validation ERRORS
+					//----------------------------
+					if(bindingResult.hasErrors()){
+				    	logger.info("[ERROR Validation] Record does not validate)");
+				    	//Now fetch the Archived Documents and fill the parent record with it
+						Collection<JsonTransportDispWorkflowSpecificTripArchivedDocsRecord> archiveDocsList = null;
+						archiveDocsList = this.controllerAjaxCommonFunctionsMgr.fetchTripHeadingArchiveDocs(appUser.getUser(), recordToValidate.getTupro());
+						recordToValidate.setGetdoctrip(archiveDocsList);
+						//Now fetch the Shipping list and fill the parent record with it
+						Collection<JsonTransportDispWorkflowSpecificTripShipRecord> shippingTripList = null;
+						shippingTripList = this.controllerAjaxCommonFunctionsMgr.fetchTripHeadingShippingTripList(appUser.getUser(), recordToValidate.getTuavd(), recordToValidate.getTupro());
+						recordToValidate.setShippingTripList(shippingTripList);
+						
+						//put domain objects and do go back to the original view...
+				    	this.setDomainObjectsInView(model, recordToValidate );
+				    	
+
+					}else{
+			    		String transactionMode = null;
+						if(recordToValidate.getTupro()!=null && !"".equals(recordToValidate.getTupro())){
+							logger.info("PURE UPDATE transaction...");
+							transactionMode = TransportDispConstants.MODE_UPDATE;
+						}else{
+							logger.info("PURE CREATE NEW transaction...");
+							transactionMode = TransportDispConstants.MODE_ADD;
+							//Get new tupro and avd...by creating a new trip.
+							//The new trip required only user and mode=A as parameters...nothing else
+							Map<String,String> map = this.createNewTrip(action, recordToValidate, transactionMode, appUser);
+							String tmpTupro = (String)map.get("tupro");
+							String tmpTuavd  = (String)map.get("tuavd");
+							recordToValidate.setTupro(tmpTupro);
+							recordToValidate.setTuavd(tmpTuavd);
+							
+							//Change mode in order to update the newly created record. This in order to send all other parameters
+							if(recordToValidate.getTupro()!=null && recordToValidate.getTuavd()!=null){ transactionMode = TransportDispConstants.MODE_UPDATE; }
+						}
+						//--------------------------------------------------
+						//At this point we are ready to do an update
+						//--------------------------------------------------
+						if(transactionMode.equals(TransportDispConstants.MODE_UPDATE)){
+				            //---------------------------
+							//get BASE URL = RPG-PROGRAM
+				            //---------------------------
+							String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_UPDATE_SPECIFIC_TRIP_URL;
+							//------------------
+							//add URL-parameter
+							//------------------
+							String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, recordToValidate.getTuavd(), recordToValidate.getTupro(), transactionMode, appUser);
+							//adjust some fields
+							//this.adjustFields(recordToValidate);
+							//Blank the message note since we do not want the content in the update. There is a special update
+							//for this field a few steps ahead
+							String messageNoteTmp = recordToValidate.getMessageNote();
+							recordToValidate.setMessageNote(null);
+							
+							String urlRequestParamsTopic = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
+							//reformat return object as to be presented in GUI
+							//recordToValidate.setTutm(dateTimeFormatter.formatTimeHHmm(recordToValidate.getTutm()));
+							//recordToValidate.setTutmt(dateTimeFormatter.formatTimeHHmm(recordToValidate.getTutmt()));
+							recordToValidate.setMessageNote(messageNoteTmp);
+							
+							//put the final valid param. string
+							String urlRequestParams = urlRequestParamsKeys + urlRequestParamsTopic;
+							//for debug purposes in GUI
+							session.setAttribute(TransportDispConstants.ACTIVE_URL_RPG_TRANSPORT_DISP, BASE_URL); 
+					    	
+							logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+					    	logger.info("URL: " + BASE_URL);
+					    	logger.info("URL PARAMS: " + urlRequestParams);
+					    	//----------------------------------------------------------------------------
+					    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+					    	//----------------------------------------------------------------------------
+						    String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+					    	//Debug --> 
+					    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+					    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+					    	rpgReturnResponseHandler.evaluateRpgResponseOnTripUpdate(rpgReturnPayload);
+					    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+					    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+					    		this.setFatalError(model, rpgReturnResponseHandler, recordToValidate);
+					    		//isValidCreatedRecordTransactionOnRPG = false;
+					    	}else{
+					    		//Update successfully done!
+					    		logger.info("[INFO] Record successfully updated, OK ");
+					    		//fetch the newly updated record
+					    		JsonTransportDispWorkflowSpecificTripContainer container = this.controllerAjaxCommonFunctionsMgr.fetchTripHeading(appUser.getUser(), recordToValidate.getTuavd(), recordToValidate.getTupro());
+								if(container!=null){
+									for(JsonTransportDispWorkflowSpecificTripRecord  record : container.getGetonetrip()){
+										recordToValidate = record;
+									}
+								}
+					    		//
+					    		this.updateMessageNote(messageNote, recordToValidate.getTuavd(), recordToValidate.getTupro(), appUser);
+					    		//set message note (after update aka refresh)
+					    		Collection<JsonTransportDispWorkflowSpecificTripMessageNoteRecord> messageNoteAfterUpdate = null;
+					    		messageNoteAfterUpdate = this.controllerAjaxCommonFunctionsMgr.fetchMessageNote(appUser.getUser(), recordToValidate.getTuavd(), recordToValidate.getTupro());
+					    		StringBuffer br = new StringBuffer();
+								for(JsonTransportDispWorkflowSpecificTripMessageNoteRecord record:messageNoteAfterUpdate ){
+									br.append(record.getFrttxt() + "\n");
+								}
+								recordToValidate.setMessageNote(br.toString());
+								//logger.info(recordToValidate.getMessageNote());
+								
+								//Now fetch the Archived Documents and fill the parent record with it
+								Collection<JsonTransportDispWorkflowSpecificTripArchivedDocsRecord> archiveDocsList = null;
+								archiveDocsList = this.controllerAjaxCommonFunctionsMgr.fetchTripHeadingArchiveDocs(appUser.getUser(), recordToValidate.getTupro());
+								recordToValidate.setGetdoctrip(archiveDocsList);
+								//Now fetch the Shipping list and fill the parent record with it
+								Collection<JsonTransportDispWorkflowSpecificTripShipRecord> shippingTripList = null;
+								shippingTripList = this.controllerAjaxCommonFunctionsMgr.fetchTripHeadingShippingTripList(appUser.getUser(), recordToValidate.getTuavd(), recordToValidate.getTupro());
+								recordToValidate.setShippingTripList(shippingTripList);
+								
+								//put domain objects
+						    	this.setDomainObjectsInView(model, recordToValidate );
+					    	}
+						}
+					}
+				//------------------------
+				//CREATE-ADD [PURE] RECORD
+				//-------------------------
+				}else if(TransportDispConstants.ACTION_CREATE.equals(action)){
+					//OBSOLETE
+					//This action is not used as an isolated create. It is realized in the UPDATE above in 2 transactions
+					//Could be needed in the future.
+				//------------------
+				//REMOVE RECORD
+				//------------------	
+				}else if(TransportDispConstants.ACTION_DELETE.equals(action)){
+					//Remove Topic
+					//Could be delete OR set a remove status...(no physical delete)
+					//TODO
+				}
+				
+				//===========
+				//FETCH LIST
+				//===========
+				//drop downs from files
+				this.setDropDownsFromFiles(model);
+				this.setCodeDropDownMgr(appUser, model);
+				
+				//Now get the parent list of workflow trips
+				//Was defualt until copyRoundTrip was implemented--->Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), record.getTuavd(), session, model);
+				Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), originalAvdOnCopyRundtur, session, model);
+				
+				
+				successView.addObject(TransportDispConstants.DOMAIN_LIST,outputList);
+				//put domain object in view
+	    		successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);
+			}
+			
+	    	return successView;
+		}
+	}
+	
+	/**
 	 * 
 	 * @param appUser
 	 * @param avdNr
