@@ -711,7 +711,18 @@
 					 		<tr>
 					 			<td valign="top" >
 					 			 <table width="98%" class="tableBorderWithRoundCornersLightGray" cellspacing="1" cellpadding="0">
-							 		<tr height="10"><td >&nbsp;</td></tr>
+							 		<tr height="2"><td ></td></tr>
+							 		<tr>
+								    		<td class="text14" nowrap>
+								    			<span title="todo">
+								    				&nbsp;Speditørkode
+							    				</span>
+								    		</td>
+								    		<td class="text14" >
+								    			&nbsp;<b>TODO</b>
+								    		</td>
+								    	</tr>
+								    	<tr height="5"><td ></td></tr>
 								    	<tr>
 								    		<td class="text14" nowrap>
 								    			<span title="todo">
@@ -719,7 +730,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.todo}">	
+								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="TODO">	
 										</td>
 										<td class="text14" nowrap>
 								    			<span title="todo">
@@ -727,7 +738,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.todo}">	
+								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="TODO">	
 										</td>
 								    	</tr>
 								    	<tr height="2"><td ></td></tr>

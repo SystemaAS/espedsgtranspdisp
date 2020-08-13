@@ -20,8 +20,10 @@ public class TransportDispJspViewManager {
 		
 		//This hard-coded value is for testing RAMBERG-adaptation during development
 		if(appUser.getInsid()!=null && "00000001SYXXX".equals(appUser.getInsid().trim())){
-			successView = new ModelAndView(sourceView.getViewName() + TransportDispConstants.ADAPTATION_RAMBERG_JSP_CODE);
-			logger.warn("View:" + successView.getViewName());
+			if ( "OSCAR".equals(appUser.getUser()) ){
+				successView = new ModelAndView(sourceView.getViewName() + TransportDispConstants.ADAPTATION_RAMBERG_JSP_CODE);
+				logger.warn("View:" + successView.getViewName());
+			}
 			
 		}else if (appUser.getInsid()!=null && TransportDispConstants.ADAPTATION_RAMBERG_INSID.equals(appUser.getInsid().trim())){
 			successView = new ModelAndView(sourceView.getViewName() + TransportDispConstants.ADAPTATION_RAMBERG_JSP_CODE);
