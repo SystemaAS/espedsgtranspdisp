@@ -106,6 +106,9 @@ public class TransportDispWorkflowHeaderController {
 		 SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//0004009901RAMB = _RAMBERG
 		logger.warn("Insid:" + appUser.getInsid());
+		logger.warn("spedKuKod:" + appUser.getSpedKuKod());
+		logger.warn("spedKuNrs:" + appUser.getSpedKuNrs());
+		
 		//adaptations
 		successView = this.jspMgr.getSuccessView(appUser, successView);
 				
@@ -138,7 +141,8 @@ public class TransportDispWorkflowHeaderController {
 						 for(JsonTransportDispWorkflowSpecificTripRecord  record : container.getGetonetrip()){
 							recordIsNull = false;
 							//put domain object
-					    	this.setDomainObjectsInView(model, record );	
+							logger.warn("Default values ON. year:" + record.getCenturyYearTurccTuraar() + " turmnd:" + record.getTurmnd());
+							this.setDomainObjectsInView(model, record );	
 						 }
 						 //Defaults (if applicable)
 						 if(recordIsNull){
@@ -171,6 +175,8 @@ public class TransportDispWorkflowHeaderController {
 		return successView;
 		 
 	}
+	
+	
 	
 	/**
 	 * This method only prepares for an upcoming CREATE NEW (it is just a rendering of standard defaults to prepare some fields)

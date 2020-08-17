@@ -714,12 +714,12 @@
 							 		<tr height="2"><td ></td></tr>
 							 		<tr>
 								    		<td class="text14" nowrap>
-								    			<span title="todo">
+								    			<span title="tubiln">
 								    				&nbsp;Speditørkode
 							    				</span>
 								    		</td>
 								    		<td class="text14" >
-								    			&nbsp;<b>TODO</b>
+								    			&nbsp;<b><label name="tubiln" id="tubiln"></label></b>
 								    		</td>
 								    	</tr>
 								    	<tr height="5"><td ></td></tr>
@@ -730,7 +730,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="TODO">	
+								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="tusjn1" id="tusjn1" size="20" maxlength="20" value="${model.record.tusjn1}">	
 										</td>
 										<td class="text14" nowrap>
 								    			<span title="todo">
@@ -738,7 +738,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="TODO">	
+								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="tusjn2" id="tusjn2" size="20" maxlength="20" value="${model.record.tusjn2}">	
 										</td>
 								    	</tr>
 								    	<tr height="2"><td ></td></tr>
@@ -749,7 +749,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wskpma" id="wskpma" size="20" maxlength="50" value="${Xmodel.record.wskpma}">	
+								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wskpma" id="wskpma" size="20" maxlength="50" value="${model.record.wskpma}">	
 										</td>
 										<td class="text14" nowrap>
 								    			<span title="wskptl">
@@ -757,7 +757,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wskptl" id="wskptl" size="16" maxlength="15" value="${Xmodel.record.wskptl}">	
+								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wskptl" id="wskptl" size="16" maxlength="15" value="${model.record.wskptl}">	
 										</td>
 								    	</tr>
 								    	<tr height="2"><td ></td></tr>
@@ -769,7 +769,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wsenid" id="wsenid" size="18" maxlength="17" value="${Xmodel.record.wsenid}">	
+								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wsenid" id="wsenid" size="18" maxlength="17" value="${model.record.wsenid}">	
 										</td>
 										<td class="text14" nowrap>
 											<img style="vertical-align: bottom;" src="resources/images/appUserOg.gif" height="16px" width="16px" border="0" alt="edit">
@@ -778,7 +778,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="wssjna" id="wssjna" size="30" maxlength="30" value="${Xmodel.record.wssjna}">	
+								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="wssjna" id="wssjna" size="30" maxlength="30" value="${model.record.wssjna}">	
 										</td>
 										<td class="text14" nowrap>
 								    			<span title="wssjmo">						
@@ -786,7 +786,7 @@
 							    				</span>
 								    		</td>
 								    		<td> 
-								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wssjmo" id="wssjmo" size="16" maxlength="15" value="${Xmodel.record.wssjmo}">	
+								    			<input type="text" class="inputTextMediumBlueMandatoryField" name="wssjmo" id="wssjmo" size="16" maxlength="15" value="${model.record.wssjmo}">	
 										</td>
 								    	</tr>    
 								    	<tr height="5"><td ></td></tr>

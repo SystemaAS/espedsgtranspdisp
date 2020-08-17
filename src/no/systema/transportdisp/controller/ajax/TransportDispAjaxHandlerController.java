@@ -131,7 +131,7 @@ public class TransportDispAjaxHandlerController {
      public @ResponseBody List<JsonTransportDispWorkflowSpecificTripRecord> getTripHeading
 	  						(@RequestParam String applicationUser, @RequestParam String avdNr, 
 	  						 @RequestParam String tripNr) {
-		logger.info("Inside: getTripHeading");
+		logger.warn("Inside: getTripHeading");
 		this.controllerAjaxCommonFunctionsMgr = new ControllerAjaxCommonFunctionsMgr(this.urlCgiProxyService, this.transportDispWorkflowSpecificTripService);
 		List<JsonTransportDispWorkflowSpecificTripRecord> result = new ArrayList<JsonTransportDispWorkflowSpecificTripRecord>();
 		

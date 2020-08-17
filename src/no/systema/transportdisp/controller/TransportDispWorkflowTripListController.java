@@ -169,12 +169,17 @@ public class TransportDispWorkflowTripListController {
 					this.setCodeDropDownMgr(appUser, model);
 					
 					//Default values (always when doFind)
+					String tuavd = request.getParameter("tuavd");
+					if(strMgr.isNull(tuavd)){ tuavd = recordToValidate.getWssavd();}
+					JsonTransportDispWorkflowSpecificTripRecord record = this.getDefaultValuesTrip(appUser, tuavd);
+					
+					/* OBSOLETE. Now we get this defualts from the back end
 					JsonTransportDispWorkflowSpecificTripRecord record = new JsonTransportDispWorkflowSpecificTripRecord();
 					record.setCenturyYearTurccTuraar(this.dateTimeManager.getCurrentYear());
 					record.setTurmnd(this.dateTimeManager.getCurrentMonth());
 					//default values
 					record.setTudt(this.dateTimeManager.getCurrentDate_ISO());
-					
+					*/
 			    	model.put(TransportDispConstants.DOMAIN_RECORD, record);
 			    	model.put(TransportDispConstants.DOMAIN_CONTAINER_TRIP_LIST, jsonTransportDispWorkflowListContainer);
 					
@@ -194,6 +199,34 @@ public class TransportDispWorkflowTripListController {
 		    }
 		}
 		
+	}
+	
+	/**
+	 * Get all default values for this user
+	 * 
+	 * @param appUser
+	 * @return
+	 */
+	private JsonTransportDispWorkflowSpecificTripRecord getDefaultValuesTrip(SystemaWebUser appUser, String tuavd){
+		JsonTransportDispWorkflowSpecificTripRecord record = new JsonTransportDispWorkflowSpecificTripRecord();
+		//https://gw.systema.no:65209/sycgip/tjetur02.pgm?user=JOVO&TUAVD=75&TUPRO=&kopirund=
+		final String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_FETCH_SPECIFIC_TRIP_URL;
+		String urlRequestParams = "user=" + appUser.getUser() + "&tuavd=" + tuavd + "&tupro=&kopirund=" ;
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	JsonTransportDispWorkflowSpecificTripContainer container = this.transportDispWorkflowSpecificTripService.getContainer(jsonPayload);
+		if(container!=null){
+			 for(JsonTransportDispWorkflowSpecificTripRecord  recordTmp : container.getGetonetrip()){
+				//put in record
+				logger.warn("Default values ON. year:" + recordTmp.getCenturyYearTurccTuraar() + " turmnd:" + recordTmp.getTurmnd());
+		    	record = recordTmp;	
+			 }
+		}
+		return record;
 	}
 	
 	/**

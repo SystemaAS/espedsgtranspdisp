@@ -514,6 +514,26 @@ public class JsonTransportDispWorkflowSpecificTripRecord extends JsonAbstractGra
 	public String getSimm3() { return this.simm3; }
 	
 	
+	private String wskpma = null;
+	public void setWskpma(String value) {  this.wskpma = value; }
+	public String getWskpma() { return this.wskpma; }
+	
+	private String wskptl = null;
+	public void setWskptl(String value) {  this.wskptl = value; }
+	public String getWskptl() { return this.wskptl; }
+	
+	private String wsenid = null;
+	public void setWsenid(String value) {  this.wsenid = value; }
+	public String getWsenid() { return this.wsenid; }
+	
+	private String wssjna = null;
+	public void setWssjna(String value) {  this.wssjna = value; }
+	public String getWssjna() { return this.wssjna; }
+	
+	private String wssjmo = null;
+	public void setWssjmo(String value) {  this.wssjmo = value; }
+	public String getWssjmo() { return this.wssjmo; }
+	
 	
     	
 	/**

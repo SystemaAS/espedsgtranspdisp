@@ -1095,6 +1095,18 @@
 			  			jq('#turund').val(""); jq('#turund').val(data[i].turund);
 			  			jq('#turundJS').text(""); jq('#turundJS').text(data[i].turund);
 			  			jq('#tutref').val(""); jq('#tutref').val(data[i].tutref);
+			  			//
+			  			jq('#tubiln').html(""); jq('#tubiln').html(data[i].tubiln);
+			  			jq('#tusjn1').val(""); jq('#tusjn1').val(data[i].tusjn1);
+			  			jq('#tusjn2').val(""); jq('#tusjn2').val(data[i].tusjn2);
+			  			//
+			  			jq('#wskpma').val(""); jq('#wskpma').val(data[i].wskpma);
+			  			jq('#wskptl').val(""); jq('#wskptl').val(data[i].wskptl);
+			  			jq('#wsenid').val(""); jq('#wsenid').val(data[i].wsenid);
+			  			jq('#wssjna').val(""); jq('#wssjna').val(data[i].wssjna);
+			  			jq('#wssjmo').val(""); jq('#wssjmo').val(data[i].wssjmo);
+			  			
+			  			
 			  			//Trip nr is required for some GUI aspects
 			  			if(data[i].tupro!=""){
 			  				if(status=='close'){ //only the active trips are allowed to have this option (tur planning)

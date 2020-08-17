@@ -15,7 +15,16 @@ public class JsonTransportDispWorkflowShippingPlanningOpenOrdersListContainer {
 	private String user = null;
 	public void setUser(String value) {  this.user = value; }
 	public String getUser() { return this.user;}
-	                  
+	
+	private String spedKuKod = null;
+	public void setSpedKuKod(String value) {  this.spedKuKod = value; }
+	public String getSpedKuKod() { return this.spedKuKod;}
+	
+	private String spedKuNrs = null;
+	public void setSpedKuNrs(String value) {  this.spedKuNrs = value; }
+	public String getSpedKuNrs() { return this.spedKuNrs;}
+	
+	
 	private String wssdf = null;
 	public void setWssdf(String value) {  this.wssdf = value; }
 	public String getWssdf() { return this.wssdf;}

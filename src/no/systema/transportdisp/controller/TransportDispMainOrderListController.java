@@ -169,7 +169,10 @@ public class TransportDispMainOrderListController {
 					}
 		    	}
 	    		StringBuffer userAvd = new StringBuffer();
-	    		outputListOpenOrders = this.getListOpenOrders(appUser, recordToValidate, model, userAvd);
+	    		outputListOpenOrders = this.getListOpenOrders(session, appUser, recordToValidate, model, userAvd);
+	    		logger.warn("spedKuKod:" + appUser.getSpedKuKod());
+	    		logger.warn("spedKuNrs:" + appUser.getSpedKuNrs());
+	    		
 	    		//Put list for upcoming view (PDF, Excel, or ErrorHandling in add/remove orders (method below...)
 	    		if(outputListOpenOrders!=null){
 					session.setAttribute(session.getId() + TransportDispConstants.SESSION_LIST_OPEN_ORDERS_ON_TRIP, outputListOpenOrders);
@@ -739,7 +742,7 @@ public class TransportDispMainOrderListController {
 	 * @param wssavd
 	 * @return
 	 */
-	private Collection<JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord> getListOpenOrders(SystemaWebUser appUser, SearchFilterTransportDispWorkflowShippingPlanningOrdersList recordToValidate, Map model, StringBuffer userAvd){
+	private Collection<JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord> getListOpenOrders(HttpSession session, SystemaWebUser appUser, SearchFilterTransportDispWorkflowShippingPlanningOrdersList recordToValidate, Map model, StringBuffer userAvd){
 		Collection<JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord> outputListOpenOrders = new ArrayList();
 		//------------------------------------
         //[STEP 2] get Open Orders BASE URL
@@ -781,6 +784,12 @@ public class TransportDispMainOrderListController {
 	    		JsonTransportDispWorkflowShippingPlanningOpenOrdersListContainer jsonOpenOrdersListContainer = this.transportDispWorkflowShippingPlanningOrdersListService.getOpenOrdersListContainer(jsonPayload);
 	    		model.put(TransportDispConstants.DOMAIN_CONTAINER_OPEN_ORDERS, jsonOpenOrdersListContainer);
 	    		if(jsonOpenOrdersListContainer!=null){
+	    			//here we populate user specific params that were not able to be rendered at login.
+	    			//this params are used in RAMBERGs adaptation. This is the only place in which we initialize them
+	    			appUser.setSpedKuKod(jsonOpenOrdersListContainer.getSpedKuKod());
+	    			appUser.setSpedKuNrs(jsonOpenOrdersListContainer.getSpedKuNrs());
+	    			session.setAttribute(AppConstants.SYSTEMA_WEB_USER_KEY, appUser);
+	    			
 	    			outputListOpenOrders = jsonOpenOrdersListContainer.getOrderlistlandled();
 	    			if(outputListOpenOrders!=null){
 	    				logger.info("List size open orders:" + outputListOpenOrders.size() + "--maxWarnings:" + jsonOpenOrdersListContainer.getMaxWarning());
