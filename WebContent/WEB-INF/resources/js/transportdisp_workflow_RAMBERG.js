@@ -422,6 +422,7 @@
   }
 
   //Validation on Driver
+  /*
   jq(function() {
  	  jq("#tusjn1").focus(function(){ 
  		  var id = jq("#tusja1").val();
@@ -440,7 +441,7 @@
 		  }
 	  });
   });
-  
+  */
   
   
   var DRIVER1 = "1";
