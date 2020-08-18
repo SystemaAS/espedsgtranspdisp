@@ -50,7 +50,8 @@ import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
 import no.systema.transportdisp.util.TransportDispConstants;
 import no.systema.transportdisp.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.transportdisp.util.RpgReturnResponseHandler;
-import no.systema.transportdisp.validator.TransportDispWorkflowSpecificTripValidator;
+import no.systema.transportdisp.validator.*;
+
 import no.systema.transportdisp.util.TransportDispDateTimeFormatter;
 import no.systema.transportdisp.util.TransportDispJspViewManager;
 import no.systema.transportdisp.util.manager.CodeDropDownMgr;
@@ -486,8 +487,13 @@ public class TransportDispWorkflowHeaderController {
 					//-----------
 					//Validation
 					//-----------
+					logger.warn("tulk:" + recordToValidate.getTulk());
+					logger.warn("tubiln:" + recordToValidate.getTubiln());
+					logger.warn("tubilk:" + recordToValidate.getTubilk());
+					logger.warn("tuknt2:" + recordToValidate.getTuknt2());
+					
 					logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
-					TransportDispWorkflowSpecificTripValidator validator = new TransportDispWorkflowSpecificTripValidator();
+					TransportDispWorkflowSpecificTripRAMBERGValidator validator = new TransportDispWorkflowSpecificTripRAMBERGValidator();
 					//adjust some fields
 					this.adjustFields(recordToValidate);
 					//validate
@@ -561,8 +567,8 @@ public class TransportDispWorkflowHeaderController {
 							session.setAttribute(TransportDispConstants.ACTIVE_URL_RPG_TRANSPORT_DISP, BASE_URL); 
 					    	
 							logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-					    	logger.info("URL: " + BASE_URL);
-					    	logger.info("URL PARAMS: " + urlRequestParams);
+					    	logger.warn("URL: " + BASE_URL);
+					    	logger.warn("URL PARAMS: " + urlRequestParams);
 					    	//----------------------------------------------------------------------------
 					    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
 					    	//----------------------------------------------------------------------------

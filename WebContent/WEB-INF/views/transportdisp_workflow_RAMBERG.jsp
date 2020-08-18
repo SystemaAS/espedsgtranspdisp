@@ -629,6 +629,14 @@
 	            			<input type="hidden" name="turund" id="turund" value='${model.record.turund}'>
 	            			<input type="hidden" name="tutref" id="tutref" value='${model.record.tutref}'>
 	            			<input type="hidden" name="originalAvd" id="originalAvd" value='${searchFilter.wssavd}'>
+	            			<%-- START hidden RAMBERG. This are mandatory fields in the standard form --%>
+	            			<input type="hidden" name="centuryYearTurccTuraar" id="centuryYearTurccTuraar" value='${model.record.centuryYearTurccTuraar}'>
+	            			<input type="hidden" name="turmnd" id="turmnd" value='${model.record.turmnd}'>
+	            			<input type="hidden" name="tulk" id="tulk" value='${model.record.tulk}'>
+	            			<input type="hidden" name="tubiln" id="tubiln" value='${model.record.tubiln}'>
+	            			<input type="hidden" name="tubilk" id="tubilk" value='${model.record.tubilk}'>
+	            			<input type="hidden" name="tuknt2" id="tuknt2" value='${model.record.tuknt2}'>
+	            			<%-- END hidden RAMBERG --%>
 	            			<table width="55%" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
 					 		<tr height="10"><td ></td></tr>
 					 		<tr>
@@ -714,18 +722,18 @@
 							 		<tr height="2"><td ></td></tr>
 							 		<tr>
 								    		<td class="text14" nowrap>
-								    			<span title="tubiln">
+								    			<span title="own_tubiln">
 								    				&nbsp;Speditørkode
 							    				</span>
 								    		</td>
 								    		<td class="text14" >
-								    			&nbsp;<b><label name="tubiln" id="tubiln"></label></b>
+								    			&nbsp;<b><label name="own_tubiln" id="own_tubiln">${model.record.tubiln}</label></b>
 								    		</td>
 								    	</tr>
 								    	<tr height="5"><td ></td></tr>
 								    	<tr>
 								    		<td class="text14" nowrap>
-								    			<span title="todo">
+								    			<span title="tusjn1">
 								    				&nbsp;Forwarders TripNo<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
@@ -733,7 +741,7 @@
 								    			<input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="tusjn1" id="tusjn1" size="20" maxlength="20" value="${model.record.tusjn1}">	
 										</td>
 										<td class="text14" nowrap>
-								    			<span title="todo">
+								    			<span title="tusjn2">
 								    				&nbsp;Contact person<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
@@ -797,6 +805,7 @@
 										    		<td class="text14" nowrap>
 									    				&nbsp;<img onMouseOver="showPop('etd_info');" onMouseOut="hidePop('etd_info');" style="vertical-align: bottom;" src="resources/images/info3.png" width="12px" height="12px" border="0" alt="info">
 									    				<span title="tudt/tutm"><spring:message code="systema.transportdisp.workflow.trip.form.label.date.departure"/></span>
+									    				<font class="text12RedBold" >*</font>
 									    				<div class="text11" style="position: relative;" align="left">
 							 						<span style="position:absolute; width:200px; left:0px; top:0px;" id="etd_info" class="popupWithInputText"  >
 							 							<font class="text11">
