@@ -202,63 +202,63 @@
 	<%-- ------------------------------- --%>
 	<%-- Floating window for file upload --%>
 	<%-- ------------------------------- --%>
-		<c:if test="${not empty model.record.heopd}">
-			<tr>
-				<td valign="top" >
-					<!-- <span style="position:absolute; left:1550px; top:160px; width:550px; height:800px;" id="economyMatrixInfo" class="popupFloating"  -->
-						<div id="dialogDraggableFileUpload" title="File Upload">
-		           		<table class="popupFloatingWithRoundCorners3D">
-					    	<tr>
-							<td valign="top">
-							<form name="uploadFileForm" id="uploadFileForm" method="post" enctype="multipart/form-data">
-								<input type="hidden" name="applicationUserUpload" id="applicationUserUpload" value='${user.user}'>
-								<input type="hidden" name="userHttpJQueryDocRoot" id="userHttpJQueryDocRoot" value='${user.httpJQueryDocRoot}'>
-								<input type="hidden" name="wsavd" id="wsavd" value='${model.record.heavd}'>
-								<input type="hidden" name="wsopd" id="wsopd" value='${model.record.heopd}'>
-								<input type="hidden" name="userDate" id="userDate" value=''>
-								<input type="hidden" name="userTime" id="userTime" value=''>
-								
-									<table id="containerdatatableTable" cellspacing="2" align="left">
-										<tr>
-											<td colspan="3" class="text14Bold">&nbsp;
-												<img style="vertical-align:bottom;" src="resources/images/upload.png" border="0" width="15" height="15" alt="upload">
-												&nbsp;File Upload&nbsp;							
-											</td>
-										</tr>
-										<tr>
-										<tr>
-										<td>
-											<table>
+		<c:if test="${empty user.spedKuKod}">
+			<c:if test="${not empty model.record.heopd}">
+				<tr>
+					<td valign="top" >
+						<!-- <span style="position:absolute; left:1550px; top:160px; width:550px; height:800px;" id="economyMatrixInfo" class="popupFloating"  -->
+							<div id="dialogDraggableFileUpload" title="File Upload">
+			           		<table class="popupFloatingWithRoundCorners3D">
+						    	<tr>
+								<td valign="top">
+								<form name="uploadFileForm" id="uploadFileForm" method="post" enctype="multipart/form-data">
+									<input type="hidden" name="applicationUserUpload" id="applicationUserUpload" value='${user.user}'>
+									<input type="hidden" name="userHttpJQueryDocRoot" id="userHttpJQueryDocRoot" value='${user.httpJQueryDocRoot}'>
+									<input type="hidden" name="wsavd" id="wsavd" value='${model.record.heavd}'>
+									<input type="hidden" name="wsopd" id="wsopd" value='${model.record.heopd}'>
+									<input type="hidden" name="userDate" id="userDate" value=''>
+									<input type="hidden" name="userTime" id="userTime" value=''>
+									
+										<table id="containerdatatableTable" cellspacing="2" align="left">
 											<tr>
-												<td class="text11">&nbsp;Archive type</td>
-												<td class="text11">&nbsp;
-													<select class="inputTextMediumBlue" tabindex=-1 name="wstype" id="wstype">
-														<c:forEach var="record" items="${user.arkivKodOpdList}" >
-								                       	 	<option value="${record.arkKod}">${record.arkKod}-${record.arkTxt}</option>
-														</c:forEach> 
-													</select>	
+												<td colspan="3" class="text14Bold">&nbsp;
+													<img style="vertical-align:bottom;" src="resources/images/upload.png" border="0" width="15" height="15" alt="upload">
+													&nbsp;File Upload&nbsp;							
 												</td>
 											</tr>
-											<tr>	
-												<td class="text11">&nbsp;File</td>
-												<td class="text11">
-					           						&nbsp;<input ondragenter="myFileUploadDragEnter(event)" ondragleave="myFileUploadDragLeave(event)" tabindex=-1 class="tableBorderWithRoundCornersLightYellow3D noFileChosenTransparent" style="width:150px;height:80px;display:block;" type="file" name="file" id="file" />
-					       						</td>
-							           		</tr>
-							           		</table>
-										</td>
-										</tr>
-					       			</table>
-							</form>	
-							</td>
-							</tr>
-						</table>
-					  </div>	
-				</td>
-			</tr>
+											<tr>
+											<tr>
+											<td>
+												<table>
+												<tr>
+													<td class="text11">&nbsp;Archive type</td>
+													<td class="text11">&nbsp;
+														<select class="inputTextMediumBlue" tabindex=-1 name="wstype" id="wstype">
+															<c:forEach var="record" items="${user.arkivKodOpdList}" >
+									                       	 	<option value="${record.arkKod}">${record.arkKod}-${record.arkTxt}</option>
+															</c:forEach> 
+														</select>	
+													</td>
+												</tr>
+												<tr>	
+													<td class="text11">&nbsp;File</td>
+													<td class="text11">
+						           						&nbsp;<input ondragenter="myFileUploadDragEnter(event)" ondragleave="myFileUploadDragLeave(event)" tabindex=-1 class="tableBorderWithRoundCornersLightYellow3D noFileChosenTransparent" style="width:150px;height:80px;display:block;" type="file" name="file" id="file" />
+						       						</td>
+								           		</tr>
+								           		</table>
+											</td>
+											</tr>
+						       			</table>
+								</form>	
+								</td>
+								</tr>
+							</table>
+						  </div>	
+					</td>
+				</tr>
+			</c:if>
 		</c:if>
-		
-		
 		
 		<tr>
 		<td>
@@ -344,15 +344,17 @@
 								 		</c:choose>
 								 		
 								 		<c:if test="${not empty model.record.heopd}">
-								 			<c:choose>
-									 			<c:when test="${empty model.fsokRedFlag}">
-									 				&nbsp;<button name="frisokveiButton" id="frisokveiButton" class="buttonGrayWithGreenFrame" type="button" >Frie søkeveier</button>
-									 			</c:when>
-									 			<c:otherwise>
-									 				&nbsp;<button name="frisokveiButton" id="frisokveiButton" class="buttonRedWithRedFrame" type="button" >Frie søkeveier</button>
-									 				<span title="Obligatorisk"><img style="vertical-align:middle;" src="resources/images/redFlag.png" width="16" height="21" border="0" alt="mandatory"></span>
-									 			</c:otherwise>
-								 			</c:choose>
+								 			<c:if test="${empty user.spedKuKod}">
+									 			<c:choose>
+										 			<c:when test="${empty model.fsokRedFlag}">
+										 				&nbsp;<button name="frisokveiButton" id="frisokveiButton" class="buttonGrayWithGreenFrame" type="button" >Frie søkeveier</button>
+										 			</c:when>
+										 			<c:otherwise>
+										 				&nbsp;<button name="frisokveiButton" id="frisokveiButton" class="buttonRedWithRedFrame" type="button" >Frie søkeveier</button>
+										 				<span title="Obligatorisk"><img style="vertical-align:middle;" src="resources/images/redFlag.png" width="16" height="21" border="0" alt="mandatory"></span>
+										 			</c:otherwise>
+									 			</c:choose>
+								 			</c:if>
 								 		</c:if>
 								 		<c:if test="${not empty model.record.hesgm}">
 								 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font title="hesgm" class="inputText11" style="background-color: #DFF2BF;color: #4F8A10;">Levert:&nbsp;${model.record.hesgm}&nbsp;-&nbsp;${model.record.hedtmo}:${model.record.heklmo}</font>
@@ -361,27 +363,29 @@
 								 	</td>
 								 	<c:if test="${not empty model.record.heopd}">
 									 	<td>&nbsp;
-									 		<%--
-				 							<a onClick="setBlockUI(this)" tabindex=-1 href="transpdisp_mainorder_printout.do?avd=${model.record.heavd}&opd=${model.record.heopd}">
-				 								<img title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
-				 							</a>
-				 							 --%>
-				 							<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print"> 
+									 		<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print"> 
 				 						</td>
 			 						</c:if>
 			 						<td width="25"></td>
 			 						<td class="text14">
-				 						<c:if test="${not empty model.record.heopd}">
-					 						<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
-					 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
-					 						<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
-									   		&nbsp;<button name="planleggingButton" id="planleggingButton" class="buttonGrayWithGreenFrame" type="button" >Til planlegging</button>
-									   		&nbsp;&nbsp;<button tabindex=-1 name="trackAndTraceButton" id="trackAndTraceButton" class="buttonGrayWithGreenFrame" type="button" >Hend.logg</button>
-									   		<c:if test="${ not empty model.record.heavd && not empty model.record.heopd }">
-						 				    	<input tabindex=-1 class="inputFormSubmit submitSaveClazz" type="submit" name="submit2" id="submit2" onClick="javascript: form.action='transportdisp_mainorder_update.do';" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
-						 				    	<input title="Lagre og Lukk" onMouseOver="style='cursor:pointer;box-shadow: 0 0 5px rgba(66, 148, 255, 1);border: 5px solid rgba(66, 148, 255, 1);'" onMouseOut="style=''" type="checkbox" name="savecloseFlag2" id="savecloseFlag2" value="1" <c:if test="${model.record.savecloseFlag2 == '1'}"> checked </c:if>></span>						 	
-						 				    	
-						 				    </c:if>
+			 							<c:if test="${not empty model.record.heopd}">
+				 						
+				 							<c:choose>
+							 					<c:when test="${empty user.spedKuKod}">
+							 						<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
+							 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
+							 						<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
+											   		&nbsp;<button name="planleggingButton" id="planleggingButton" class="buttonGrayWithGreenFrame" type="button" >Til planlegging</button>
+											   		&nbsp;&nbsp;<button tabindex=-1 name="trackAndTraceButton" id="trackAndTraceButton" class="buttonGrayWithGreenFrame" type="button" >Hend.logg</button>
+											   		<c:if test="${ not empty model.record.heavd && not empty model.record.heopd }">
+								 				    		<input tabindex=-1 class="inputFormSubmit submitSaveClazz" type="submit" name="submit2" id="submit2" onClick="javascript: form.action='transportdisp_mainorder_update.do';" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
+								 				    		<input title="Lagre og Lukk" onMouseOver="style='cursor:pointer;box-shadow: 0 0 5px rgba(66, 148, 255, 1);border: 5px solid rgba(66, 148, 255, 1);'" onMouseOut="style=''" type="checkbox" name="savecloseFlag2" id="savecloseFlag2" value="1" <c:if test="${model.record.savecloseFlag2 == '1'}"> checked </c:if>></span>
+								 				    	</c:if>						 									 				    	
+					 							</c:when>
+					 							<c:otherwise>
+					 								&nbsp;&nbsp;<button tabindex=-1 name="trackAndTraceButton" id="trackAndTraceButton" class="buttonGrayWithGreenFrame" type="button" >Hend.logg</button>
+					 							</c:otherwise>
+				 							</c:choose>
 										</c:if>
 				 					</td>
 			 						
@@ -1874,9 +1878,16 @@
 							 		<input type="hidden" name="fvlinr_${counter.count}" id="fvlinr_${counter.count}" value="${fraktbrevRecord.fvlinr}" >
 							 		
 							 		<tr class="tableRow" >
-							 			<td title="Endre" width="2%" align="center" class="tableCell" style="cursor:pointer;" id="fvlinr_${fraktbrevRecord.fvlinr}@fbn_${fraktbrevRecord.fvfbnr}@counter_${counter.count}">
-							 				<img style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
-							 			</td>
+							 			<c:choose>
+								 			<c:when test="${empty user.spedKuKod}">
+									 			<td title="Endre" width="2%" align="center" class="tableCell" style="cursor:pointer;" id="fvlinr_${fraktbrevRecord.fvlinr}@fbn_${fraktbrevRecord.fvfbnr}@counter_${counter.count}">
+									 				<img style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+									 			</td>
+								 			</c:when>
+								 			<c:otherwise>
+								 				<td>&nbsp;</td>
+								 			</c:otherwise>
+							 			</c:choose>
 							 			<td width="2%" align="center" class="tableCell" >${fraktbrevRecord.fvlinr}</td>
 					               		<td width="5%" align="left" class="tableCell" >${fraktbrevRecord.fmmrk1}</td>
 						 				<td width="5%" align="right" class="tableCell" >${fraktbrevRecord.fvant}</td>
@@ -1900,17 +1911,12 @@
 						 				<td width="2%" align="right" class="tableCellDangerousGoods" >${fraktbrevRecord.ffpoen}</td>
 					 					
 					 					<td width="2%" align="center" class="tableCell" >
-						               		<c:if test="${not empty fraktbrevRecord.fvlinr}">
-						               			<%--
-						               			<c:if test="${ model.record.singleLine == 'N' }">
+					 						<c:if test="${empty user.spedKuKod}">
+							               		<c:if test="${not empty fraktbrevRecord.fvlinr}">
 							               			<a id="deleteLine_${counter.count}" onClick="deleteOrderLine(this);">
-							               				<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
+							               				<img src="resources/images/delete.gif" border="0" alt="remove">
 								               		</a>
 							               		</c:if>
-							               		--%>
-							               		<a id="deleteLine_${counter.count}" onClick="deleteOrderLine(this);">
-						               				<img src="resources/images/delete.gif" border="0" alt="remove">
-							               		</a>
 						               		</c:if> 	
 							 			</td>
 						 			</tr>
@@ -2163,17 +2169,19 @@
 						<td align="right">
 		 				    <label class="text14Red" id="orderLineErrMsgPlaceHolder"></label>
 	 				    </td>
-						<td align="right">
-		 				    <c:choose>
-			 				    <c:when test="${ not empty model.record.heavd && not empty model.record.heopd }">
-		 				    		<input tabindex=-1 class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" onClick="javascript: form.action='transportdisp_mainorder_update.do';" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
-		 				    		<input title="Lagre og Lukk" onMouseOver="style='cursor:pointer;box-shadow: 0 0 5px rgba(66, 148, 255, 1);border: 5px solid rgba(66, 148, 255, 1);'" onMouseOut="style=''" type="checkbox" name="savecloseFlag" id="savecloseFlag" value="1" <c:if test="${model.record.savecloseFlag == '1'}"> checked </c:if>>
-			 				    </c:when>
-			 				    <c:otherwise>
-		 				    		<input tabindex=-1 class="inputFormSubmit submitSaveClazz" type="submit" name="submitnew" id="submitnew" onClick="javascript: form.action='transportdisp_mainorder_update.do';" value='<spring:message code="systema.transportdisp.submit.createnew.order"/>'/>
-			 				    </c:otherwise>	
-		 				    </c:choose>
-	 				    </td>
+	 				    <c:if test="${empty user.spedKuKod}">
+							<td align="right">
+			 				    <c:choose>
+				 				    <c:when test="${ not empty model.record.heavd && not empty model.record.heopd }">
+			 				    			<input tabindex=-1 class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" onClick="javascript: form.action='transportdisp_mainorder_update.do';" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
+			 				    			<input title="Lagre og Lukk" onMouseOver="style='cursor:pointer;box-shadow: 0 0 5px rgba(66, 148, 255, 1);border: 5px solid rgba(66, 148, 255, 1);'" onMouseOut="style=''" type="checkbox" name="savecloseFlag" id="savecloseFlag" value="1" <c:if test="${model.record.savecloseFlag == '1'}"> checked </c:if>>
+				 				    </c:when>
+				 				    <c:otherwise>
+			 				    			<input tabindex=-1 class="inputFormSubmit submitSaveClazz" type="submit" name="submitnew" id="submitnew" onClick="javascript: form.action='transportdisp_mainorder_update.do';" value='<spring:message code="systema.transportdisp.submit.createnew.order"/>'/>
+				 				    </c:otherwise>	
+			 				    </c:choose>
+		 				    </td>
+	 				    </c:if>
 				    </tr>
 				    </table>
 			    </td>

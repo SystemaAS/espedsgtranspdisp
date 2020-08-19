@@ -38,6 +38,7 @@ public class JsonTransportDispWorkflowShippingPlanningCurrentOrdersListRecord ex
 	private String hesg = null;
 	private String hesgm = null;
 	private String ttstat = null;
+	private String ttstat2 = null;
 	private String trsdfd = null;
 	private String trsdfk = null;
 	private String trsdtd = null;

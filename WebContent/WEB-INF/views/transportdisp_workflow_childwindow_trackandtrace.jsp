@@ -167,7 +167,9 @@
     	<c:if test="${empty doUpdated }">
 	<tr>
     <td>
-    		<button name="inputShowFormButton" id="inputShowFormButton" class="inputFormSubmit" type="button" ><spring:message code="systema.transportdisp.createnew"/>&nbsp;&nbsp;&nbsp;&nbsp;<font class="text10" style="text-decoration: underline;">Vis frem</font></button>
+    		<c:if test="${empty user.spedKuKod}">
+    			<button name="inputShowFormButton" id="inputShowFormButton" class="inputFormSubmit" type="button" ><spring:message code="systema.transportdisp.createnew"/>&nbsp;&nbsp;&nbsp;&nbsp;<font class="text10" style="text-decoration: underline;">Vis frem</font></button>
+    		</c:if>
     </td>
     </tr>
     </c:if>

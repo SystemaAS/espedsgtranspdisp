@@ -233,44 +233,46 @@
 			  fbn = fbn.replace("fbn_","");
 			  //DEBUG --> 
 			  //alert("avd:" + avd + "trip:" + trip + "appUser:" + jq('#applicationUser').val());
-			  jq.ajax({
-			  	  type: 'GET',
-			  	  url: 'fetchFraktbrevLine_TransportDisp.do',
-			  	  data: { applicationUser : jq('#applicationUser').val(), 
-			  		  	  requestString : "&avd=" +  jq('#wsavd').val() + "&opd=" +  jq('#wsopd').val() + "&fbn=" +  fbn + "&lin=" +  fvlinr },
-			  	  dataType: 'json',
-			  	  cache: false,
-			  	  contentType: 'application/json',
-			  	  success: function(data) {
-			  		var len = data.length;
-			  		for ( var i = 0; i < len; i++) {
-			  			jq('#updateLinNr').val(data[i].fvlinr);
-			  			jq('#linNr').text(data[i].fvlinr);
-			  			
-			  			jq('#fmmrk1').val(data[i].fmmrk1);
-			  			jq('#fvant').val(data[i].fvant);
-			  			jq('#fvpakn').val(data[i].fvpakn);
-			  			jq('#fvvt').val(data[i].fvvt);
-			  			jq('#fvvkt').val(data[i].fvvkt);
-			  			jq('#fvlen').val(data[i].fvlen);
-			  			jq('#fvbrd').val(data[i].fvbrd);
-			  			jq('#fvhoy').val(data[i].fvhoy);
-			  			jq('#fvvol').val(data[i].fvvol);
-			  			jq('#fvlm').val(data[i].fvlm);
-			  			jq('#fvlm2').val(data[i].fvlm2);
-			  			jq('#ffunnr').val(data[i].ffunnr);
-			  			jq('#ffembg').val(data[i].ffembg);
-			  			jq('#ffindx').val(data[i].ffindx);
-			  			jq('#ffantk').val(data[i].ffantk);
-			  			jq('#ffante').val(data[i].ffante);
-			  			jq('#ffenh').val(data[i].ffenh);
-			  			
-			  		}
-			  	  },
-			  	  error: function() {
-			  	    alert('Error loading ... tblItemLines onClick');
-			  	  }
-			  });
+			  if (id != null && id != ''){
+				  jq.ajax({
+				  	  type: 'GET',
+				  	  url: 'fetchFraktbrevLine_TransportDisp.do',
+				  	  data: { applicationUser : jq('#applicationUser').val(), 
+				  		  	  requestString : "&avd=" +  jq('#wsavd').val() + "&opd=" +  jq('#wsopd').val() + "&fbn=" +  fbn + "&lin=" +  fvlinr },
+				  	  dataType: 'json',
+				  	  cache: false,
+				  	  contentType: 'application/json',
+				  	  success: function(data) {
+				  		var len = data.length;
+				  		for ( var i = 0; i < len; i++) {
+				  			jq('#updateLinNr').val(data[i].fvlinr);
+				  			jq('#linNr').text(data[i].fvlinr);
+				  			
+				  			jq('#fmmrk1').val(data[i].fmmrk1);
+				  			jq('#fvant').val(data[i].fvant);
+				  			jq('#fvpakn').val(data[i].fvpakn);
+				  			jq('#fvvt').val(data[i].fvvt);
+				  			jq('#fvvkt').val(data[i].fvvkt);
+				  			jq('#fvlen').val(data[i].fvlen);
+				  			jq('#fvbrd').val(data[i].fvbrd);
+				  			jq('#fvhoy').val(data[i].fvhoy);
+				  			jq('#fvvol').val(data[i].fvvol);
+				  			jq('#fvlm').val(data[i].fvlm);
+				  			jq('#fvlm2').val(data[i].fvlm2);
+				  			jq('#ffunnr').val(data[i].ffunnr);
+				  			jq('#ffembg').val(data[i].ffembg);
+				  			jq('#ffindx').val(data[i].ffindx);
+				  			jq('#ffantk').val(data[i].ffantk);
+				  			jq('#ffante').val(data[i].ffante);
+				  			jq('#ffenh').val(data[i].ffenh);
+				  			
+				  		}
+				  	  },
+				  	  error: function() {
+				  	    alert('Error loading ... tblItemLines onClick');
+				  	  }
+				  });
+			  	}
 	  	});
   });
 			  		

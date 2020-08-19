@@ -271,16 +271,20 @@
 													</span>
 												</div>
 						           			</td>
+						           			
 						           		</c:if>
 						           		<c:if test="${record.ttstat=='Urørt'}" >   
 						           			<td width="2%" align="center" class="text14 tableCellGray" style="color: #D8000C;">
 							           			<font class="inputText11" style="background-color: #FFBABA;color: #D8000C;">${record.ttstat}</font>
+							           			
 						           			</td>
+						           			
 						           		</c:if>
 						           		<c:if test="${record.ttstat=='Hentet'}" >   
 						           			<td width="2%" align="center" class="text14 tableCellGray" style="color: #9F6000;">
 							           			<font class="inputText11" style="background-color: #FEEFB3;color: #9F6000;">${record.ttstat}</font>
-						           			</td>
+							           		</td>
+						           			
 						           		</c:if>
 					           		</c:when>
 					           		<c:otherwise>
@@ -767,16 +771,25 @@
 									           			</font>
 													</span>
 												</div>
+												<c:if test="${not empty record.ttstat2}" > 
+						           					&nbsp;${record.ttstat2}
+						           				</c:if>
 						           			</td>
 						           		</c:if>
 						           		<c:if test="${record.ttstat=='Urørt'}" >   
 						           			<td width="2%" align="center" class="textMediumBlue" style="color: #D8000C;">
 							           			<font class="inputText11" style="background-color: #FFBABA;color: #D8000C;">${record.ttstat}</font>
+							           			<c:if test="${not empty record.ttstat2}" > 
+						           					&nbsp;${record.ttstat2}
+						           				</c:if>
 						           			</td>
 						           		</c:if>
 						           		<c:if test="${record.ttstat=='Hentet'}" >   
 						           			<td width="2%" align="center" class="textMediumBlue" style="color: #9F6000;">
 							           			<font class="inputText11" style="background-color: #FEEFB3;color: #9F6000;">${record.ttstat}</font>
+							           			<c:if test="${not empty record.ttstat2}" > 
+						           					&nbsp;${record.ttstat2}
+						           				</c:if>
 						           			</td>
 						           		</c:if>
 					           		</c:when>

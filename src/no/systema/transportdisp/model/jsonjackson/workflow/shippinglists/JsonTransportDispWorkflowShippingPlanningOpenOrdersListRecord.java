@@ -47,6 +47,7 @@ public class JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord exten
 	private String dftoll = null;
 	private String dista1 = null;
 	private String ttstat = null;
+	private String ttstat2 = null;
 	private String hesgm = null;
 	private String hedtmo = null;
 	private String heklmo = null;
