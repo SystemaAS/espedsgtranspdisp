@@ -242,9 +242,9 @@
 			               <tr height="20" >
 			                  
 			               <td align="center" width="2%" class="text14 tableCellGray">&nbsp;
-				           		<a onClick="setBlockUI(this)" href="transportdisp_mainorderlist_add_remove_order.do?user=${user.user}&wmode=D&wstur=${searchFilter.tur}&wsavd=${record.heavd}&wsopd=${record.heopd}">
+			           		<a onClick="setBlockUI(this)" href="transportdisp_mainorderlist_add_remove_order.do?user=${user.user}&wmode=D&wstur=${searchFilter.tur}&wsavd=${record.heavd}&wsopd=${record.heopd}">
 	    		    				<img title="Remove" style="vertical-align:bottom;" src="resources/images/remove.png" width="14" height="15" border="0" alt="remove">
-			   					</a>
+			   				</a>
 				           </td>
 			               <td width="2%" class="text14 tableCellGray" align="center">
 			               		<input class="clazz_checkis_currentorders" type="checkbox" id="checkis_currentorders${counter.count}@user=${user.user}&wmode=D&wstur=${searchFilter.tur}&wsavd=${record.heavd}&wsopd=${record.heopd}" >
@@ -721,7 +721,7 @@
 	                
 	                <tbody >
 		            <c:forEach items="${listOpenOrders}" var="record" varStatus="counter">  
-		            <%-- Prebooking=hestn7: should be cathegorized with another color. In this case with warning color... --%>  
+		            <%-- Prebooking=hestn7: should be categorized with another color. In this case with warning color... --%>  
 		            <tr class="tex14" <c:if test="${not empty record.hestn7}"> style="background-color:#FEEFB3; color: #9F6000;"</c:if> >
 		               <c:if test="${not empty searchFilter.tur}">
                    			<td align="center" width="2%" class="textMediumBlue">&nbsp;
@@ -736,25 +736,46 @@
 		           		<div id="davd${record.heavd}_dopd${record.heopd}_linkcontainer${counter.count}" ondrop="drop(event)" ondragenter="highlightDropArea(event)" ondragleave="noHighlightDropArea(event)" ondragover="allowDrop(event)" >
 		           		<c:choose>
 		           		<c:when test="${empty searchFilter.tur && not empty searchFilter.opd}">
-			           		<a style="cursor:pointer;" id="hepro_${record.hepro}@heavd_${record.heavd}@heopd_${record.heopd}@alinkOpenOrdersListId_${counter.count}" onClick="goToSpecificOrder(this);">
-		    		    				<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="update">
-		    		    				<font class="textMediumBlue">${record.heavd}/${record.heopd}</font>
-	    		    				</a>
+		           			<c:choose>
+		           			<c:when test="${ empty user.spedKuKod}">
+		           				<a style="cursor:pointer;" id="hepro_${record.hepro}@heavd_${record.heavd}@heopd_${record.heopd}@alinkOpenOrdersListId_${counter.count}" onClick="goToSpecificOrder(this);">
+		    		    					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="update">
+			    		    				<font class="textMediumBlue">${record.heavd}/${record.heopd}</font>
+		    		    				</a>
+	    		    				</c:when>
+	    		    				<c:otherwise>
+	    		    						${record.heavd}/${record.heopd}
+	    		    				</c:otherwise>
+	    		    				</c:choose>
 	    		    			</c:when>
 	    		    			<c:otherwise>
+	    		    				<c:choose>
+		           			<c:when test="${ empty user.spedKuKod}">
 	    		    				<a style="cursor:pointer;" id="hepro_${searchFilter.tur}@heavd_${record.heavd}@heopd_${record.heopd}@alinkOpenOrdersListId_${counter.count}" onClick="goToSpecificOrder(this);">
 		    		    				<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="update">
 		    		    				<font class="textMediumBlue">${record.heavd}/${record.heopd}</font>
 		    		    			</a>
+		    		    			</c:when>
+		    		    			<c:otherwise>
+	    		    						${record.heavd}/${record.heopd}
+	    		    				</c:otherwise>
+	    		    				</c:choose>
 	    		    			</c:otherwise>
     		    			</c:choose>
     		    			</div>
 			           </td>
 			           <c:if test="${empty searchFilter.tur}">
-				           <td width="2%" class="textMediumBlue">
-				           		<%-- Drag and drop handle (when being source) --%>
-			 			  		 &nbsp;<img title="Drag to target..." style="vertical-align:middle;cursor:pointer;" src="resources/images/icon_drag_drop.png" width="25px" height="25px" border="0" alt="edit" draggable="true" ondragstart="drag(event)" id="avd_${record.heavd}@opd_${record.heopd}@tripnr_@${counter.count}">
-						   </td>
+			           	   <c:choose>
+		           			<c:when test="${ empty user.spedKuKod}">	
+					           <td width="2%" class="textMediumBlue">
+				           			<%-- Drag and drop handle (when being source) --%>
+				 			  		&nbsp;<img title="Drag to target..." style="vertical-align:middle;cursor:pointer;" src="resources/images/icon_drag_drop.png" width="25px" height="25px" border="0" alt="edit" draggable="true" ondragstart="drag(event)" id="avd_${record.heavd}@opd_${record.heopd}@tripnr_@${counter.count}">
+							   </td>
+						   </c:when>
+						   <c:otherwise>
+						   		<td width="2%">&nbsp;</td>
+						   </c:otherwise>
+						   </c:choose>
 					   </c:if>	
 					   
 					   <c:choose>
@@ -1001,9 +1022,11 @@
 							</div>
 		               </td>
 		               <td width="2%" align="center" class="textMediumBlue">
-            		  	 	<a id="avd_${record.heavd}@opd_${record.heopd}" title="delete" onClick="doPermanentlyDeleteOrder(this)" tabindex=-1>
-			               		<img src="resources/images/delete.gif" border="0" alt="remove">
-			               	</a>&nbsp;
+		               		<c:if test="${ empty user.spedKuKod}">
+	            		  	 		<a id="avd_${record.heavd}@opd_${record.heopd}" title="delete" onClick="doPermanentlyDeleteOrder(this)" tabindex=-1>
+				               		<img src="resources/images/delete.gif" border="0" alt="remove">
+				               	</a>&nbsp;
+			               	</c:if>
 					   </td>
 					   <td width="2%" align="center" class="text14RedBold">&nbsp;${record.hestn7}</td>
 		               

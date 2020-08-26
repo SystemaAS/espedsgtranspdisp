@@ -141,21 +141,23 @@
 			    				
 			    				>&nbsp;<spring:message code="systema.transportdisp.workflow.label"/>&nbsp;</font>
 		    				</a>
-		    				&nbsp;<font color="#FFFFFF"; style="font-weight: bold;">|</font>
-			    			<a id="alinkHeaderMenuHistoryListId" tabindex=-1 href="transportdisp_mainorderlist_history.do?action=doFind">
-			    				&nbsp;<font 
-			    				<c:choose>           
-		                   			<c:when test="${user.activeMenu=='TRANSPORT_DISP_HISTORY'}">
-		                       			class="headerMenuMediumGreen"
-		                   			</c:when>
-		                   			<c:otherwise>   
-		                       			class="headerMenuLightGreen"
-		                   			</c:otherwise>
-		               			</c:choose>
-			    				
-			    				>&nbsp;<spring:message code="systema.transportdisp.workflow.label.history"/>&nbsp;</font>
-		    				</a>
-			    				
+		    				<%-- Only show for normal users: SpedKuKod user is not normal. It is "speditörkund" --%>
+		    				<c:if test="${empty user.spedKuKod}">
+			    				&nbsp;<font color="#FFFFFF"; style="font-weight: bold;">|</font>
+				    			<a id="alinkHeaderMenuHistoryListId" tabindex=-1 href="transportdisp_mainorderlist_history.do?action=doFind">
+				    				&nbsp;<font 
+				    				<c:choose>           
+			                   			<c:when test="${user.activeMenu=='TRANSPORT_DISP_HISTORY'}">
+			                       			class="headerMenuMediumGreen"
+			                   			</c:when>
+			                   			<c:otherwise>   
+			                       			class="headerMenuLightGreen"
+			                   			</c:otherwise>
+			               			</c:choose>
+				    				
+				    				>&nbsp;<spring:message code="systema.transportdisp.workflow.label.history"/>&nbsp;</font>
+			    				</a>
+			    			</c:if>	
 			    				
 			    				<label onClick="showPop('debugPrintlnUrlStore');" >&nbsp;&nbsp;</label>
 			    				<div class="text11" style="position: relative;display: inline;" align="left">
