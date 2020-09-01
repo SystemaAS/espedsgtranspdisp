@@ -115,12 +115,12 @@ public class TransportDispMainOrderListController {
 			return loginView;
 			
 		}else{
+			StringBuffer userAvd = new StringBuffer();
+			
 			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TRANSPORT_DISP);
 			appUser.setUrlStoreProps(this.reflectionUrlStoreMgr.printProperties("no.systema.transportdisp.url.store.TransportDispUrlDataStore", "html")); //Debug info om UrlStore
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			//drop downs
-    		this.setCodeDropDownMgr(appUser, model);
-    		//----------------------
+			//----------------------
     		//Put FILTER in SESSION for further use (within this module) ONLY with: POST method = doFind on search fields
     		//----------------------
             if(request.getMethod().equalsIgnoreCase(RequestMethod.POST.toString())){
@@ -151,6 +151,10 @@ public class TransportDispMainOrderListController {
 			if(bindingResult.hasErrors()){
 	    		logger.info("[ERROR Validation] search-filter does not validate)");
 	    		//put domain objects and do go back to the successView from here
+	    		//get the list in order to get the SpedKuKod And SpedKuXXX params
+	    		outputListOpenOrders = this.getListOpenOrders(session, appUser, recordToValidate, model, userAvd);
+	    		//drop downs
+		 		this.setCodeDropDownMgr(appUser, model);
 	    		
 				successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);
 	    		successView.addObject(TransportDispConstants.DOMAIN_LIST_CURRENT_ORDERS, new ArrayList());
@@ -168,10 +172,11 @@ public class TransportDispMainOrderListController {
 						session.setAttribute(session.getId() + TransportDispConstants.SESSION_LIST_CURRENT_ORDERS_ON_TRIP, outputListCurrentOrders);
 					}
 		    	}
-	    		StringBuffer userAvd = new StringBuffer();
+	    		
 	    		outputListOpenOrders = this.getListOpenOrders(session, appUser, recordToValidate, model, userAvd);
 	    		logger.warn("spedKuKod:" + appUser.getSpedKuKod());
-	    		logger.warn("spedKuNrs:" + appUser.getSpedKuNrs());
+	    		logger.info("spedKuNrs:" + appUser.getSpedKuNrs());
+	    		logger.info("spedKuAvd:" + appUser.getSpedKuAvd());
 	    		
 	    		//Put list for upcoming view (PDF, Excel, or ErrorHandling in add/remove orders (method below...)
 	    		if(outputListOpenOrders!=null){
@@ -197,7 +202,8 @@ public class TransportDispMainOrderListController {
 		 			model.put(TransportDispConstants.ASPECT_ERROR_MESSAGE, errorFromRedirect);
 		 		}
 				//drop downs
-				//this.setCodeDropDownMgr(appUser, model);
+		 		this.setCodeDropDownMgr(appUser, model);
+	    		
 				successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
 	    		//domain and search filter
 				successView.addObject(TransportDispConstants.DOMAIN_LIST_CURRENT_ORDERS, outputListCurrentOrders);
@@ -788,6 +794,7 @@ public class TransportDispMainOrderListController {
 	    			//this params are used in RAMBERGs adaptation. This is the only place in which we initialize them
 	    			appUser.setSpedKuKod(jsonOpenOrdersListContainer.getSpedKuKod());
 	    			appUser.setSpedKuNrs(jsonOpenOrdersListContainer.getSpedKuNrs());
+	    			appUser.setSpedKuAvd(jsonOpenOrdersListContainer.getSpedKuAvd());
 	    			session.setAttribute(AppConstants.SYSTEMA_WEB_USER_KEY, appUser);
 	    			
 	    			outputListOpenOrders = jsonOpenOrdersListContainer.getOrderlistlandled();
@@ -893,8 +900,8 @@ public class TransportDispMainOrderListController {
 	 */
 	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringAvdGroups(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model,appUser);
-		//oppdragtype
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringOppdragsType(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model, appUser, null);
+		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringValidAvds(model, appUser);
 	}
 
 	//SERVICES

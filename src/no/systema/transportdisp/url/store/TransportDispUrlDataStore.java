@@ -178,6 +178,7 @@ public final class TransportDispUrlDataStore {
 	static public String TRANSPORT_DISP_GENERAL_AVD_GROUPS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TJINQAGR.pgm";
 	//http://gw.systema.no/sycgip/TJINQAGR.pgm?user=JOVO
 	
+	
 	//--------------------------------------------
 	//[1.2] FETCH Specific TRIP from WORKFLOW LIST
 	//--------------------------------------------

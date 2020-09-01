@@ -53,6 +53,7 @@ public final class TransportDispConstants {
 	public static final String RESOURCE_MODEL_KEY_OPPDRAGSTYPE_LIST = "oppdragstypeList";
 	public static final String RESOURCE_MODEL_KEY_GEBYRCODES_LIST = "gebyrCodesList";
 	public static final String RESOURCE_MODEL_KEY_AVD_GROUPS_LIST = "avdGroupsList";
+	public static final String RESOURCE_MODEL_KEY_VALID_AVDS_LIST = "avdValidList";
 	public static final String RESOURCE_MODEL_KEY_TRANSPORTTYPE_CODE_LIST = "transporttypeList";
 	
 	public static final Integer CONSTANT_TOTAL_NUMBER_OF_ORDER_LINES = 4;

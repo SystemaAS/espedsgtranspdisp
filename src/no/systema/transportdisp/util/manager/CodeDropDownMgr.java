@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
-
+import no.systema.main.util.StringManager;
 //import no.systema.tvinn.sad.model.external.url.UrlTvinnSadTolltariffenObject;
 import no.systema.transportdisp.model.jsonjackson.workflow.codes.JsonTransportDispCodeContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.codes.JsonTransportDispCodeRecord;
@@ -57,6 +57,7 @@ public class CodeDropDownMgr {
 	private static final Logger logger = Logger.getLogger(CodeDropDownMgr.class.getName());
 	//
 	public static final String CODE_2_COUNTRY = "2";
+	private StringManager strMgr = new StringManager();
 	
 	/**
 	 * 
@@ -360,5 +361,30 @@ public class CodeDropDownMgr {
 						e.printStackTrace();
 				}		
 			}
-	
+	/**
+	 * 
+	 * Gets a list of valid avd. if any
+	 * @param model
+	 * @param appUser
+	 */
+	public void populateHtmlDropDownsFromJsonStringValidAvds( Map model, SystemaWebUser appUser){
+			List<String> avdList = new ArrayList<String>();
+			try{
+				//only when special user (Speditør in Ramberg adaptation)
+				if(strMgr.isNotNull(appUser.getSpedKuKod())){
+					//only when avd list exists
+					if(strMgr.isNotNull(appUser.getSpedKuAvd())){
+						String str[] = appUser.getSpedKuAvd().split(" ");
+						avdList = Arrays.asList(str);
+					}
+				}
+				logger.info(avdList.toString());
+				model.put(TransportDispConstants.RESOURCE_MODEL_KEY_VALID_AVDS_LIST, avdList);
+
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+					
+	}
+		
 }

@@ -521,17 +521,34 @@
 			    		
 				        <td>
 							<font title="avd/wssavd" class="text14"><spring:message code="systema.transportdisp.orders.open.search.label.dept"/></font>
-							<c:if test="${ empty user.spedKuKod}">
-								<a href="javascript:void(0);" onClick="window.open('transportdisp_workflow_childwindow_avd.do?action=doFind','avdWin','top=100px,left=300px,height=600px,width=800px,scrollbars=no,status=no,location=no')">
-			 						<img id="imgAvdSearch" align="bottom" style="cursor:pointer;" src="resources/images/find.png" height="13px" width="13px" border="0" alt="search">
-			 					</a>
-		 					</c:if>
-							<font id="objAvdGroupsList" class="text14SkyBlue" style="cursor:pointer;text-decoration: underline;">Grp</font>
-			        	</td>
-			        	
-				        
-			    		<td>
-							<input type="text" class="inputTextMediumBlue" name="avd" id="avd" size="5" maxlength="4" value='${searchFilter.avd}'>
+							<c:choose>
+								<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+									&nbsp;
+			 					</c:when>
+			 					<c:otherwise>
+			 						<a href="javascript:void(0);" onClick="window.open('transportdisp_workflow_childwindow_avd.do?action=doFind','avdWin','top=100px,left=300px,height=600px,width=800px,scrollbars=no,status=no,location=no')">
+				 						<img id="imgAvdSearch" align="bottom" style="cursor:pointer;" src="resources/images/find.png" height="13px" width="13px" border="0" alt="search">
+				 					</a>
+				 					<font id="objAvdGroupsList" class="text14SkyBlue" style="cursor:pointer;text-decoration: underline;">Grp</font>
+			 					</c:otherwise>
+		 					</c:choose>
+			        		</td>
+			        	    
+			    			<td>
+			    				<c:choose>
+	 						<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+		 						<select class="inputTextMediumBlue" name="avd" id="avd">
+				            		<option value="">-select-</option>
+				 				  	<c:forEach var="record" items="${model.avdValidList}" >
+			                       	 	<option title="${record}" value="${record}">${record}</option>
+									</c:forEach> 
+								</select>
+							</c:when>
+							<c:otherwise>
+								<input type="text" class="inputTextMediumBlue" name="avd" id="avd" size="5" maxlength="4" value='${searchFilter.avd}'>
+							</c:otherwise>
+							</c:choose>
+							
 							<div id="divAvdGroupsList" style="display:none;position: relative;height:10em;" class="ownScrollableSubWindowDynamicWidthHeight" align="left" >
 		 						<table id="tblAvdGroupsList" class="inputTextMediumBlueMandatoryField">
 									<c:forEach items="${model.avdGroupsList}" var="record" varStatus="counter">  
