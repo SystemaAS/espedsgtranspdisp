@@ -96,14 +96,20 @@
 	                	
 	                <td valign="bottom" class="text14" align="left" >
                 		<span title="wssavd"><spring:message code="systema.transportdisp.workflow.trip.list.search.label.department"/></span>
-		 				<c:if test="${ empty user.spedKuKod}">
+		 				<c:choose>
+						<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+							&nbsp;
+ 						</c:when>
+	 					<c:otherwise>
 			 				<a href="javascript:void(0);" onClick="window.open('transportdisp_workflow_childwindow_avd.do?action=doInit','avdWin','top=150px,left=300px,height=600px,width=800px,scrollbars=no,status=no,location=no')">
 			 					<img id="imgAvdSearch" align="bottom" style="cursor:pointer;" src="resources/images/find.png" height="13px" width="13px" border="0" alt="search">
 			 				</a>
-		 				</c:if>
-		 				<font id="objAvdGroupsList" class="text14SkyBlue" style="cursor:pointer;text-decoration: underline;">Grp</font>
-                		
+		 					<font id="objAvdGroupsList" class="text14SkyBlue" style="cursor:pointer;text-decoration: underline;">Grp</font>
+						</c:otherwise>
+						</c:choose>		 				
 	                </td>
+	                
+	                
 	                <td valign="bottom" class="text14" align="left" >&nbsp;&nbsp;&nbsp;<span title="wsstur"><spring:message code="systema.transportdisp.workflow.trip.list.search.label.trip"/></span></td>
 	                <td valign="bottom" class="text14" align="left" >&nbsp;&nbsp;&nbsp;<span title="wtusg"><spring:message code="systema.transportdisp.workflow.trip.list.search.label.sign"/></span></td>
 	                <td valign="bottom" class="text14" align="left" >&nbsp;&nbsp;&nbsp;<span title="wtubiln"><spring:message code="systema.transportdisp.workflow.trip.list.search.label.trucknr"/></span></td>
@@ -129,12 +135,28 @@
 			            		<option value="Z" <c:if test="${searchFilter.wssst == 'Z'}"> selected </c:if> >Alle</option>
 			            		
 						</select>
-					</td>			       
-	                <c:choose>
-						<c:when test="${not empty searchFilter.wssavd}">	
-			                <td align="left" >&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wssavd" id="wssavd" size="5" maxlength="4" value='${searchFilter.wssavd}'>&nbsp;
-		                		<div id="divAvdGroupsList" style="display:none;position: relative;height:10em;" class="ownScrollableSubWindowDynamicWidthHeight" align="left" >
-			 						
+					</td>	
+					<td>	
+						<c:choose>
+	 						<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+		 						<select class="inputTextMediumBlue" name="wssavd" id="wssavd">
+				            		<option value="">-select-</option>
+				 				  	<c:forEach var="record" items="${model.avdValidList}" >
+			                       	 	<option title="${record}" value="${record}" <c:if test="${searchFilter.wssavd == record}"> selected </c:if> >${record}</option>
+									</c:forEach> 
+									
+								</select>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${not empty searchFilter.wssavd}">	
+						                &nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wssavd" id="wssavd" size="5" maxlength="4" value='${searchFilter.wssavd}'>&nbsp;
+					                </c:when>
+					                <c:otherwise>
+					                		&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wssavd" id="wssavd" size="5" maxlength="4" value='${model.record.tuavd}'>&nbsp;
+					                </c:otherwise>
+		                			</c:choose>
+			          			<div id="divAvdGroupsList" style="display:none;position: relative;height:10em;" class="ownScrollableSubWindowDynamicWidthHeight" align="left" >
 									<table id="tblAvdGroupsList" class="inputTextMediumBlueMandatoryField">
 										<c:forEach items="${model.avdGroupsList}" var="record" varStatus="counter">  
 										<tr>
@@ -143,27 +165,11 @@
 										</tr>
 										</c:forEach>
 									</table>	
-								</div>	
-			                
-			                </td>
-		                </c:when>
-		                <c:otherwise>
-		                		<td align="left" >&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wssavd" id="wssavd" size="5" maxlength="4" value='${model.record.tuavd}'>&nbsp;
-		                		
-			                		<div id="divAvdGroupsList" style="display:none;position: relative;height:10em;" class="ownScrollableSubWindowDynamicWidthHeight" align="left" >
-				 						
-										<table id="tblAvdGroupsList" class="inputTextMediumBlueMandatoryField">
-											<c:forEach items="${model.avdGroupsList}" var="record" varStatus="counter">  
-											<tr>
-												<td id="id_${record.agrKode}" OnClick="doPickAvdGroup(this)" class="tableHeaderFieldFirst" style="cursor:pointer;" ><font class="text14SkyBlue">${record.agrKode}</font></td>
-												<td class="tableHeaderField">${record.agrNavn}</td>
-											</tr>
-											</c:forEach>
-										</table>	
-									</div>	
-		                		</td>
-		                </c:otherwise>
-	                </c:choose>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+					</td>			
 					<td align="left" >&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueUPPERCASE" name="wsstur" id="wsstur" size="9" maxlength="8" value='${searchFilter.wsstur}'>&nbsp;</td>
 					<td align="left" >&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wtusg" id="wtusg" size="5" maxlength="5" value='${searchFilter.wtusg}'>&nbsp;</td>
 					<td align="left" >&nbsp;<input type="text" class="inputTextMediumBlueUPPERCASE" name="wtubiln" id="wtubiln" size="10" maxlength="10" value='${searchFilter.wtubiln}'>&nbsp;</td>
@@ -283,11 +289,10 @@
 		                    <th title="Rundtur" width="2%" align="right" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.roundTrip"/>&nbsp;</th>
 		                    <th title="Kopi Tur" width="2%" width="1%" align="left" class="text14">&nbsp;</th>
 
-		                    <%--
-		                    <th title="Close/Open" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.closeopen"/>&nbsp;</th>
-		                     --%>
 		                    <th title="Steng en eller flere" width="2%" class="text14" align="center">
-		                    		<input title="Steng en eller flere" style="cursor:pointer;" type="button" value="S." name="currentordersColumnHeaderButtonClose" id="currentordersColumnHeaderButtonClose" onClick="getValidCheckisCloseOpen(this);">
+		                    		<c:if test="${ empty user.spedKuKod}">
+		                    			<input title="Steng en eller flere" style="cursor:pointer;" type="button" value="S." name="currentordersColumnHeaderButtonClose" id="currentordersColumnHeaderButtonClose" onClick="getValidCheckisCloseOpen(this);">
+		                    		</c:if>
 		                    </th>		
 	                    
 		                    <th title="Godsliste print status" width="2%" class="text14">&nbsp;<spring:message code="systema.transportdisp.workflow.trip.list.search.label.gp"/>&nbsp;</th>
@@ -376,7 +381,8 @@
 	            		   <td width="3%" align="right" class="text14 tableCellGray">&nbsp;${record.tures}&nbsp;</td>
 	            		   <td width="1%" align="right" class="text14 tableCellGray">${record.turund}</td>
 		            	   <td width="1%" align="left" class="text14">
-		            	   		<a title="copy" class="copyLink" id="copyLink${counter.count}" runat="server" href="#">
+		            	   			<c:if test="${ empty user.spedKuKod}">
+		            	   			<a title="copy" class="copyLink" id="copyLink${counter.count}" runat="server" href="#">
 									<img style="vertical-align:middle;" title="Copy-Round trip" src="resources/images/copy.png" width="12px" height="12px" border="0" alt="copy">
 								</a>
 								<div style="display: none;" class="clazz_dialog" id="dialog${counter.count}" title="Dialog">
@@ -399,23 +405,9 @@
 										</table>
 									</form>
 								</div>
+								</c:if>
 	            		   </td>
-	            		   <%-- Close Open one-on-one --> REPLACE with bulk-close-open in next cell
-	            		   <td width="3%" align="center" class="text14 tableCellGray">
-	            		   		<c:choose>	
-		            		   		<c:when test="${record.turclose=='close'}">
-					           		<a href="transportdisp_workflow_closeOpenTrip.do?user=${user.user}&tuavd=${record.tuavd}&tupro=${record.tupro}&tust=A">
-	    		    					<img title="Close" style="vertical-align:bottom;" src="resources/images/close.png" width="15" hight="15" border="0" alt="close">
-				   					</a><font class="text12Bold" >${record.tust}</font>
-			   					</c:when>
-			   					<c:otherwise>
-									<a href="transportdisp_workflow_closeOpenTrip.do?user=${user.user}&tuavd=${record.tuavd}&tupro=${record.tupro}&tust=">
-	    		    					<img title="Open" style="vertical-align:bottom;" src="resources/images/open.png" width="18" hight="18" border="0" alt="open">
-				   					</a><font class="text12Bold" >${record.tust}</font>
-			   					</c:otherwise>
-		   					</c:choose>
-	            		   	</td>
-	            		   	--%>
+	            		   
 	            		   	<td width="2%" class="text14 tableCellGray" align="center">
 	            		   		<c:choose>	
 		            		   		<c:when test="${record.turclose=='close'}">
@@ -429,6 +421,8 @@
 	            		   
 	            		   <td width="3%" align="center" class="text14 tableCellGray">&nbsp;${record.tutst1}&nbsp;</td>
 	            		   <td width="3%" align="center" class="textMediumBlue">
+	            		   			<c:choose>
+	            		   			<c:when test="${ empty user.spedKuKod}">
 			               		<a title="print Tur.&nbsp;${record.tupro}" class="printLink" id="printLink${counter.count}" runat="server" href="#">
 									<img style="vertical-align: middle;" src="resources/images/printer3.png" width="20px" height="20px" border="0" alt="Print">
 								</a>
@@ -505,35 +499,36 @@
 										</table>
 										</form>
 								</div>
+								</c:when>
+								<c:otherwise>
+									<a title="print Tur.&nbsp;${record.tupro}" class="printLinkLight" id="printLinkLight${counter.count}" runat="server" href="#">
+										<img style="vertical-align: middle;" src="resources/images/printer3.png" width="20px" height="20px" border="0" alt="Print">
+									</a>
+									<div style="display: none;" class="clazz_dialogPrintLight" id="dialogPrint${counter.count}" title="Dialog Print">
+										<form id="printFormOnList${counter.count}">
+										<input type="hidden" id="tur${counter.count}" name="tur${counter.count}" value="${record.tupro}">
+										<input type="hidden" id="avd${counter.count}" name="avd${counter.count}" value="${record.tuavd}">
+										<input type="hidden" id="sign${counter.count}" name="sign${counter.count}" value="${record.tusg}">
+									 	<table>
+					   						<tr height="3"><td></td></tr>
+					   						<tr>
+												<td class="text14" align="left" >	
+													Lasteliste&nbsp;<img class="clazz_imgLastlistePdf" id="imgLastlistePdf${counter.count}" title="LL PDF" style="vertical-align:middle;cursor:pointer;" src="resources/images/pdf.png" width="14" height="14" border="0" alt="LL. PDF">
+												</td>
+					   						</tr>
+										</table>
+										</form>
+									</div>
+								</c:otherwise>
+								</c:choose>
 							</td>
 	            		   
-	            		   
-	            		   
 	            		   <td width="3%" align="center" class="text14 tableCellGray">
-	            		   		<input class="inputFormSubmit11Slim" type="button" value="Upload" name="uplButton${counter.count}" onClick="window.open('transportdisp_workflow_childwindow_uploadFile.do?action=doInit&wstur=${record.tupro}','transpDispWorklistFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">	 
+	            		   		<c:if test="${ empty user.spedKuKod}">
+	            		   			<input class="inputFormSubmit11Slim" type="button" value="Upload" name="uplButton${counter.count}" onClick="window.open('transportdisp_workflow_childwindow_uploadFile.do?action=doInit&wstur=${record.tupro}','transpDispWorklistFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">
+	            		   		</c:if>	 
 	            		   </td>
-	            		   <%--
-	            		   <td align="center" class="text14 tableCellGray">
-            		   			 <form name="uploadFileForm_${counter.count}" id="uploadFileForm_${counter.count}" method="post" enctype="multipart/form-data">
-	            		   		 	<input ondragenter="myFileUploadDragEnter(event,this)" ondragleave="myFileUploadDragLeave(event,this)" class="tableBorderWithRoundCornersLightYellow noFileChosenTransparent" style="height:25px;display:block;" onChange="uploadFile(this);" type="file" name="file_${counter.count}" id="file_${counter.count}" />
-	            		   		 	
-	            		   		 	<%-- everything below this line will be hidden for the end-user but not for jquery
-	            		   		 	<input type="hidden" name="applicationUserUpload_${counter.count}" id="applicationUserUpload_${counter.count}" value='${user.user}'>
-									<input type="hidden" name="wstur_${counter.count}" id="wstur_${counter.count}" value='${record.tupro}'>
-									 <div class="text14" style="position: relative;" align="left">
-										<span style="position:absolute; left:0px; top:0px; width:250px" id="upload_phantom" class="popupWithInputText"  >
-											<select class="inputText14" name="wstype_${counter.count}" id="wstype_${counter.count}">
-												<c:forEach var="record" items="${user.arkivKodTurList}" >
-						                       	 	<option value="${record.arkKod}">${record.arkKod}</option>
-												</c:forEach> 
-											</select>
-											<input class="inputFormSubmit" type="button" name="submitUpload_${counter.count}" id="submitUpload_${counter.count}" value='Save'>
-										</span>
-									</div>
-								</form>
-	            		   </td>
-	            		    --%>
-			            </tr> 
+	            		   </tr> 
 		            	</c:forEach>
 		            </tbody>
 		            </table>

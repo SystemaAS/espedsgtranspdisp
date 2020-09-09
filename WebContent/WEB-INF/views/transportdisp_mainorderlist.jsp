@@ -73,6 +73,7 @@
 							<font class="tabDisabledLink"><spring:message code="systema.transportdisp.workflow.trip.tab"/></font>&nbsp;<font class="text10Orange">F9</font>
 						</a>
 					</td>
+					<c:if test="${ empty user.spedKuKod}">
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="18%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a class="text14" onClick="setBlockUI(this);" href="transportdisp_mainorderlist_fellesutskrift.do?avd=${searchFilter.avd}&sign=${searchFilter.sign}" > 	
@@ -81,6 +82,7 @@
 						</a>
 						
 					</td>
+					</c:if>
 					<td width="70%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>	
 				</c:otherwise>
 			</c:choose>
@@ -324,6 +326,7 @@
 			               <td width="2%" align="center" class="text14 tableCell11RedFont">&nbsp;${record.hepoen}</td>
 			               
 			               <td width="2%" align="center" class="textMediumBlue">
+			               		<c:if test="${ empty user.spedKuKod}">
 			               		<a title="print Oppd.&nbsp;${record.heopd}" class="printLinkCo" id="printLinkCo${counter.count}" runat="server" href="#">
 									<img style="vertical-align: middle;" src="resources/images/printer3.png" width="20px" height="20px" border="0" alt="Print">
 								</a>
@@ -427,17 +430,10 @@
 								</table>
 								
 								</form>
-							</div>
+								</div>
+								</c:if>
 		            		   </td>
 		            		   
-		            		   
-			               <%--
-			               <td width="2%" align="center" class="text14 tableCellGray">
-	           		   			<a target="_blank" href="transportdisp_mainorderlist_renderFraktbrev.do?user=${user.user}&wsavd=${record.heavd}&wsopd=${record.heopd}&wstoll=${record.dftoll}">
-  		    						<img title="Fraktbr.PDF" style="vertical-align:bottom;" src="resources/images/pdf.png" width="16" height="16" border="0" alt="Fraktbr. PDF">
-   								</a>
-           		   			</td>
-          		   			--%>
 			            </tr> 
 			            
 			            </c:forEach>
@@ -540,7 +536,7 @@
 		 						<select class="inputTextMediumBlue" name="avd" id="avd">
 				            		<option value="">-select-</option>
 				 				  	<c:forEach var="record" items="${model.avdValidList}" >
-			                       	 	<option title="${record}" value="${record}">${record}</option>
+			                       	 	<option title="${record}" value="${record}" <c:if test="${searchFilter.avd == record}"> selected </c:if> >${record}</option>
 									</c:forEach> 
 								</select>
 							</c:when>
@@ -885,6 +881,7 @@
 							</c:if>
 		               </td>
 		               <td width="2%" align="center" class="textMediumBlue">
+		               		<c:if test="${ empty user.spedKuKod}">
 		               		<a title="print Oppd.&nbsp;${record.heopd}" class="printLink" id="printLink${counter.count}" runat="server" href="#">
 								<img style="vertical-align: middle;" src="resources/images/printer3.png" width="20px" height="20px" border="0" alt="Print">
 							</a>
@@ -986,18 +983,13 @@
 										</tr>
 									</table>
 									</form>
-							</div>
-							
+								</div>
+								</c:if>
 	           		   				
             		   </td>
-		               <%--
-		               <td width="2%" align="center" class="textMediumBlue">
-	           		   		<a target="_blank" href="transportdisp_mainorderlist_renderFraktbrev.do?user=${user.user}&wsavd=${record.heavd}&wsopd=${record.heopd}&wstoll=${record.dftoll}">
-  		    					<img title="Fraktbr.PDF" style="vertical-align:bottom;" src="resources/images/pdf.png" width="16" height="16" border="0" alt="Fraktbr. PDF">
-   							</a>
-            		   </td>
-            		    --%>
+		               
             		   <td width="2%" align="center" class="textMediumBlue">
+            		   			<c:if test="${ empty user.spedKuKod}">
 		               		<a title="copy" class="copyLink" id="copyLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/copy.png" border="0" alt="copy">
 							</a>
@@ -1021,10 +1013,11 @@
 									</table>
 								</form>
 							</div>
-							
+							</c:if>
 		               </td>
 		               
 		               <td width="2%" align="center" class="textMediumBlue">
+		               		<c:if test="${ empty user.spedKuKod}">
 		               		<a title="move" class="moveLink" id="moveLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/move.png" width="18" height="18" border="0" alt="move">
 							</a>
@@ -1047,6 +1040,7 @@
 									</table>
 								</form>
 							</div>
+							</c:if>
 		               </td>
 		               <td width="2%" align="center" class="textMediumBlue">
 		               		<c:if test="${ empty user.spedKuKod}">

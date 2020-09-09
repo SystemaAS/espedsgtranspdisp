@@ -173,13 +173,7 @@ public class TransportDispWorkflowTripListController {
 					if(strMgr.isNull(tuavd)){ tuavd = recordToValidate.getWssavd();}
 					JsonTransportDispWorkflowSpecificTripRecord record = this.getDefaultValuesTrip(appUser, tuavd);
 					
-					/* OBSOLETE. Now we get this defualts from the back end
-					JsonTransportDispWorkflowSpecificTripRecord record = new JsonTransportDispWorkflowSpecificTripRecord();
-					record.setCenturyYearTurccTuraar(this.dateTimeManager.getCurrentYear());
-					record.setTurmnd(this.dateTimeManager.getCurrentMonth());
-					//default values
-					record.setTudt(this.dateTimeManager.getCurrentDate_ISO());
-					*/
+					
 			    	model.put(TransportDispConstants.DOMAIN_RECORD, record);
 			    	model.put(TransportDispConstants.DOMAIN_CONTAINER_TRIP_LIST, jsonTransportDispWorkflowListContainer);
 					
@@ -619,7 +613,8 @@ public class TransportDispWorkflowTripListController {
 		//oppdragtype
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringOppdragsType(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model, appUser, null);
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringAvdGroups(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model,appUser);
-						
+		//avd for RAMBERG adaptation
+		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringValidAvds(model, appUser);
 	}
 
 	//SERVICES

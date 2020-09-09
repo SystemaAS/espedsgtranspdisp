@@ -369,6 +369,7 @@ public class CodeDropDownMgr {
 	 */
 	public void populateHtmlDropDownsFromJsonStringValidAvds( Map model, SystemaWebUser appUser){
 			List<String> avdList = new ArrayList<String>();
+			logger.warn(appUser.getSpedKuKod());
 			try{
 				//only when special user (Speditør in Ramberg adaptation)
 				if(strMgr.isNotNull(appUser.getSpedKuKod())){
@@ -378,7 +379,7 @@ public class CodeDropDownMgr {
 						avdList = Arrays.asList(str);
 					}
 				}
-				logger.info(avdList.toString());
+				logger.warn(avdList.toString());
 				model.put(TransportDispConstants.RESOURCE_MODEL_KEY_VALID_AVDS_LIST, avdList);
 
 			}catch(Exception e){

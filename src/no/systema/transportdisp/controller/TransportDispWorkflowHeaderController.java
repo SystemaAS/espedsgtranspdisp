@@ -975,6 +975,8 @@ public class TransportDispWorkflowHeaderController {
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringAvdGroups(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model,appUser);
 		//transp.måte
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonTransporttypeJavaBased(this.urlCgiProxyService,this.maintSadImportKodts4Service, model, appUser);
+		//valid avd for RAMBERG adaptation
+		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringValidAvds(model, appUser);
 	}
 	
 	

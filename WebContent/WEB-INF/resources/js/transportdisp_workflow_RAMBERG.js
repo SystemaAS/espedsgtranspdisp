@@ -1111,7 +1111,7 @@
 			  				if(status=='close'){ //only the active trips are allowed to have this option (tur planning)
 			  					jq('.clazzAvdCreateNew').css('visibility', 'collapse');
 			  					jq('.clazzOrderTripTab').css('visibility', 'visible');
-			  					jq('.ordersTripOpen').attr('href', 'transportdisp_mainorderlist_RAMBERG.do?action=doFind&wssavd='+ data[i].tuavd + '&wstur=' + data[i].tupro);
+			  					jq('.ordersTripOpen').attr('href', 'transportdisp_mainorderlist.do?action=doFind&wssavd='+ data[i].tuavd + '&wstur=' + data[i].tupro);
 			  					jq('#tuproTab').text(data[i].tupro);jq('#tuproTab').addClass('text14MediumBlue');
 			  					//Info fields on EDIT
 			  					//jq('#tuavdJS').text(""); jq('#tuavdJS').text(data[i].tuavd);
@@ -1929,6 +1929,21 @@
 	  });
 	  
   });
+  
+  jq(function() { 
+	  jq( ".clazz_dialogPrintLight" ).each(function(){
+		jq(this).dialog({
+			autoOpen: false,
+			  maxWidth:600,
+		      maxHeight: 200,
+		      width: 350,
+		      height: 150,
+			  modal: true,
+			  dialogClass: 'print-dialog-class'
+		});
+	  });
+	  
+  });
  
   //Present dialog box onClick 
   jq(function() {
@@ -1977,12 +1992,36 @@
 	 	 		 } ] 
 			  
 		  });
-		  //init values
-		  //jq("#dialogSave"+counterIndex).button("option", "disabled", true);
-		  
 		  //open now
 		  jq("#dialogPrint"+counterIndex).dialog('open');
 		 
+	  });
+  });
+  
+  
+  //Present dialog box onClick 
+  jq(function() {
+	  jq(".printLinkLight").click(function() {
+		  var id = this.id;
+		  counterIndex = id.replace("printLinkLight","");
+		   jq("#dialogPrint"+counterIndex).dialog( "option", "title", "Skriv ut - Tur " + jq('#avd'+counterIndex).val() + "/" + jq('#tur'+counterIndex).val() );
+		  //deal with buttons for this modal window
+		  jq("#dialogPrint"+counterIndex).dialog({
+		  
+			 buttons: [ 
+	            {
+			 	 id: "dialogCancelTU"+counterIndex,
+			 	 text: "Lukk", 
+				 click: function(){
+					 		
+			  				jq( this ).dialog( "close" );
+					 		  
+				 		} 
+	 	 		 } ] 
+			  
+		  });
+		  //open now
+		  jq("#dialogPrint"+counterIndex).dialog('open');
 	  });
   });
   
