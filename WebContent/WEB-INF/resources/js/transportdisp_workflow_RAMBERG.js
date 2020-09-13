@@ -16,6 +16,9 @@
 	  jq("#printImg").click(function() {
 		  presentPrintDialog();
 	  });
+	  jq("#printImgLight").click(function() {
+		  presentPrintDialogLight();
+	  });
 	  jq("#imgGodslistePdf").click(function() {
 		  renderGodsListaWithTuproJS();
 	  });
@@ -1814,6 +1817,18 @@
 			  
 	  });
   });
+  jq(function() { 
+	  jq("#dialogPrintLight").dialog({
+		  autoOpen: false,
+		  maxWidth:600,
+	      maxHeight: 200,
+	      width: 350,
+	      height: 150,
+		  modal: true,
+		  dialogClass: 'print-dialog-class'
+			  
+	  });
+  });
   
   function presentPrintDialog(){
 	  //set default. Can't be static in html ...MUST be dynamic HERE!!
@@ -1864,6 +1879,31 @@
 	  //jq("#dialogSaveTU").button("option", "disabled", true);
 	  //open now
 	  jq('#dialogPrint').dialog('open');
+  }
+  
+  function presentPrintDialogLight(){
+	  //set default. Can't be static in html ...MUST be dynamic HERE!!
+	  //jq('input:radio[name="smsType"]').filter('[value="grabber"]').attr('checked', true);
+	  
+	  //setters (add more if needed)
+	  jq('#dialogPrintLight').dialog( "option", "title", "Skriv ut - Turnr. " + jq("#tuavd").val() + "/" + jq("#tuproJS").text() );
+	  //deal with buttons for this modal window
+	  jq('#dialogPrintLight').dialog({
+		 buttons: [ 
+            {
+		 	 id: "dialogCancelTU",
+		 	 text: "Lukk", 
+			 click: function(){
+				 		//
+		  				jq( this ).dialog( "close" ); 
+		  				
+			 		} 
+ 	 		 } ] 
+	  });
+	  //init values
+	  //jq("#dialogSaveTU").button("option", "disabled", true);
+	  //open now
+	  jq('#dialogPrintLight').dialog('open');
   }
   
   //PRINT documents 

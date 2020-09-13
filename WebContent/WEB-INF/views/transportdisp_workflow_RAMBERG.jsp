@@ -687,21 +687,39 @@
 						 						<c:choose>
 								 				    <c:when test="${ not empty model.record.tupro}">
 								 				    	<div id="divSmsEmailButtons" style="display:inline">
-								 				    		<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print"> 
-									 						<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
+								 				    			<c:choose>
+								 				    			<c:when test="${empty user.spedKuAvd}">
+								 				    				<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
+								 				    			</c:when>
+								 				    			<c:otherwise>
+								 				    				<img id="printImgLight" name="printImgLight" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
+								 				    			</c:otherwise>
+								 				    			</c:choose>
+								 				    			<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
 									 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
-						 									<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
+									 						<c:if test="${empty user.spedKuAvd}">
+						 										<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
+						 									</c:if>
 					 									</div>
+					 									
 								 				    	<input class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
 								 				    	<input class="inputFormSubmitGray" type="button" name="updCancelButton" id="updCancelButton" value='<spring:message code="systema.transportdisp.cancel"/>'>
 								 				    </c:when>
 								 				    <c:otherwise>
 								 				    	<div id="divSmsEmailButtons" style="display:none">
-								 				    		<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print"> 
-									 						<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
+								 				    			<c:choose>
+								 				    			<c:when test="${empty user.spedKuAvd}">
+								 				    				<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
+								 				    			</c:when>
+								 				    			<c:otherwise>
+								 				    				<img id="printImgLight" name="printImgLight" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
+								 				    			</c:otherwise>
+								 				    			</c:choose>
+								 				    			<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
 									 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
-						 									<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
-						 									
+						 									<c:if test="${empty user.spedKuAvd}">
+						 										<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
+						 									</c:if>
 					 									</div>
 							 				    		<input class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.submit.createnew"/>'/>
 							 				    		<input class="inputFormSubmitGray" type="button" name="updCancelButton" id="updCancelButton" value='<spring:message code="systema.transportdisp.cancel"/>'>
@@ -731,7 +749,7 @@
 								    	<tr>
 								    		<td class="text14" nowrap>
 								    			<span title="tusjn1">
-								    				&nbsp;Forwarders TripNo<font class="text12RedBold" >*</font>
+								    				&nbsp;Speditørs turnummer<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
 								    		<td> 
@@ -739,7 +757,7 @@
 										</td>
 										<td class="text14" nowrap>
 								    			<span title="tusjn2">
-								    				&nbsp;Contact person<font class="text12RedBold" >*</font>
+								    				&nbsp;Kontakperson<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
 								    		<td> 
@@ -750,7 +768,7 @@
 								    	<tr>
 								    		<td class="text14" nowrap>
 								    			<span title="wskpma">
-								    				&nbsp;Cont.person mail<font class="text12RedBold" >*</font>
+								    				&nbsp;Kont.pers epost<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
 								    		<td> 
@@ -758,7 +776,7 @@
 										</td>
 										<td class="text14" nowrap>
 								    			<span title="wskptl">
-								    				&nbsp;SMS no<font class="text12RedBold" >*</font>
+								    				&nbsp;SMS-nummer<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
 								    		<td> 
@@ -770,7 +788,7 @@
 								    		<td class="text14" nowrap>
 								    			<img style="vertical-align: bottom;" src="resources/images/lorry_green.png" height="16px" width="16px" border="0" alt="edit">
 								    			<span title="wsenid">
-								    				Truck/Unit ID<font class="text12RedBold" >*</font>
+								    				Bil/enhets-ID<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
 								    		<td> 
@@ -779,7 +797,7 @@
 										<td class="text14" nowrap>
 											<img style="vertical-align: bottom;" src="resources/images/appUserOg.gif" height="16px" width="16px" border="0" alt="edit">
 								    			<span title="wssjna">
-								    				Driver's name<font class="text12RedBold" >*</font>
+								    				Sjåførs navn<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
 								    		<td> 
@@ -787,7 +805,7 @@
 										</td>
 										<td class="text14" nowrap>
 								    			<span title="wssjmo">						
-								    				&nbsp;Phone/SMS<font class="text12RedBold" >*</font>
+								    				&nbsp;Mob/SMS-nr<font class="text12RedBold" >*</font>
 							    				</span>
 								    		</td>
 								    		<td> 
@@ -801,7 +819,7 @@
 											    	<tr>
 										    		<td class="text14" nowrap>
 									    				&nbsp;<img onMouseOver="showPop('etd_info');" onMouseOut="hidePop('etd_info');" style="vertical-align: bottom;" src="resources/images/info3.png" width="12px" height="12px" border="0" alt="info">
-									    				<span title="tudt/tutm"><spring:message code="systema.transportdisp.workflow.trip.form.label.date.departure"/></span>
+									    				<span title="tudt/tutm">Lastestart dato/tid</span>
 									    				<font class="text12RedBold" >*</font>
 									    				<div class="text11" style="position: relative;" align="left">
 							 						<span style="position:absolute; width:200px; left:0px; top:0px;" id="etd_info" class="popupWithInputText"  >
@@ -875,7 +893,7 @@
 										    	<tr>
 										    		<td class="text14" nowrap>
 									    				&nbsp;<img onMouseOver="showPop('eta_info');" onMouseOut="hidePop('eta_info');" style="vertical-align: bottom;" src="resources/images/info3.png" width="12px" height="12px" border="0" alt="info">
-									    				<span title="tudtt/tutmt"><spring:message code="systema.transportdisp.workflow.trip.form.label.date.arrival"/></span>
+									    				<span title="tudtt/tutmt">Ferdig senest dato/tid</span>
 									    				<div class="text11" style="position: relative;" align="left">
 							 						<span style="position:absolute; width:200px; left:0px; top:0px;" id="eta_info" class="popupWithInputText"  >
 							 							<font class="text11">
@@ -1212,81 +1230,100 @@
 		<%-- ---------------- --%>
 		<tr>
 		<td>
-			<div id="dialogPrint" title="Dialog Print">
+			<c:choose>
+    			<c:when test="${empty user.spedKuAvd}">
+				<div id="dialogPrint" title="Dialog Print">
 					<form id="printForm">
 					<input type="hidden" id="tur" name="tur" value="${model.record.tupro}">
 						
 				 	<table>
    						<tr height="3"><td></td></tr>
-   						<tr>
-							<td colspan="2" class="text14" align="left" >
-								<input type="checkbox" name="fbType" id="fbType" value="fb">
-								Fraktbrev
-							</td>	
-   						</tr>
-   						<tr>
-							<td colspan="2" class="text14" align="left" >
-								<input type="checkbox" name="cmrType" id="cmrType" value="cmr">
-								CMR-Fraktbrev
-							</td>	
-   						</tr>
-   						<tr>
-							<td colspan="2" class="text14" align="left" >
-								<input type="checkbox" name="ffType" id="ffType" value="ff">
-								Ferdigmeldte-fakturaer
-							</td>	
-   						</tr>
-   						<tr>
-							<td colspan="2" class="text14" align="left" >
-								<input type="checkbox" name="aordType" id="aordType" value="I">
-								<span id="alinkAordPdfi" >Arbeidsordre Intern</span>													
-							</td>
-   						</tr>
-   						<tr>
-							<td colspan="2" class="text14" align="left" >
-								<input type="checkbox" name="aordTypee" id="aordTypee" value="E">
-								<span id="alinkAordPdfe" >Arbeidsordre Ekstern</span>													
-							</td>
-   						</tr>
-   						<tr>
-							<td class="text14" align="left" >
-								<input type="checkbox" name="godslistType" id="godslistType" value="gl">
-								<span id="alinkGodslistePdf" style="text-decoration: underline;" onMouseOver="style='color:lemonchiffon;cursor:pointer;text-decoration: underline;'" onMouseOut="style='color:black;text-decoration: underline;'">Godsliste</span>
-							</td>	
-							<td class="text14" align="left" >	
-								<img id="imgGodslistePdf" title="GL.PDF" style="vertical-align:middle;cursor:pointer" src="resources/images/pdf.png" width="14" height="14" border="0" alt="GL. PDF">
-							</td>
-   						</tr>
-   						<tr>
-							<td class="text14" align="left" >
-								<input type="checkbox" name="lastlistType" id="lastlistType" value="ll">
-								<span id="alinkLastlistePdf" style="text-decoration: underline;" onMouseOver="style='color:lemonchiffon;cursor:pointer;text-decoration: underline;'" onMouseOut="style='color:black;text-decoration: underline;'">Lasteliste</span>
-							</td>
-							<td class="text14" align="left" >	
-								<img id="imgLastlistePdf" title="LL.PDF" style="vertical-align:middle;cursor:pointer" src="resources/images/pdf.png" width="14" height="14" border="0" alt="LL. PDF">
-							</td>	
-   						</tr>
-   						<tr>
-							<td class="text14" align="left" >
-								<input type="checkbox" name="turkonvoluttType" id="turkonvoluttType" value="tk">
-								<span class="clazz_alinkTurkonvoluttTypePdf" id="alinkTurkonvoluttTypePdf" >Turkonvolutt</span>
-							</td>
-						
-  						</tr>
    						
-   						<tr height="15"><td></td></tr>
-						<tr>
-							<td colspan="4" class="text14MediumBlue" align="left">
-								<label id="printStatus"></label>
-							</td>
-						</tr>
+   							<tr>
+								<td colspan="2" class="text14" align="left" >
+									<input type="checkbox" name="fbType" id="fbType" value="fb">
+									Fraktbrev
+								</td>	
+	   						</tr>
+	   						<tr>
+								<td colspan="2" class="text14" align="left" >
+									<input type="checkbox" name="cmrType" id="cmrType" value="cmr">
+									CMR-Fraktbrev
+								</td>	
+	   						</tr>
+	   						<tr>
+								<td colspan="2" class="text14" align="left" >
+									<input type="checkbox" name="ffType" id="ffType" value="ff">
+									Ferdigmeldte-fakturaer
+								</td>	
+	   						</tr>
+	   						<tr>
+								<td colspan="2" class="text14" align="left" >
+									<input type="checkbox" name="aordType" id="aordType" value="I">
+									<span id="alinkAordPdfi" >Arbeidsordre Intern</span>													
+								</td>
+	   						</tr>
+	   						<tr>
+								<td colspan="2" class="text14" align="left" >
+									<input type="checkbox" name="aordTypee" id="aordTypee" value="E">
+									<span id="alinkAordPdfe" >Arbeidsordre Ekstern</span>													
+								</td>
+	   						</tr>
+	   						<tr>
+								<td class="text14" align="left" >
+									<input type="checkbox" name="godslistType" id="godslistType" value="gl">
+									<span id="alinkGodslistePdf" style="text-decoration: underline;" onMouseOver="style='color:lemonchiffon;cursor:pointer;text-decoration: underline;'" onMouseOut="style='color:black;text-decoration: underline;'">Godsliste</span>
+								</td>	
+								<td class="text14" align="left" >	
+									<img id="imgGodslistePdf" title="GL.PDF" style="vertical-align:middle;cursor:pointer" src="resources/images/pdf.png" width="14" height="14" border="0" alt="GL. PDF">
+								</td>
+	   						</tr>
+	   						<tr>
+								<td class="text14" align="left" >
+									<input type="checkbox" name="lastlistType" id="lastlistType" value="ll">
+									<span id="alinkLastlistePdf" style="text-decoration: underline;" onMouseOver="style='color:lemonchiffon;cursor:pointer;text-decoration: underline;'" onMouseOut="style='color:black;text-decoration: underline;'">Lasteliste</span>
+								</td>
+								<td class="text14" align="left" >	
+									<img id="imgLastlistePdf" title="LL.PDF" style="vertical-align:middle;cursor:pointer" src="resources/images/pdf.png" width="14" height="14" border="0" alt="LL. PDF">
+								</td>	
+	   						</tr>
+	   						<tr>
+								<td class="text14" align="left" >
+									<input type="checkbox" name="turkonvoluttType" id="turkonvoluttType" value="tk">
+									<span class="clazz_alinkTurkonvoluttTypePdf" id="alinkTurkonvoluttTypePdf" >Turkonvolutt</span>
+								</td>
+							
+	  						</tr>
+	   						
+	   						<tr height="15"><td></td></tr>
+							<tr>
+								<td colspan="4" class="text14MediumBlue" align="left">
+									<label id="printStatus"></label>
+								</td>
+							</tr>
+						
 					</table>
 					</form>
-			</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div id="dialogPrintLight" title="Dialog Print">
+					<form id="printForm">
+					<input type="hidden" id="tur" name="tur" value="${model.record.tupro}">
+					<table>
+   						<tr height="3"><td></td></tr>
+						<tr>
+							<td class="text14" align="left" >	
+								Lasteliste&nbsp;<img id="imgLastlistePdf" title="LL.PDF" style="vertical-align:middle;cursor:pointer" src="resources/images/pdf.png" width="14" height="14" border="0" alt="LL. PDF">
+							</td>	
+   						</tr>
+   					</table>
+					</form>
+				</div>
+			</c:otherwise>
+			</c:choose>
 		</td>
 		</tr>
-		
-		
 </table>	
 		
 <!-- ======================= footer ===========================-->
