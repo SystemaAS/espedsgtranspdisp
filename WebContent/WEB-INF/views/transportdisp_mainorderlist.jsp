@@ -187,8 +187,10 @@
 					<tr>
 						<td id="dtuavd${searchFilter.avd}_dtupro${searchFilter.tur}_oncontainer" ondrop="dropX(event)" ondragenter="highlightDropArea(event)" ondragleave="noHighlightDropArea(event)" ondragover="allowDrop(event)" class="text14MediumBlue">
 							<spring:message code="systema.transportdisp.orders.current.header"/>&nbsp;&nbsp;
-							<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
-							<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
+							<c:if test="${ empty user.spedKuAvd}">
+								<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
+								<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
+							</c:if>
 						</td>
 					</tr>
 					<c:if test="${not empty model.containerCurrentOrders.maxWarning}">
