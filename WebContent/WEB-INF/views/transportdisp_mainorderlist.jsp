@@ -318,7 +318,18 @@
 			               		<input onKeyPress="return numberKey(event)" type="text" class="inputText11 clazz_position_currentorders" name="wspos${counter.count}" id="wspos${counter.count}" title="wspos${counter.count}@user=${user.user}&wsavd=${record.heavd}&wsopd=${record.heopd}" size="4" maxlength="3" value='${record.wspos}'>&nbsp;
 			               </td>
 			               <td width="2%" align="center" class="text14 tableCellGray">&nbsp;${record.hest}&nbsp;</td>
-			               <td width="2%" align="right" class="text14 tableCellGray">&nbsp;${record.hent}&nbsp;</td>
+			               <td width="2%" align="right" class="text14 tableCellGray">
+		               			<c:choose>
+					        		<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+				               		<a style="padding:20px 10px;display:block;" target="popup" onclick="window.open('http://esped.ramberg.no/sycgip/syOPCL.pgm?user=${user.user}&avd=${record.heavd}&opd=${record.heopd}','popupLegacyColli','width=1000,height=450')">
+				               			<font class="text14Orange">&nbsp;<b>${record.hent}</b></font>
+				               		</a>
+			               		</c:when>
+			               		<c:otherwise>
+			               			&nbsp;${record.hent}
+			               		</c:otherwise>
+			               		</c:choose>
+			               </td>
 			               <td width="2%" align="right" class="text14 tableCellGray">&nbsp;${record.hevkt}&nbsp;</td>
 			               <td width="2%" align="right" class="text14 tableCellGray">&nbsp;${record.hem3}&nbsp;</td>
 			               <td width="2%" align="right" class="text14 tableCellGray">&nbsp;${record.helm}&nbsp;</td>
@@ -508,11 +519,20 @@
 				        </td>
 				        
 				        <td>
-				        	<select class="inputTextMediumBlue" name="wsprebook" id="wsprebook">
-		 						<option value="A" <c:if test="${searchFilter.wsprebook == 'A'}"> selected </c:if> >Alle</option>
-		 						<option value="F" <c:if test="${searchFilter.wsprebook == 'F'}"> selected </c:if> >Ordre</option>
-		 						<option value="P" <c:if test="${searchFilter.wsprebook == 'P'}"> selected </c:if> >PreBook</option>
-							</select>
+				        	<c:choose>
+				        		<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+					        		<select class="inputTextMediumBlue" name="wsprebook" id="wsprebook">
+			 						<option value="F" >Ordre</option>
+								</select>
+					        	</c:when>
+					        	<c:otherwise>
+					        		<select class="inputTextMediumBlue" name="wsprebook" id="wsprebook">
+			 						<option value="A" <c:if test="${searchFilter.wsprebook == 'A'}"> selected </c:if> >Alle</option>
+			 						<option value="F" <c:if test="${searchFilter.wsprebook == 'F'}"> selected </c:if> >Ordre</option>
+			 						<option value="P" <c:if test="${searchFilter.wsprebook == 'P'}"> selected </c:if> >PreBook</option>
+								</select>
+							</c:otherwise>
+							</c:choose>
 				        </td>
 			    		
 				        <td>
@@ -617,11 +637,20 @@
 				        	&nbsp;<font title="wsdista" class="text14"><spring:message code="systema.transportdisp.orders.open.search.label.ordreType"/></font>
 				        </td>
 				        <td>
-				        	<select class="inputTextMediumBlue" name="wsdista" id="wsdista">
-		 						<option value="" <c:if test="${empty searchFilter.wsdista}"> selected </c:if> >Udisp.ordrer</option>
-		 						<option value="V" <c:if test="${searchFilter.wsdista == 'V'}"> selected </c:if>  >Vent.ordrer</option>
-		 						<option value="E" <c:if test="${searchFilter.wsdista == 'E'}"> selected </c:if> >EDI ordrer</option>
-							</select>
+				        		<c:choose>
+				        		<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+					        		<select class="inputTextMediumBlue" name="wsdista" id="wsdista">
+			 						<option value="" >Udisp.ordrer</option>
+		 						</select>
+							</c:when>
+							<c:otherwise>
+								<select class="inputTextMediumBlue" name="wsdista" id="wsdista">
+			 						<option value="" <c:if test="${empty searchFilter.wsdista}"> selected </c:if> >Udisp.ordrer</option>
+			 						<option value="V" <c:if test="${searchFilter.wsdista == 'V'}"> selected </c:if>  >Vent.ordrer</option>
+			 						<option value="E" <c:if test="${searchFilter.wsdista == 'E'}"> selected </c:if> >EDI ordrer</option>
+								</select>
+							</c:otherwise>
+							</c:choose>
 				        </td>
 				        
 				        <td align="right">	
@@ -859,7 +888,18 @@
 		               <td width="2%" class="textMediumBlue">&nbsp;${record.henak}</td>
 		               <td width="2%" class="textMediumBlue">&nbsp;${record.hetri}-${record.headk3}</td>
 		               <td width="2%" class="textMediumBlue">&nbsp;${record.trsdtd}&nbsp;${record.trsdtk}</td>
-		               <td align="right" width="2%" class="textMediumBlue">&nbsp;${record.hent}</td>
+		               <td align="right" width="2%" class="textMediumBlue">
+		               		<c:choose>
+				        		<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
+			               		<a style="padding:20px 10px;display:block;" target="popup" onclick="window.open('http://esped.ramberg.no/sycgip/syOPCL.pgm?user=${user.user}&avd=${record.heavd}&opd=${record.heopd}','popupLegacyColli','width=1000,height=450')">
+			               			<font class="text14Orange">&nbsp;<b>${record.hent}</b></font>
+			               		</a>
+		               		</c:when>
+		               		<c:otherwise>
+		               			&nbsp;${record.hent}
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
 		               <td width="2%" class="textMediumBlue">&nbsp;${record.hevs1}</td>
 		               <td align="right" width="2%" class="textMediumBlue">&nbsp;${record.hevkt}</td>
 		               <td align="right" width="2%" class="textMediumBlue">&nbsp;${record.hem3}</td>

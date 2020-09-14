@@ -686,43 +686,38 @@
 					 						<td nowrap align="right">
 						 						<c:choose>
 								 				    <c:when test="${ not empty model.record.tupro}">
-								 				    	<div id="divSmsEmailButtons" style="display:inline">
+								 				    		<div id="divSmsEmailButtons" style="display:inline">
 								 				    			<c:choose>
 								 				    			<c:when test="${empty user.spedKuAvd}">
 								 				    				<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
-								 				    			</c:when>
+								 				    				<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
+								 				    				<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
+									 							<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
+						 									</c:when>
 								 				    			<c:otherwise>
-								 				    				<img id="printImgLight" name="printImgLight" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
+								 				    				&nbp;
 								 				    			</c:otherwise>
 								 				    			</c:choose>
-								 				    			<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
-									 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
-									 						<c:if test="${empty user.spedKuAvd}">
-						 										<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
-						 									</c:if>
-					 									</div>
-					 									
-								 				    	<input class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
+								 				    		</div>
+					 								<input class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.submit.save"/>'/>
 								 				    	<input class="inputFormSubmitGray" type="button" name="updCancelButton" id="updCancelButton" value='<spring:message code="systema.transportdisp.cancel"/>'>
 								 				    </c:when>
 								 				    <c:otherwise>
-								 				    	<div id="divSmsEmailButtons" style="display:none">
+								 				    		<div id="divSmsEmailButtons" style="display:none">
 								 				    			<c:choose>
 								 				    			<c:when test="${empty user.spedKuAvd}">
 								 				    				<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
-								 				    			</c:when>
+								 				    				<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
+								 				    				<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
+									 							<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
+						 									</c:when>
 								 				    			<c:otherwise>
-								 				    				<img id="printImgLight" name="printImgLight" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
+								 				    				&nbsp;
 								 				    			</c:otherwise>
 								 				    			</c:choose>
-								 				    			<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
-									 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
-						 									<c:if test="${empty user.spedKuAvd}">
-						 										<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>
-						 									</c:if>
-					 									</div>
-							 				    		<input class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.submit.createnew"/>'/>
-							 				    		<input class="inputFormSubmitGray" type="button" name="updCancelButton" id="updCancelButton" value='<spring:message code="systema.transportdisp.cancel"/>'>
+								 				    		</div>
+							 				    			<input class="inputFormSubmit submitSaveClazz" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.submit.createnew"/>'/>
+							 				    			<input class="inputFormSubmitGray" type="button" name="updCancelButton" id="updCancelButton" value='<spring:message code="systema.transportdisp.cancel"/>'>
 								 				    </c:otherwise>	
 							 				    </c:choose>
 						 				    </td>
