@@ -974,7 +974,11 @@ public class TransportDispWorkflowHeaderController {
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringOppdragsType(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model, appUser, null);
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringAvdGroups(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model,appUser);
 		//transp.måte
-		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonTransporttypeJavaBased(this.urlCgiProxyService,this.maintSadImportKodts4Service, model, appUser);
+		if (appUser.getInsid()!=null && TransportDispConstants.ADAPTATION_RAMBERG_INSID.equals(appUser.getInsid().trim())){
+			//nothing for RAMBERG
+		}else{
+			this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonTransporttypeJavaBased(this.urlCgiProxyService,this.maintSadImportKodts4Service, model, appUser);
+		}
 		//valid avd for RAMBERG adaptation
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringValidAvds(model, appUser);
 	}
