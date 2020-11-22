@@ -387,5 +387,34 @@ public class CodeDropDownMgr {
 			}
 					
 	}
+	
+	public void populateHtmlDropDownsFromJsonStringValidImpExp( Map model, SystemaWebUser appUser){
+		Map<String,String> map = new LinkedHashMap<String,String>();
+		logger.warn(appUser.getSpedKuIE());
+		try{
+			//only when special user (Speditør in Ramberg adaptation)
+			if(strMgr.isNotNull(appUser.getSpedKuKod())){
+				//only when avd list exists
+				if(strMgr.isNotNull(appUser.getSpedKuIE())){
+					String str[] = appUser.getSpedKuIE().split(" ");
+					List<String> tmp = Arrays.asList(str);
+					for(String record: tmp){
+						if("I".equals(record)){
+							map.put("I", "Import");
+						}else if ("E".equals(record)){
+							map.put("E", "Eksport");
+						}
+					}
+					
+				}
+			}
+			logger.warn(map.toString());
+			model.put(TransportDispConstants.RESOURCE_MODEL_KEY_IMPORT_EXPORT_TYPE_LIST, map);
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+				
+}
 		
 }

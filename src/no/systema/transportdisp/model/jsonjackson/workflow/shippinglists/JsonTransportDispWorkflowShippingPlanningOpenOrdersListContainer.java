@@ -28,6 +28,10 @@ public class JsonTransportDispWorkflowShippingPlanningOpenOrdersListContainer {
 	public void setSpedKuAvd(String value) {  this.spedKuAvd = value; }
 	public String getSpedKuAvd() { return this.spedKuAvd;}
 	
+	private String spedKuIE = null;
+	public void setSpedKuIE(String value) {  this.spedKuIE = value; }
+	public String getSpedKuIE() { return this.spedKuIE;}
+	
 	
 	private String wssdf = null;
 	public void setWssdf(String value) {  this.wssdf = value; }

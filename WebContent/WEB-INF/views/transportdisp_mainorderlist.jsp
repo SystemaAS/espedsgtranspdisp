@@ -40,9 +40,8 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<%--<a id="alinkTripListId" style="display:block;" href="transportdisp_workflow_getTrip.do?user=${user.user}&tuavd=${searchFilter.avd}&tupro=${searchFilter.tur}"> --%>
-						<a id="alinkTripListId" style="display:block;" href="transportdisp_workflow_getTrip.do?user=${user.user}&tuavd=${searchFilter.avd}&tupro=">
-						
+						<a id="alinkTripListId" style="display:block;">
+							<%--<a id="alinkTripListId" style="display:block;" href="transportdisp_workflow_getTrip.do?user=${user.user}&tuavd=${searchFilter.avd}&tupro=">--%>
 							<img style="vertical-align:bottom;" src="resources/images/list.gif" border="0" alt="general list">
 							<font class="tabDisabledLink"><spring:message code="systema.transportdisp.workflow.trip.tab"/></font>&nbsp;<font class="text10Orange">F9</font>
 						</a>
@@ -67,11 +66,12 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="18%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<%--<a id="alinkTripListId" style="display:block;" href="transportdisp_workflow_getTrip.do?user=${user.user}&tuavd=${searchFilter.avd}&tupro=${searchFilter.tur}">--%>
-						<a id="alinkTripListId" style="display:block;" href="transportdisp_workflow_getTrip.do?user=${user.user}&tuavd=${searchFilter.avd}&tupro=">
+						<a id="alinkTripListId" style="display:block;">
+							<%--<a id="alinkTripListId" style="display:block;" href="transportdisp_workflow_getTrip.do?user=${user.user}&tuavd=${searchFilter.avd}&tupro=">--%>
 							<img style="vertical-align:bottom;" src="resources/images/list.gif" border="0" alt="general list">
 							<font class="tabDisabledLink"><spring:message code="systema.transportdisp.workflow.trip.tab"/></font>&nbsp;<font class="text10Orange">F9</font>
 						</a>
+						
 					</td>
 					<c:if test="${ empty user.spedKuKod}">
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
@@ -93,6 +93,7 @@
 	</tr>
 	
 	<input type="hidden" name="applicationUser" id="applicationUser" value='${user.user}'>
+	<input type="hidden" name="insid" id="insid" value='${user.insid}'>
 	<input type="hidden" name="userHttpJQueryDocRoot" id="userHttpJQueryDocRoot" value='${user.httpJQueryDocRoot}'>
 	<input type="hidden" name="tripNr" id="tripNr" value='${searchFilter.tur}'>
 	<input type="hidden" name="fkeysavd" id="fkeysavd" value='${searchFilter.avd}'>
@@ -516,7 +517,7 @@
 			    	<td> 
 			    	<table cellspacing="2" >
 			    		<tr> 
-			    		<td>
+			    			<td>
 				        	&nbsp;<font title="wsprebook" class="text14"><spring:message code="systema.transportdisp.orders.open.search.label.prebook"/></font>
 				        </td>
 				        
@@ -524,7 +525,9 @@
 				        	<c:choose>
 				        		<c:when test="${ not empty user.spedKuKod && not empty user.spedKuAvd}">
 					        		<select class="inputTextMediumBlue" name="wsprebook" id="wsprebook">
-			 						<option value="F" >Ordre</option>
+					        			<c:forEach var="record" items="${model.impExpValidList}" >
+			                       	 	<option title="${record.value}" value="${record.key}" <c:if test="${searchFilter.wsprebook == record.key}"> selected </c:if> >${record.value}</option>
+									</c:forEach>
 								</select>
 					        	</c:when>
 					        	<c:otherwise>

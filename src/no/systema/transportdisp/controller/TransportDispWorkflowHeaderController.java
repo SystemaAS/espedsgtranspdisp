@@ -112,8 +112,7 @@ public class TransportDispWorkflowHeaderController {
 		
 		//adaptations
 		successView = this.jspMgr.getSuccessView(appUser, successView);
-				
-		 
+	
 		 SearchFilterTransportDispWorkflowTripList tripListSearchFilter = new SearchFilterTransportDispWorkflowTripList();
 		 
 		 Map model = new HashMap();
@@ -124,12 +123,16 @@ public class TransportDispWorkflowHeaderController {
 			 String applicationUser = appUser.getUser();
 			 String avdNr = request.getParameter("tuavd");
 			 String tripNr = request.getParameter("tupro");
+			 //this is only for Ramberg adaptation
+			 String wsprebook = request.getParameter("wsprebook");
+			 //
 			 tripListSearchFilter.setWssavd(avdNr);
+			 tripListSearchFilter.setWsprebook(wsprebook);
 			 //prepare the access CGI with RPG back-end
 			 String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_FETCH_SPECIFIC_TRIP_URL;
-			 String urlRequestParamsKeys = "user=" + applicationUser + "&tuavd=" + avdNr + "&tupro=" + tripNr;
-			 logger.info("URL: " + BASE_URL);
-			 logger.info("PARAMS: " + urlRequestParamsKeys);
+			 String urlRequestParamsKeys = "user=" + applicationUser + "&tuavd=" + avdNr + "&tupro=" + tripNr + "&wsprebook=" + wsprebook;
+			 logger.warn("URL: " + BASE_URL);
+			 logger.warn("PARAMS: " + urlRequestParamsKeys);
 			 logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
 			 logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");

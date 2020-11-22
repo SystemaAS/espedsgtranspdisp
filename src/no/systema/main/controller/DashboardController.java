@@ -457,7 +457,7 @@ public class DashboardController {
 		appUser.setSystemaLogo(jsonSystemaUserContainer.getSystemaLogo());
 		appUser.setSignatur(jsonSystemaUserContainer.getSignatur());
 		appUser.setFiland(jsonSystemaUserContainer.getFiland());
-		//in order to make specific adaptations on a specific customer
+		//in order to make specific adaptations on a specific customer at Firm-level
 		appUser.setInsid(jsonSystemaUserContainer.getInsid());
 		
 		appUser.setDftdg(jsonSystemaUserContainer.getDftdg());

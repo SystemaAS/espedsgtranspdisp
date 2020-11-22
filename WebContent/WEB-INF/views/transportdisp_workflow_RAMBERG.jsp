@@ -44,7 +44,7 @@
 		<tr height="2"><td></td></tr>
 		<tr height="25"> 
 			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkOrderListId" style="display:block;" id="ordersOpen" href="transportdisp_mainorderlist.do?action=doFind&avd=${searchFilter.wssavd}">
+				<a id="alinkOrderListId" style="display:block;" id="ordersOpen" href="transportdisp_mainorderlist.do?action=doFind&wsprebook=${searchFilter.wsprebook}&avd=${searchFilter.wssavd}">
 					<img style="vertical-align:middle;" src="resources/images/bulletGreen.png" width="6px" height="6px" border="0" alt="open orders">
 					<font class="tabDisabledLink"><spring:message code="systema.transportdisp.workflow.trip.all.openorders.tab"/></font>&nbsp;<font class="text10Orange">F3</font>
 				</a>
@@ -88,11 +88,11 @@
         		<input type="hidden" name="applicationUser" id="applicationUser" value='${user.user}'>
         		<input type="hidden" name="filand" id="filand" value='${user.filand}'>
         		<input type="hidden" name="fkeysavd" id="fkeysavd" value='${searchFilter.wssavd}'>
-				<input type="hidden" name="fkeysopd" id="fkeystur" value='${model.record.tupro}'>
-	 	        
-	 	        <table cellspacing="2">
+        		<input type="hidden" name="fkeysopd" id="fkeystur" value='${model.record.tupro}'>
+        		    <table cellspacing="2">
 	 	        <tr>
-	 	        	<td valign="bottom" class="text14" align="left" >&nbsp;&nbsp;&nbsp;<span title="wssst"><spring:message code="systema.transportdisp.workflow.trip.list.search.label.status"/></span></td>
+	 	        		<td valign="bottom" class="text14" align="left" >&nbsp;&nbsp;&nbsp;<span title="wsprebook">Booktyp.</span></td>
+	 	        		<td valign="bottom" class="text14" align="left" ><span title="wssst"><spring:message code="systema.transportdisp.workflow.trip.list.search.label.status"/></span></td>
 	                	
 	                <td valign="bottom" class="text14" align="left" >
                 		<span title="wssavd"><spring:message code="systema.transportdisp.workflow.trip.list.search.label.department"/></span>
@@ -126,6 +126,7 @@
 	                <td>&nbsp;</td>
 				</tr>
 				<tr>
+					<td align="left" >&nbsp;<input readonly type="text" class="inputTextReadOnly" name="wsprebook" id="wsprebook" size="5" value='${searchFilter.wsprebook}'></td>
 					<td class="text14" align="left" >
 						<select class="inputTextMediumBlue" name="wssst" id="wssst">
 								<option value="" <c:if test="${searchFilter.wssst == ''}"> selected </c:if> >Åpne</option>
@@ -612,6 +613,18 @@
 					 		<tr height="15">
 					 			<td class="text14White">
 									&nbsp;<spring:message code="systema.transportdisp.workflow.trip.form.label.header.workWithTrip"/>&nbsp;<img style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+									<c:if test="${not empty searchFilter.wsprebook}">
+										&nbsp;&nbsp;&nbsp;	
+										<c:choose>
+											<c:when test="${searchFilter.wsprebook == 'I'}">
+												IMPORT
+											</c:when>
+											<c:otherwise>
+												EKSPORT
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+									
 				 				</td>
 			 				</tr>
 		 				</table>

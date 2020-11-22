@@ -523,6 +523,7 @@ public class TransportDispWorkflowTripListController {
 		
 		StringBuffer urlRequestParams = new StringBuffer();
 		urlRequestParams.append("user=" + appUser.getUser());
+		if(!"".equals(searchFilter.getWsprebook()) && searchFilter.getWsprebook()!=null){urlRequestParams.append("&wsprebook=" + searchFilter.getWsprebook()); }
 		if(!"".equals(searchFilter.getWssst()) && searchFilter.getWssst()!=null){urlRequestParams.append("&wssst=" + searchFilter.getWssst()); }
 		if(!"".equals(searchFilter.getWssavd()) && searchFilter.getWssavd()!=null){urlRequestParams.append("&wssavd=" + searchFilter.getWssavd()); }
 		if(!"".equals(searchFilter.getWsstur()) && searchFilter.getWsstur()!=null){urlRequestParams.append("&wsstur=" + searchFilter.getWsstur()); }

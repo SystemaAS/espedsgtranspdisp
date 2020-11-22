@@ -29,6 +29,10 @@ public class SearchFilterTransportDispWorkflowTripList {
 	public void setWsstur(String value) {  this.wsstur = value; }
 	public String getWsstur() { return this.wsstur;}
 	
+	private String wsprebook = null;
+	public void setWsprebook(String value) {  this.wsprebook = value; }
+	public String getWsprebook() { return this.wsprebook;}
+	
 	private String wssst = null;
 	public void setWssst(String value) {  this.wssst = value; }
 	public String getWssst() { return this.wssst;}

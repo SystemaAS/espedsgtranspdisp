@@ -11,17 +11,28 @@
 	  jq('#alinkOrderListId').click(function() { 
 		  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 	  }); 
-	  jq('#alinkTripListId').click(function() { 
-		  //not working ... setBlockUI();
+	  jq('#alinkTripListId').click(function() {
+		  //special here since we must take wsprebook into account
 		  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+		  //standard
+		  var wkflowLink = 'transportdisp_workflow_getTrip.do?user=' + jq('#applicationUser').val() + '&tuavd=' + jq('#avd').val() + '&tupro=' + '&wsprebook=' + jq('#wsprebook').val();
+		  // incase adaptation (RAMBERG or other)
+		  if(jq('#insid').val()!=''){
+			  wkflowLink = 'transportdisp_workflow.do?action=doFind&user=' + jq('#applicationUser').val() + '&tuavd=' + jq('#avd').val() + '&tupro=' + '&wsprebook=' + jq('#wsprebook').val();
+		  }
+		  window.location = wkflowLink;
+
 	  });
 	  jq('#alinkHeaderMenuMainListId').click(function() { 
-		  //not working ... setBlockUI();
 		  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 	  });
 	  jq('#alinkHeaderMenuHistoryListId').click(function() { 
-		  //not working ... setBlockUI();
 		  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+	  });
+	  
+	  jq('#ffbnrIdLink').click(function() {
+		  jq('#ffbnrIdLink').attr('target','_blank');
+		  
 	  });
 	  
   });

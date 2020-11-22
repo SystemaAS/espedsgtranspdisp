@@ -6,7 +6,7 @@ import java.util.*;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -101,8 +101,10 @@ public class TransportDispMainOrderListController {
 		this.context = TdsAppContext.getApplicationContext();
 		Collection<JsonTransportDispWorkflowShippingPlanningCurrentOrdersListRecord> outputListCurrentOrders = new ArrayList<JsonTransportDispWorkflowShippingPlanningCurrentOrdersListRecord>();
 		Collection<JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord> outputListOpenOrders = new ArrayList<JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord>();
+		
 		String wstur = request.getParameter("wstur");
 		String wssavd = request.getParameter("wssavd");
+		String wsprebook = request.getParameter("wsprebook");
 		
 		Map model = new HashMap();
 		//String messageFromContext = this.context.getMessage("user.label",new Object[0], request.getLocale());
@@ -137,8 +139,9 @@ public class TransportDispMainOrderListController {
             }
             //END FILTER in SESSION
             
-            //Adjust record after fetch of filter from session (is applicable)
+            //Adjust record after fetch of filter from session (if applicable)
             if(strMgr.isNotNull(wssavd)){ recordToValidate.setAvd(wssavd); }
+            if(strMgr.isNotNull(wsprebook)){ recordToValidate.setWsprebook(wsprebook); }
             //Init
             recordToValidate.setTur(null);
     		if(strMgr.isNotNull(wstur)){  recordToValidate.setTur(wstur); }
@@ -795,6 +798,8 @@ public class TransportDispMainOrderListController {
 	    			appUser.setSpedKuKod(jsonOpenOrdersListContainer.getSpedKuKod());
 	    			appUser.setSpedKuNrs(jsonOpenOrdersListContainer.getSpedKuNrs());
 	    			appUser.setSpedKuAvd(jsonOpenOrdersListContainer.getSpedKuAvd());
+	    			appUser.setSpedKuIE(jsonOpenOrdersListContainer.getSpedKuIE());
+	    			
 	    			session.setAttribute(AppConstants.SYSTEMA_WEB_USER_KEY, appUser);
 	    			
 	    			outputListOpenOrders = jsonOpenOrdersListContainer.getOrderlistlandled();
@@ -902,6 +907,7 @@ public class TransportDispMainOrderListController {
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringAvdGroups(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model,appUser);
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringOppdragsType(this.urlCgiProxyService, this.transportDispDropDownListPopulationService, model, appUser, null);
 		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringValidAvds(model, appUser);
+		this.codeDropDownMgr.populateHtmlDropDownsFromJsonStringValidImpExp(model, appUser);
 	}
 
 	//SERVICES
