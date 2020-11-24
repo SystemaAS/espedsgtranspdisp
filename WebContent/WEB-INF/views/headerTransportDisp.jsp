@@ -8,7 +8,10 @@
 		<link href="resources/jquery.calculator.css" rel="stylesheet" type="text/css"/>
 		
 		<%-- datatables grid CSS --%>
+		
 		<link type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.bootstrap4.css"/>
 		<link type="text/css" href="//cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
 		<link type="text/css" href="//cdn.datatables.net/plug-ins/1.10.19/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
 		
@@ -59,13 +62,15 @@
 		<%--Banner --%>
 	 	<tr class="clazzTdsBanner" id="tdsBanner" style="visibility:visible">
 	 	 	<%-- class="grayTitanBg" --%>
-		 	<td height="40" class="headerTdsBannerAreaBg" width="100%" align="left" colspan="3"> 
+		 	<td class="headerTdsBannerAreaBg" width="100%" align="left" colspan="3"> 
 	    			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-	    			 	<tr>
+	    			 		<%--<tr >
 				        	<td>&nbsp;</td>
 				        	<td>&nbsp;</td>
 					 		<td>&nbsp;</td>
 				        </tr>
+				         --%>
+				        <tr class="text" height="5"><td></td></tr>
 					 	<tr>
 					 		<c:choose>
 					 		<c:when test="${not empty user.logo}">
@@ -80,6 +85,7 @@
 												<c:when test="${fn:contains(user.logo, 'systema')}">
 												<td class="text14white" width="10%" align=left valign="bottom" >&nbsp;
 													<img src="resources/images/${user.logo}" border="0" width=60px height=40px>
+													&nbsp;
 												</td>
 												</c:when>
 												<c:otherwise>
@@ -99,7 +105,7 @@
 					 		</c:otherwise>
 				 		</c:choose>
 					 		
-					 		<td class="text32Bold" width="90%" align="center" valign="middle" style="color:#778899;" >
+					 		<td class="text28Bold" width="90%" align="center" valign="middle" style="color:#778899;" >
 					 			eSped<font style="color:#003300;">sg</font> - <spring:message code="systema.transportdisp.title"/>
 					 			
 					 		</td>
@@ -109,12 +115,13 @@
 				 				</c:if>
 				 			</td>
 				        </tr>
-				        <tr>
+				        <%--<tr>
 				        	<td>&nbsp;</td>
 				        	<td>&nbsp;</td>
 					 		<td class="text14" width="10%" align=right valign="bottom" >&nbsp;</td>
 				        </tr>
-				        <tr class="text" height="1"><td></td></tr>
+				         --%>
+				        <tr class="text" height="3"><td></td></tr>
 				     </table> 
 			</td>
 		</tr>
@@ -158,7 +165,7 @@
 				    				>&nbsp;<spring:message code="systema.transportdisp.workflow.label.history"/>&nbsp;</font>
 			    				</a>
 			    			</c:if>	
-			    				
+			    				<%--
 			    				<label onClick="showPop('debugPrintlnUrlStore');" >&nbsp;&nbsp;</label>
 			    				<div class="text11" style="position: relative;display: inline;" align="left">
 								<span style="position:absolute; left:-150px; top:3px; width:150;" id="debugPrintlnUrlStore" class="popupWithInputText"  >
@@ -172,9 +179,9 @@
 						           		</div>
 					        		</span>
 					        	</div>	
-			    			
+			    				 --%>
 			    			</td>		      				
-		      				<td class="text12" width="50%" align="right" valign="middle">
+	      				<td class="text12" width="50%" align="right" valign="middle">
 		      					
 		      					<c:if test="${ empty user.usrLang || user.usrLang == 'NO'}">
 				               		<img src="resources/images/countryFlags/Flag_NO.gif" height="12" border="0" alt="country">
@@ -229,7 +236,7 @@
 			     </table> 
 			</td>
 	    </tr>
-	    <tr class="text" height="8"><td></td>
+	    <tr class="text" height="4"><td></td>
 	    </tr>
 	    
 	    

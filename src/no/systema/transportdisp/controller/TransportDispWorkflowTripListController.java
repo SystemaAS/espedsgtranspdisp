@@ -3,6 +3,7 @@ package no.systema.transportdisp.controller;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -141,8 +142,8 @@ public class TransportDispWorkflowTripListController {
 	    		
 	    		session.setAttribute(TransportDispConstants.ACTIVE_URL_RPG_TRANSPORT_DISP, BASE_URL + "==>params: " + urlRequestParams.toString()); 
 		    	logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.info("URL: " + BASE_URL);
-		    	logger.info("URL PARAMS: " + urlRequestParams);
+		    	logger.warn("URL: " + BASE_URL);
+		    	logger.warn("URL PARAMS: " + urlRequestParams);
 		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
 				//Debug --> 
@@ -171,7 +172,7 @@ public class TransportDispWorkflowTripListController {
 					//Default values (always when doFind)
 					String tuavd = request.getParameter("tuavd");
 					if(strMgr.isNull(tuavd)){ tuavd = recordToValidate.getWssavd();}
-					JsonTransportDispWorkflowSpecificTripRecord record = this.getDefaultValuesTrip(appUser, tuavd);
+					JsonTransportDispWorkflowSpecificTripRecord record = this.getDefaultValuesTrip(appUser, tuavd, recordToValidate);
 					
 					
 			    	model.put(TransportDispConstants.DOMAIN_RECORD, record);
@@ -199,13 +200,18 @@ public class TransportDispWorkflowTripListController {
 	 * Get all default values for this user
 	 * 
 	 * @param appUser
+	 * @param tuavd
+	 * @param recordToValidate
 	 * @return
 	 */
-	private JsonTransportDispWorkflowSpecificTripRecord getDefaultValuesTrip(SystemaWebUser appUser, String tuavd){
+	private JsonTransportDispWorkflowSpecificTripRecord getDefaultValuesTrip(SystemaWebUser appUser, String tuavd, SearchFilterTransportDispWorkflowTripList recordToValidate){
 		JsonTransportDispWorkflowSpecificTripRecord record = new JsonTransportDispWorkflowSpecificTripRecord();
 		//https://gw.systema.no:65209/sycgip/tjetur02.pgm?user=JOVO&TUAVD=75&TUPRO=&kopirund=
+		String wsprebook = "";
+		if(StringUtils.isNotEmpty(recordToValidate.getWsprebook())){ wsprebook = recordToValidate.getWsprebook(); }
+		
 		final String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_FETCH_SPECIFIC_TRIP_URL;
-		String urlRequestParams = "user=" + appUser.getUser() + "&tuavd=" + tuavd + "&tupro=&kopirund=" ;
+		String urlRequestParams = "user=" + appUser.getUser() + "&tuavd=" + tuavd + "&wsprebook=" + wsprebook + "&tupro=&kopirund=" ;
 		
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);

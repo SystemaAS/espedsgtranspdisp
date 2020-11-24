@@ -2,6 +2,7 @@ package no.systema.transportdisp.controller;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,7 @@ import no.systema.main.model.SystemaWebUser;
 import no.systema.transportdisp.service.TransportDispWorkflowListService;
 import no.systema.transportdisp.service.TransportDispWorkflowSpecificTripService;
 import no.systema.transportdisp.service.html.dropdown.TransportDispDropDownListPopulationService;
+import no.systema.transportdisp.filter.SearchFilterTransportDispWorkflowShippingPlanningOrdersList;
 import no.systema.transportdisp.filter.SearchFilterTransportDispWorkflowTripList;
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowListContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowListRecord;
@@ -128,6 +130,22 @@ public class TransportDispWorkflowHeaderController {
 			 //
 			 tripListSearchFilter.setWssavd(avdNr);
 			 tripListSearchFilter.setWsprebook(wsprebook);
+			 //recharge the orderlist filter in case of Ramberg. Some users do not charge this filter in the entry point list - order list
+			 if(StringUtils.isNotEmpty(appUser.getInsid()) && StringUtils.isNotEmpty(appUser.getSpedKuKod())){
+				 if(StringUtils.isNotEmpty(tripListSearchFilter.getWsprebook())){
+					 SearchFilterTransportDispWorkflowShippingPlanningOrdersList sessionOrderListFilter = (SearchFilterTransportDispWorkflowShippingPlanningOrdersList)session.getAttribute(TransportDispConstants.SESSION_SEARCH_FILTER_TRANSP_DISP);
+					 if(sessionOrderListFilter!=null){
+						 sessionOrderListFilter.setWsprebook(tripListSearchFilter.getWsprebook());
+					 }else{
+						 sessionOrderListFilter = new SearchFilterTransportDispWorkflowShippingPlanningOrdersList();
+						 sessionOrderListFilter.setWsprebook(tripListSearchFilter.getWsprebook());
+					 }
+					 session.setAttribute(TransportDispConstants.SESSION_SEARCH_FILTER_TRANSP_DISP, sessionOrderListFilter);
+					 
+				 }
+				 
+			 }
+			 
 			 //prepare the access CGI with RPG back-end
 			 String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_FETCH_SPECIFIC_TRIP_URL;
 			 String urlRequestParamsKeys = "user=" + applicationUser + "&tuavd=" + avdNr + "&tupro=" + tripNr + "&wsprebook=" + wsprebook;
@@ -170,7 +188,7 @@ public class TransportDispWorkflowHeaderController {
 			 this.setDropDownsFromFiles(model);
 			 this.setCodeDropDownMgr(appUser, model);
 			 //Now get the parent list of workflow trips
-			 Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(applicationUser, avdNr, session, model);
+			 Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(applicationUser, tripListSearchFilter.getWssavd(), tripListSearchFilter.getWsprebook(), session, model);
 			 successView.addObject(TransportDispConstants.DOMAIN_LIST,outputList);
 			 successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);	
 			 successView.addObject("searchFilter", tripListSearchFilter);
@@ -212,7 +230,7 @@ public class TransportDispWorkflowHeaderController {
 			 this.setDropDownsFromFiles(model);
 			 this.setCodeDropDownMgr(appUser, model);
 			 //Now get the parent list of workflow trips
-			 Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(applicationUser, tripListSearchFilter.getWssavd(), session, model);
+			 Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(applicationUser, tripListSearchFilter.getWssavd(), tripListSearchFilter.getWsprebook(), session, model);
 			 successView.addObject(TransportDispConstants.DOMAIN_LIST,outputList);
 			 successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);	
 			 successView.addObject("searchFilter", tripListSearchFilter);
@@ -245,9 +263,11 @@ public class TransportDispWorkflowHeaderController {
 		logger.info("Method: " + method);
 		//required params for a specific trip
 		String originalAvdOnCopyRundtur = request.getParameter("originalAvd");
+		
 		logger.info("Avd original:" + originalAvdOnCopyRundtur);
 		logger.info("Avd:" + recordToValidate.getTuavd());
 		logger.info("Trip No.:" + recordToValidate.getTupro());
+		
 		String[] messageNote = this.getChunksOfMessageNote(recordToValidate);
 		//---------------------------------
 		//Crucial request parameters (Keys)
@@ -425,7 +445,7 @@ public class TransportDispWorkflowHeaderController {
 				
 				//Now get the parent list of workflow trips
 				//Was defualt until copyRoundTrip was implemented--->Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), record.getTuavd(), session, model);
-				Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), originalAvdOnCopyRundtur, session, model);
+				Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), originalAvdOnCopyRundtur, null, session, model);
 				
 				
 				successView.addObject(TransportDispConstants.DOMAIN_LIST,outputList);
@@ -460,6 +480,8 @@ public class TransportDispWorkflowHeaderController {
 		logger.info("Method: " + method);
 		//required params for a specific trip
 		String originalAvdOnCopyRundtur = request.getParameter("originalAvd");
+		String originalWsprebook = request.getParameter("originalWsprebook");
+		
 		logger.info("Avd original:" + originalAvdOnCopyRundtur);
 		logger.info("Avd:" + recordToValidate.getTuavd());
 		logger.info("Trip No.:" + recordToValidate.getTupro());
@@ -645,7 +667,7 @@ public class TransportDispWorkflowHeaderController {
 				
 				//Now get the parent list of workflow trips
 				//Was defualt until copyRoundTrip was implemented--->Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), record.getTuavd(), session, model);
-				Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), originalAvdOnCopyRundtur, session, model);
+				Collection<JsonTransportDispWorkflowListRecord> outputList = this.fetchWorkflowList(appUser.getUser(), originalAvdOnCopyRundtur, originalWsprebook, session, model);
 				
 				
 				successView.addObject(TransportDispConstants.DOMAIN_LIST,outputList);
@@ -664,7 +686,7 @@ public class TransportDispWorkflowHeaderController {
 	 * @param session
 	 * @return
 	 */
-	private Collection<JsonTransportDispWorkflowListRecord> fetchWorkflowList(String appUser, String avdNr, HttpSession session, Map model ){
+	private Collection<JsonTransportDispWorkflowListRecord> fetchWorkflowList(String appUser, String avd, String wsprebook,  HttpSession session, Map model ){
 		Collection<JsonTransportDispWorkflowListRecord> outputList = new ArrayList<JsonTransportDispWorkflowListRecord>();
 		logger.info("Inside: fetchWorkflowList");
 		//===========
@@ -675,9 +697,13 @@ public class TransportDispWorkflowHeaderController {
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
 		urlRequestParams.append("user=" + appUser);
-		if(avdNr!=null && !"".equals(avdNr)){ 
-			urlRequestParams.append("&wssavd=" + avdNr); 
+		if(StringUtils.isNotEmpty(avd)){ 
+			urlRequestParams.append("&wssavd=" + avd); 
 		}
+		if(StringUtils.isNotEmpty(wsprebook)){ 
+			urlRequestParams.append("&wsprebook=" + wsprebook); 
+		}
+		
 		session.setAttribute(TransportDispConstants.ACTIVE_URL_RPG_TRANSPORT_DISP, BASE_LIST_URL + "==>params: " + urlRequestParams.toString()); 
     	logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.info("URL: " + BASE_LIST_URL);

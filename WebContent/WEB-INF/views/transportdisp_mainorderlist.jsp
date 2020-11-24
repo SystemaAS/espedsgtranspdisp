@@ -508,11 +508,13 @@
 					
 				<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 					 the cosmetic frame will not follow the whole datatable grid including the search field... --%>
-				<table id="containerdatatableTable2" style="width:100%;" cellspacing="2" align="left" >
+				<table id="containerdatatableTable2" width="100%" cellspacing="2" align="left" >
 				
 			    <tr>
    				    <form name="searchForm" id="searchForm" action="transportdisp_mainorderlist.do?action=doFind" method="post" >
 					<input type="hidden" name="tur" id="tur" value='${searchFilter.tur}'>
+					<input type="hidden" name="wstur" id="wstur" value='${searchFilter.tur}'>
+					<input type="hidden" name="wssavd" id="wssavd" value='${model.wssavd}'>
 					<input type="hidden" name="userAvd" id="userAvd" value='${model.userAvd}'>
 			    	<td> 
 			    	<table cellspacing="2" >
@@ -731,7 +733,7 @@
 				<tr height="5"><td></td></tr>
 				<tr>
 				<td >
-				<table id="openOrders" class="display compact cell-border" cellspacing="0">
+				<table id="openOrders" class="display compact cell-border" width="100%">
 					<thead >
 					<tr class="tableHeaderField" >
 						<c:if test="${not empty searchFilter.tur}">
@@ -782,8 +784,8 @@
 		            <tr class="tex14" <c:if test="${not empty record.hestn7}"> style="background-color:#FEEFB3; color: #9F6000;"</c:if> >
 		               <c:if test="${not empty searchFilter.tur}">
                    			<td align="center" width="2%" class="textMediumBlue">&nbsp;
-			           			<a style="display:block;" onClick="setBlockUI(this)" href="transportdisp_mainorderlist_add_remove_order.do?user=${user.user}&wmode=A&wstur=${searchFilter.tur}&wsavd=${record.heavd}&wsopd=${record.heopd}">
-    		    					<img title="Add" style="vertical-align:bottom;" src="resources/images/addOrder.png" width="14" hight="15" border="0" alt="add">
+			           			<a style="display:block;" onClick="setBlockUI(this)" href="transportdisp_mainorderlist_add_remove_order.do?user=${user.user}&wmode=A&wstur=${searchFilter.tur}&wsavd=${record.heavd}&wsopd=${record.heopd}&wsopd=${record.heopd}&wsprebook=${searchFilter.wsprebook}">
+    		    							<img title="Add" style="vertical-align:bottom;" src="resources/images/addOrder.png" width="14" hight="15" border="0" alt="add">
 		   						</a>
 		   					</td>
 		   					<td align="center" width="2%" class="textMediumBlue" ><input class="clazz_checkis_openorders" type="checkbox" id="checkis_openorders${counter.count}@user=${user.user}&wmode=A&wstur=${searchFilter.tur}&wsavd=${record.heavd}&wsopd=${record.heopd}"></td>		

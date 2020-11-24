@@ -639,6 +639,7 @@
 	            			<input type="hidden" name="turund" id="turund" value='${model.record.turund}'>
 	            			<input type="hidden" name="tutref" id="tutref" value='${model.record.tutref}'>
 	            			<input type="hidden" name="originalAvd" id="originalAvd" value='${searchFilter.wssavd}'>
+	            			<input type="hidden" name="originalWsprebook" id="originalWsprebook" value='${searchFilter.wsprebook}'>
 	            			<%-- START hidden RAMBERG. This are mandatory fields in the standard form --%>
 	            			<input type="hidden" name="centuryYearTurccTuraar" id="centuryYearTurccTuraar" value='${model.record.centuryYearTurccTuraar}'>
 	            			<input type="hidden" name="turmnd" id="turmnd" value='${model.record.turmnd}'>

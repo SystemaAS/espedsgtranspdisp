@@ -102,12 +102,12 @@ public class TransportDispMainOrderListController {
 		Collection<JsonTransportDispWorkflowShippingPlanningCurrentOrdersListRecord> outputListCurrentOrders = new ArrayList<JsonTransportDispWorkflowShippingPlanningCurrentOrdersListRecord>();
 		Collection<JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord> outputListOpenOrders = new ArrayList<JsonTransportDispWorkflowShippingPlanningOpenOrdersListRecord>();
 		
+		Map model = new HashMap();
+		
 		String wstur = request.getParameter("wstur");
 		String wssavd = request.getParameter("wssavd");
+		model.put("wssavd", wssavd);
 		String wsprebook = request.getParameter("wsprebook");
-		
-		Map model = new HashMap();
-		//String messageFromContext = this.context.getMessage("user.label",new Object[0], request.getLocale());
 		
 		ModelAndView successView = new ModelAndView("transportdisp_mainorderlist");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
@@ -140,7 +140,6 @@ public class TransportDispMainOrderListController {
             //END FILTER in SESSION
             
             //Adjust record after fetch of filter from session (if applicable)
-            if(strMgr.isNotNull(wssavd)){ recordToValidate.setAvd(wssavd); }
             if(strMgr.isNotNull(wsprebook)){ recordToValidate.setWsprebook(wsprebook); }
             //Init
             recordToValidate.setTur(null);
@@ -190,7 +189,7 @@ public class TransportDispMainOrderListController {
 	    		//STEP [2]
 	    		//Get the trip header and economic Matrix
 	    		model.put(TransportDispConstants.DOMAIN_RECORD, new JsonTransportDispWorkflowSpecificTripRecord());
-		 		JsonTransportDispWorkflowSpecificTripContainer container = this.controllerAjaxCommonFunctionsMgr.fetchTripHeading(appUser.getUser(), recordToValidate.getAvd(), recordToValidate.getTur());
+		 		JsonTransportDispWorkflowSpecificTripContainer container = this.controllerAjaxCommonFunctionsMgr.fetchTripHeading(appUser.getUser(), wssavd, recordToValidate.getTur());
 		 		if(container!=null){
 	   			 	for(JsonTransportDispWorkflowSpecificTripRecord  record : container.getGetonetrip()){
 	   			 		model.put(TransportDispConstants.DOMAIN_RECORD, record);		   			 		
@@ -245,11 +244,13 @@ public class TransportDispMainOrderListController {
 		String wsavd = request.getParameter("wsavd");
 		String wsopd = request.getParameter("wsopd");
 		String wmode = request.getParameter("wmode");
+		
 
 		if(wmode!=null && !"".equals(wmode)){recordToValidate.setMode(wmode);}
 		if(wsavd!=null && !"".equals(wsavd))recordToValidate.setAvd(wsavd);
 		if(wstur!=null && !"".equals(wstur))recordToValidate.setTur(wstur);
 		if(wsopd!=null && !"".equals(wsopd))recordToValidate.setOpd(wsopd);
+		
 		logger.info("#OPD:" + recordToValidate.getOpd());
 		ModelAndView errorView = new ModelAndView("transportdisp_mainorderlist");
 		ModelAndView successView = new ModelAndView("redirect:transportdisp_mainorderlist.do?action=doFind&wssavd=" + wsavd + "&wstur=" + wstur);
@@ -278,10 +279,10 @@ public class TransportDispMainOrderListController {
 	    		this.setCodeDropDownMgr(appUser, model);
 				//this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser);
 				//this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-				successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);
-	    		successView.addObject(TransportDispConstants.DOMAIN_LIST_CURRENT_ORDERS, new ArrayList());
-	    		successView.addObject(TransportDispConstants.DOMAIN_LIST_OPEN_ORDERS, new ArrayList());
-	    		successView.addObject("searchFilter", recordToValidate);
+	    		errorView.addObject(TransportDispConstants.DOMAIN_MODEL, model);
+	    		errorView.addObject(TransportDispConstants.DOMAIN_LIST_CURRENT_ORDERS, new ArrayList());
+	    		errorView.addObject(TransportDispConstants.DOMAIN_LIST_OPEN_ORDERS, new ArrayList());
+	    		errorView.addObject("searchFilter", recordToValidate);
 				return errorView;
 	    		
 		    }else{
@@ -301,11 +302,13 @@ public class TransportDispMainOrderListController {
 		    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
 		    	//we must evaluate a return RPG code in order to know if the Update was OK or not
 		    	rpgReturnResponseHandler.evaluateRpgResponseOnAddRemoveOrder(rpgReturnPayload);
-		    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+		    	if(StringUtils.isNotEmpty(rpgReturnResponseHandler.getErrorMessage())){
 		    		rpgReturnResponseHandler.setErrorMessage("AVD/OPD:" + wsavd +"/"+ wsopd + " - " + rpgReturnResponseHandler.getErrorMessage());
 		    		this.setFatalErrorAddRemoveOrders(model, rpgReturnResponseHandler, recordToValidate);
 		    		
 		    		successView = errorView;
+		    		//drop downs
+			 		this.setCodeDropDownMgr(appUser, model);
 		    		successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);
 		    		//-------------------------------------------------------------------------------------------------------
 		    		//Now re-populate all elements since we are not able to redirect (we must present the ERROR message ...)

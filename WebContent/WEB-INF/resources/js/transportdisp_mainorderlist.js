@@ -16,10 +16,6 @@
 		  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 		  //standard
 		  var wkflowLink = 'transportdisp_workflow_getTrip.do?user=' + jq('#applicationUser').val() + '&tuavd=' + jq('#avd').val() + '&tupro=' + '&wsprebook=' + jq('#wsprebook').val();
-		  // incase adaptation (RAMBERG or other)
-		  if(jq('#insid').val()!=''){
-			  wkflowLink = 'transportdisp_workflow.do?action=doFind&user=' + jq('#applicationUser').val() + '&tuavd=' + jq('#avd').val() + '&tupro=' + '&wsprebook=' + jq('#wsprebook').val();
-		  }
 		  window.location = wkflowLink;
 
 	  });
