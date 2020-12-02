@@ -1358,6 +1358,17 @@
 	  });	 
   });
   
+//Present dialog box onClick (href in parent JSP)  
+  jq(function() {
+	  jq(".merkmottLink").click(function() {
+		  var id = this.id;
+		  var record = id.split("_");
+		  var avd = record[0].replace("avd","");
+		  var opd = record[1].replace("opd","");
+		  jq('#'+id).attr('target','_blank');
+		  window.open('transportdisp_workflow_childwindow_merkmott.do?action=doInit&avd=' + avd + '&opd=' + opd, "opptypeWin", "top=300px,left=700px,height=480px,width=550px,scrollbars=no,status=no,location=no");
+	  });
+  });
 
   
   

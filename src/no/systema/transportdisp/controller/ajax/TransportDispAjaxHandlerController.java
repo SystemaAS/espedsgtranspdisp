@@ -142,7 +142,7 @@ public class TransportDispAjaxHandlerController {
 				Collection<JsonTransportDispWorkflowSpecificTripArchivedDocsRecord> archiveDocsList = new ArrayList<JsonTransportDispWorkflowSpecificTripArchivedDocsRecord>();
 				Collection<JsonTransportDispWorkflowSpecificTripShipRecord> shippingTripList = new ArrayList<JsonTransportDispWorkflowSpecificTripShipRecord>();
 				for(JsonTransportDispWorkflowSpecificTripRecord  record : container.getGetonetrip()){
-					logger.info("####TUPRO-field:" + record.getTupro());
+					logger.warn("####TUPRO-field:" + record.getTupro());
 					//Now fetch the Message Note and fill the parent record with it
 					messageNote = this.controllerAjaxCommonFunctionsMgr.fetchMessageNote(applicationUser, avdNr, tripNr);
 					record.setFreetextlist(messageNote);

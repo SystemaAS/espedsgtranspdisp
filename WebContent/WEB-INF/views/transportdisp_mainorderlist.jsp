@@ -765,6 +765,7 @@
 	                    <th title="PONr" width="2%" class="text14"><spring:message code="systema.transportdisp.orders.open.list.search.label.poNr"/></th>
 	                    <th title="Farliggods" width="2%" class="text14"><spring:message code="systema.transportdisp.orders.open.list.search.label.dangerousgoods.adr"/></th>
 	                    <th title="Internmelding" width="2%" class="text14"><spring:message code="systema.transportdisp.orders.open.list.search.label.internmelding.text"/></th>
+	                    <th title="MerkMott" width="2%" class="text14"><spring:message code="systema.transportdisp.orders.open.list.search.label.merkmott"/></th>
 	                    <th title="Print" width="2%" class="text14"><spring:message code="systema.transportdisp.orders.open.list.search.label.printDocs"/></th>
 	                    <%--
 	                    <th width="2%" class="text14"><spring:message code="systema.transportdisp.orders.open.list.search.label.fraktbrev"/></th>
@@ -927,6 +928,11 @@
 								</div>
 							</c:if>
 		               </td>
+		               <td width="2%" align="center" class="textMediumBlue">
+		               <a title="Merk mottat, Avd.&nbsp;${record.heavd}&nbsp;Oppd.&nbsp;${record.heopd}" class="merkmottLink" id="avd${record.heavd}_opd${record.heopd}" >
+							<img style="vertical-align: middle;" src="resources/images/testsuites.png" width="18px" height="18px" border="0" alt="Merk mottat">
+						</a>
+				       </td>			
 		               <td width="2%" align="center" class="textMediumBlue">
 		               		<c:if test="${ empty user.spedKuKod}">
 		               		<a title="print Oppd.&nbsp;${record.heopd}" class="printLink" id="printLink${counter.count}" runat="server" href="#">

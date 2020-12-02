@@ -323,8 +323,8 @@ public class ControllerAjaxCommonFunctionsMgr {
 	 	if(avdNr!=null){ urlRequestParamsKeys.append("&tuavd=" + avdNr); }
 	 	if(tripNr!=null){ urlRequestParamsKeys.append("&tupro=" + tripNr); }
 	 	
-	 	logger.info("URL: " + BASE_URL);
-	 	logger.info("PARAMS: " + urlRequestParamsKeys);
+	 	logger.warn("URL: " + BASE_URL);
+	 	logger.warn("PARAMS: " + urlRequestParamsKeys);
 	 	logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 	 	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
 	 	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");

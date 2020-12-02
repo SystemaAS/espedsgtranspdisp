@@ -2423,6 +2423,70 @@ public class TransportDispWorkflowControllerChildWindow {
 		}
 		
 	}
+	
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="transportdisp_workflow_childwindow_merkmott.do", params="action=doInit",  method={RequestMethod.GET} )
+	public ModelAndView doInitMerkMott(@ModelAttribute ("record") JsonTransportDispAvdRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		logger.info("Inside: doInitMerkMott");
+		Map model = new HashMap();
+		String avd = request.getParameter("avd");
+		String opd = request.getParameter("opd");
+		logger.warn("avd:" + avd + " " + "opd:" + opd);
+		ModelAndView successView = new ModelAndView("transportdisp_workflow_childwindow_merkmott");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			model.put("avd", avd);
+			model.put("opd", opd);
+			//model.put(TransportDispConstants.DOMAIN_RECORD, recordToValidate);
+			successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
+	    	return successView;
+		}
+	}		
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="transportdisp_workflow_childwindow_merkmott_edit.do",  method={RequestMethod.POST} )
+	public ModelAndView doEditMerkMott(@ModelAttribute ("record") JsonTransportDispAvdRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		logger.info("Inside: doEditMerkMott");
+		Map model = new HashMap();
+		String avd = request.getParameter("avd");
+		String opd = request.getParameter("opd");
+		logger.warn("avd:" + avd + " " + "opd:" + opd);
+		ModelAndView successView = new ModelAndView("transportdisp_workflow_childwindow_merkmott");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			model.put("avd", avd);
+			model.put("opd", opd);
+			//model.put(TransportDispConstants.DOMAIN_RECORD, recordToValidate);
+			successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
+	    	return successView;
+		}
+	}		
+		
+		
+		
+		
 	/**
 	 * 
 	 * @param searchFilter
