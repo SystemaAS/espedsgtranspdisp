@@ -12,6 +12,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.Jso
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispCustomerRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispLoadUnloadPlacesContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispLoadUnloadPlacesRecord;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispMerkMottContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispPackingCodesContainer;
@@ -299,6 +300,20 @@ public class JsonTransportDispChildWindowMapper extends ObjectMapperAbstractGran
 	public JsonTransportDispSendSmsContainer getSendSmsContainer(String utfPayload) throws Exception{
 		//At this point we now have an UTF-8 payload
 		JsonTransportDispSendSmsContainer container = super.getObjectMapper().readValue(utfPayload.getBytes(), JsonTransportDispSendSmsContainer.class); 
+		//logger.info("[JSON-String payload status=OK]  " + container.getGebyrKoder());
+		
+		return container;
+	}
+	
+	/**
+	 * 
+	 * @param utfPayload
+	 * @return
+	 * @throws Exception
+	 */
+	public JsonTransportDispMerkMottContainer getMerkMottContainer(String utfPayload) throws Exception{
+		//At this point we now have an UTF-8 payload
+		JsonTransportDispMerkMottContainer container = super.getObjectMapper().readValue(utfPayload.getBytes(), JsonTransportDispMerkMottContainer.class); 
 		//logger.info("[JSON-String payload status=OK]  " + container.getGebyrKoder());
 		
 		return container;

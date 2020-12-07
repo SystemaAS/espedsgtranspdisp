@@ -6,6 +6,7 @@ package no.systema.transportdisp.service;
 import no.systema.main.model.jsonjackson.general.postalcodes.JsonPostalCodesContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispCustomerContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispLoadUnloadPlacesContainer;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispMerkMottContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispPackingCodesContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispTollstedCodesContainer;
@@ -53,5 +54,5 @@ public interface TransportDispChildWindowService {
 	public JsonTransportDispSendSmsContainer getSendSmsContainer(String utfPayload);
 	public JsonTransportDispFrisokveiGiltighetsListContainer getOrderFrisokveiContainerGiltighetsLista(String utfPayload);
 	public JsonTransportDispTTraceCodesContainer getEventCodeContainer(String utfPayload);
-	
+	public JsonTransportDispMerkMottContainer getMerkMottContainer(String utfPayload);
 }

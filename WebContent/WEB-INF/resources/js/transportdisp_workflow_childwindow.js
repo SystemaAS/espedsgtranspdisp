@@ -31,8 +31,18 @@
   				  jq("#tttime").val('0' + str + '00');
   			  }
   		  }
-  	  });
+  		});
   		
+  		
+  		jq("#wsDTMO").datepicker({ 
+    		  dateFormat: 'ddmmy',
+    		  firstDay: 1 //monday
+		});
+  		jq("#wsDTG").datepicker({ 
+  		  dateFormat: 'ddmmy',
+  		  firstDay: 1 //monday
+		});
+
   	});
   	
   	jq(function () {

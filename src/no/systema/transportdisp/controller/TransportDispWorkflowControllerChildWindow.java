@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -17,10 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 
@@ -28,17 +27,14 @@ import no.systema.transportdisp.util.RpgReturnResponseHandler;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.springframework.web.bind.ServletRequestDataBinder;
 
 import no.systema.external.tvinn.sad.z.maintenance.service.MaintSadImportKodts4Service;
 //application imports
 import no.systema.main.context.TdsAppContext;
 import no.systema.main.service.UrlCgiProxyService;
-import no.systema.main.service.UrlCgiProxyServiceImpl;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
-import no.systema.main.util.EncodingTransformer;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.util.StringManager;
 import no.systema.main.model.SystemaWebUser;
@@ -51,7 +47,6 @@ import no.systema.transportdisp.service.TransportDispWorkflowSpecificTripService
 import no.systema.transportdisp.service.html.dropdown.TransportDispDropDownListPopulationService;
 import no.systema.transportdisp.util.manager.CodeDropDownMgr;
 import no.systema.transportdisp.util.manager.ControllerAjaxCommonFunctionsMgr;
-import no.systema.main.model.jsonjackson.general.postalcodes.JsonPostalCodesContainer;
 import no.systema.main.model.jsonjackson.general.postalcodes.JsonPostalCodesRecord;
 import no.systema.transportdisp.filter.SearchFilterTransportDispWorkflowTripList;
 import no.systema.transportdisp.mapper.url.request.UrlRequestParameterMapper;
@@ -59,12 +54,12 @@ import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWork
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowListRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowSpecificTripContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowSpecificTripRecord;
-import no.systema.transportdisp.model.jsonjackson.workflow.budget.JsonTransportDispWorkflowSpecificBudgetRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.codes.JsonTransportDispCodeContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispCustomerContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispCustomerRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispLoadUnloadPlacesContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispLoadUnloadPlacesRecord;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispMerkMottContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispPackingCodesContainer;
@@ -100,7 +95,6 @@ import no.systema.transportdisp.model.jsonjackson.workflow.triplist.childwindow.
 import no.systema.transportdisp.model.jsonjackson.workflow.triplist.childwindow.JsonTransportDispDriverRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.triplist.childwindow.JsonTransportDispTranspCarrierContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.triplist.childwindow.JsonTransportDispTranspCarrierRecord;
-import no.systema.transportdisp.model.jsonjackson.workflow.codes.JsonTransportDispCodeContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.codes.JsonTransportDispCodeRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.triplist.childwindow.JsonTransportDispFileUploadValidationContainer;
 
@@ -108,6 +102,8 @@ import no.systema.transportdisp.model.jsonjackson.workflow.triplist.childwindow.
 import no.systema.transportdisp.util.TransportDispConstants;
 import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
 import no.systema.transportdisp.validator.TransportDispWorkflowTripListValidator;
+import no.systema.transportdisp.validator.TransportDispWorkflowSpecificMerkMottValidator;
+import no.systema.transportdisp.validator.TransportDispWorkflowSpecificOrderValidator;
 import no.systema.transportdisp.validator.TransportDispWorkflowSpecificTrackTraceValidator;
 
 
@@ -2433,41 +2429,43 @@ public class TransportDispWorkflowControllerChildWindow {
 	 * @return
 	 */
 	@RequestMapping(value="transportdisp_workflow_childwindow_merkmott.do", params="action=doInit",  method={RequestMethod.GET} )
-	public ModelAndView doInitMerkMott(@ModelAttribute ("record") JsonTransportDispAvdRecord recordToValidate, HttpSession session, HttpServletRequest request){
+	public ModelAndView doInitMerkMott(@ModelAttribute ("record") JsonTransportDispMerkMottContainer recordToValidate, HttpSession session, HttpServletRequest request){
 		logger.info("Inside: doInitMerkMott");
 		Map model = new HashMap();
-		String avd = request.getParameter("avd");
-		String opd = request.getParameter("opd");
-		logger.warn("avd:" + avd + " " + "opd:" + opd);
+		logger.warn("avd:" + recordToValidate.getAvd() + " " + "opd:" + recordToValidate.getOpd());
 		ModelAndView successView = new ModelAndView("transportdisp_workflow_childwindow_merkmott");
+		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
 		if(appUser==null){
 			return this.loginView;
 			
 		}else{
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			model.put("avd", avd);
-			model.put("opd", opd);
-			//model.put(TransportDispConstants.DOMAIN_RECORD, recordToValidate);
-			successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
+			//Fetch
+	    	model.put(TransportDispConstants.DOMAIN_RECORD, this.fetchMerkMott(appUser, recordToValidate));
+			
+	    	this.setAspectsMerkeMott(model);
+	    	successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
 	    	return successView;
 		}
 	}		
+		
+	
+
 	/**
 	 * 
 	 * @param recordToValidate
+	 * @param bindingResult
 	 * @param session
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value="transportdisp_workflow_childwindow_merkmott_edit.do",  method={RequestMethod.POST} )
-	public ModelAndView doEditMerkMott(@ModelAttribute ("record") JsonTransportDispAvdRecord recordToValidate, HttpSession session, HttpServletRequest request){
+	public ModelAndView doEditMerkMott(@ModelAttribute ("record") JsonTransportDispMerkMottContainer recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("Inside: doEditMerkMott");
 		Map model = new HashMap();
-		String avd = request.getParameter("avd");
-		String opd = request.getParameter("opd");
-		logger.warn("avd:" + avd + " " + "opd:" + opd);
+		logger.warn("avd:" + recordToValidate.getAvd() + " " + "opd:" + recordToValidate.getOpd());
+		
 		ModelAndView successView = new ModelAndView("transportdisp_workflow_childwindow_merkmott");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -2475,17 +2473,123 @@ public class TransportDispWorkflowControllerChildWindow {
 			return this.loginView;
 			
 		}else{
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			model.put("avd", avd);
-			model.put("opd", opd);
-			//model.put(TransportDispConstants.DOMAIN_RECORD, recordToValidate);
-			successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
+			TransportDispWorkflowSpecificMerkMottValidator validator = new TransportDispWorkflowSpecificMerkMottValidator();
+			validator.validate(recordToValidate, bindingResult);
+		    
+			//check for ERRORS
+			if(bindingResult.hasErrors()){
+	    		logger.info("[ERROR Validation] search-filter does not validate)");
+	    		
+	    		model.put(TransportDispConstants.DOMAIN_RECORD, recordToValidate);
+	    		
+	    		this.setAspectsMerkeMott(model);
+	    		successView.addObject(TransportDispConstants.DOMAIN_MODEL, model);
+				return successView;
+	    		
+		    }else{
+		    	
+		    	//update
+		    	JsonTransportDispMerkMottContainer saved = this.updateMerkMott(appUser, recordToValidate);
+		    	
+		    	if(saved==null || (saved!=null && StringUtils.isNotEmpty(saved.getErrMsg())) ){
+		    		//render back-end error and stay with the old record
+		    		model.put(TransportDispConstants.ASPECT_ERROR_MESSAGE, saved.getErrMsg());
+		    		model.put(TransportDispConstants.DOMAIN_RECORD, recordToValidate);
+		    		
+		    	}else{
+		    		//OK update
+		    		//now fetch
+			    	model.put(TransportDispConstants.DOMAIN_RECORD, this.fetchMerkMott(appUser, recordToValidate));
+		    	}
+		    	
+		    }	
+			
+			this.setAspectsMerkeMott(model);
+	    	successView.addObject(TransportDispConstants.DOMAIN_MODEL , model);
+			
 	    	return successView;
 		}
-	}		
+	}
+	
+	private void setAspectsMerkeMott(Map model){
+		//html title override
+		model.put("htmlTitleSuffix", "Merke mottatt/lnr");
+	}
+		
+	/**
+	 * 	
+	 * @param appUser
+	 * @param recordToValidate
+	 * @return
+	 */
+	private JsonTransportDispMerkMottContainer fetchMerkMott(SystemaWebUser appUser, JsonTransportDispMerkMottContainer recordToValidate){
+		JsonTransportDispMerkMottContainer container = null;
+		
+		//prepare the access CGI with RPG back-end
+		String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_ORDER_MERKMOTT_URL;
+		String urlRequestParams = "user=" + appUser.getUser() + "&mode=G" + "&avd=" + recordToValidate.getAvd() + "&opd=" + recordToValidate.getOpd();
+		
+		logger.warn("URL: " + BASE_URL);
+		logger.warn("PARAMS: " + urlRequestParams);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+		//Debug -->
+    	logger.warn(jsonPayload);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    
+		if(jsonPayload!=null){
+    		container = this.transportDispChildWindowService.getMerkMottContainer(jsonPayload);
+    		if(container!=null){
+    			this.adjustFieldsForFetch(container);
+    		}
+		}	
 		
 		
+		return container;
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 * @return
+	 */
+	private JsonTransportDispMerkMottContainer updateMerkMott(SystemaWebUser appUser, JsonTransportDispMerkMottContainer recordToValidate){
+		JsonTransportDispMerkMottContainer container = null;
 		
+		this.adjustFieldsForUpdate(recordToValidate);
+		
+		//prepare the access CGI with RPG back-end
+		String BASE_URL = TransportDispUrlDataStore.TRANSPORT_DISP_BASE_ORDER_MERKMOTT_URL;
+		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mode=U";
+		String urlRequestParamsRecord = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
+		String urlRequestParams = urlRequestParamsKeys + urlRequestParamsRecord;
+		
+		logger.warn("URL: " + BASE_URL);
+		logger.warn("PARAMS: " + urlRequestParams);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+		//Debug -->
+    	logger.warn(jsonPayload);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    
+		if(jsonPayload!=null){
+    		container = this.transportDispChildWindowService.getMerkMottContainer(jsonPayload);
+		}	
+		
+		
+		return container;
+	}
+	
+	private void adjustFieldsForFetch(JsonTransportDispMerkMottContainer recordToValidate){
+		recordToValidate.setWsDTMO(new DateTimeManager().convertToDate_NO(recordToValidate.getWsDTMO()));
+		recordToValidate.setWsDTG(new DateTimeManager().convertToDate_NO(recordToValidate.getWsDTG()));
+	}
+	
+	private void adjustFieldsForUpdate(JsonTransportDispMerkMottContainer recordToValidate){
+		recordToValidate.setWsDTMO(new DateTimeManager().convertToDate_ISO(recordToValidate.getWsDTMO()));
+		recordToValidate.setWsDTG(new DateTimeManager().convertToDate_ISO(recordToValidate.getWsDTG()));
+	}
 		
 	/**
 	 * 
@@ -2934,15 +3038,13 @@ public class TransportDispWorkflowControllerChildWindow {
 	@Qualifier ("urlCgiProxyService")
 	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
-	@Required
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
 
 	@Qualifier 
 	private TransportDispChildWindowService transportDispChildWindowService;
-	@Autowired
-	@Required	
+	@Autowired	
 	public void setTransportDispChildWindowService(TransportDispChildWindowService value){this.transportDispChildWindowService = value;}
 	public TransportDispChildWindowService getTransportDispChildWindowService(){ return this.transportDispChildWindowService; }
 	
@@ -2952,8 +3054,7 @@ public class TransportDispWorkflowControllerChildWindow {
 	//---------------
 	@Qualifier 
 	private TransportDispWorkflowSpecificTripService transportDispWorkflowSpecificTripService;
-	@Autowired
-	@Required	
+	@Autowired	
 	public void setTransportDispWorkflowSpecificTripService(TransportDispWorkflowSpecificTripService value){this.transportDispWorkflowSpecificTripService = value;}
 	public TransportDispWorkflowSpecificTripService getTransportDispWorkflowSpecificTripService(){ return this.transportDispWorkflowSpecificTripService; }
 	
@@ -2961,7 +3062,6 @@ public class TransportDispWorkflowControllerChildWindow {
 	@Qualifier ("transportDispWorkflowListService")
 	private TransportDispWorkflowListService transportDispWorkflowListService;
 	@Autowired
-	@Required
 	public void setTransportDispWorkflowListService (TransportDispWorkflowListService value){ this.transportDispWorkflowListService = value; }
 	public TransportDispWorkflowListService getTransportDispWorkflowListService(){ return this.transportDispWorkflowListService; }
 	
@@ -2974,7 +3074,6 @@ public class TransportDispWorkflowControllerChildWindow {
 	@Qualifier ("transportDispWorkflowSpecificOrderService")
 	private TransportDispWorkflowSpecificOrderService transportDispWorkflowSpecificOrderService;
 	@Autowired
-	@Required
 	public void setTransportDispWorkflowSpecificOrderService (TransportDispWorkflowSpecificOrderService value){ this.transportDispWorkflowSpecificOrderService = value; }
 	public TransportDispWorkflowSpecificOrderService getTransportDispWorkflowSpecificOrderService(){ return this.transportDispWorkflowSpecificOrderService; }
 	

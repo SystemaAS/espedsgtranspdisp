@@ -37,6 +37,13 @@
 	    	window.open('transportdisp_workflow_childwindow_bilnr.do?action=doInit&unbiln=' + jq('#vfbnr').val() + '&ctype=vfbnr', "bilnrWin", "top=300px,left=350px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
 	  
+	
+	  jq("#merkMottImg").click(function() {
+		  jq('#merkMottImg').attr('target','_blank');
+		  window.open('transportdisp_workflow_childwindow_merkmott.do?action=doInit&avd=' + jq('#heavd').val() + '&opd=' + jq('#heopd').val(), "opptypeWin", "top=300px,left=700px,height=480px,width=550px,scrollbars=no,status=no,location=no");
+	  });
+	
+	  
 	  
 	  //PRINT popup
 	  jq("#alinkFraktbrevPdf").click(function() {

@@ -88,9 +88,9 @@
 			 	<%--Required key parameters from the Topic parent --%>
 			 	<input type="hidden" name="applicationUser" id="applicationUser" value='${user.user}'>
 			 	<input type="hidden" name="action" id="action" value='doUpdate'/>
-			 	<input type="hidden" name="avd" id="avd" value='${model.avd}'>
-				<input type="hidden" name="opd" id="opd" value='${model.opd}'>
-				<input type="hidden" name="updateId" id="updateId" value="${model.updateId}">
+			 	<input type="hidden" name="avd" id="avd" value='${model.record.avd}'>
+				<input type="hidden" name="opd" id="opd" value='${model.record.opd}'>
+				<input type="hidden" name="updateId" id="updateId" value="1">
 				
 			 	<%-- Record CREATE --%>
 					<table width="100%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
@@ -98,7 +98,7 @@
 			 		<tr height="15">
 			 			<td class="text14White" align="left" >
 			 				&nbsp;&nbsp;<img src="resources/images/update.gif" border="0" alt="edit">&nbsp;&nbsp;
-			 				Op.&nbsp;<b>${model.avd}/${model.opd}</b>
+			 				Op.&nbsp;<b>${model.record.avd}/${model.record.opd}</b>
 		 				</td>
 	 				</tr>
 					</table>
@@ -109,55 +109,55 @@
 					 		<table  class="tableBorderWithRoundCornersGray" width="99%" border="0" cellspacing="0" cellpadding="0">
 					 			<tr height="5"><td class="text" align="left"></td></tr>
 					 			<tr >
-					 				<td class="text14" align="left">&nbsp;Gods mottatt av</td>
+					 				<td title="wsSGM" class="text14" align="left">&nbsp;Gods mottatt av</td>
 					                <td class="text14" align="left">
-					                		<input type="text" class="inputTextMediumBlue"  name="todo" id="todo" size="12" maxlength="10" value='${Xmodel.record.todo}'>
+					                		<input type="text" class="inputTextMediumBlue"  name="wsSGM" id="wsSGM" size="12" maxlength="10" value='${model.record.wsSGM}'>
 					                </td>
 					            </tr>
 					            <tr >
-					 				<td class="text14" align="left">&nbsp;Dato (DDMMÅÅ)</td>
+					 				<td title="wsDTMO" class="text14" align="left">&nbsp;Dato (DDMMÅÅ)</td>
 					                <td class="text14" align="left">
-					                		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue"  name="todo" id="todo" size="8" maxlength="6" value='${Xmodel.record.todo}'>
+					                		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue"  name="wsDTMO" id="wsDTMO" size="8" maxlength="6" value='${model.record.wsDTMO}'>
 					                </td>
 					            </tr>
 					            <tr >
-					 				<td class="text14" align="left">&nbsp;Klokkeslett (ttmm)</td>
+					 				<td title="wsKLMO" class="text14" align="left">&nbsp;Klokkeslett (ttmm)</td>
 					                <td class="text14" align="left">
-					                		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue"  name="todo" id="todo" size="6" maxlength="4" value='${Xmodel.record.todo}'>
+					                		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue"  name="wsKLMO" id="wsKLMO" size="6" maxlength="4" value='${model.record.wsKLMO}'>
 					                </td>
 					            </tr>
 					            <tr height="12"><td colspan="3" class="text" align="left"></td></tr>
 					            <tr >
-					 				<td class="text14" align="left">&nbsp;Ekspedisjonssted</td>
+					 				<td title="wsTLE" class="text14" align="left">&nbsp;Ekspedisjonssted</td>
 					                <td class="text14" align="left">
-					                		<input type="text" class="inputTextMediumBlue"  name="todo" id="todo" size="8" maxlength="6" value='${Xmodel.record.todo}'>
+					                		<input type="text" class="inputTextMediumBlue"  name="wsTLE" id="wsTLE" size="8" maxlength="6" value='${model.record.wsTLE}'>
 					                </td>
 					            </tr>
 					            <tr >
-					 				<td class="text14" align="left">&nbsp;Løpenr</td>
+					 				<td title="wsTLL" class="text14" align="left">&nbsp;Løpenr</td>
 					                <td class="text14" align="left">
-					                		<input type="text" class="inputTextMediumBlue"  name="todo" id="todo" size="12" maxlength="10" value='${Xmodel.record.todo}'>
+					                		<input type="text" class="inputTextMediumBlue"  name="wsTLL" id="wsTLL" size="12" maxlength="10" value='${model.record.wsTLL}'>
 					                </td>
 					            </tr>
 					            <tr>
-						        		<td class="text14" align="left">&nbsp;Kan utføres</td>
+						        		<td title="wsTLKU" class="text14" align="left">&nbsp;Kan utføres</td>
 					        		    <td class="text14" align="left" >
-						            	<select  class="inputTextMediumBlue" name="todo" id="todo" >
-						 				  <option value=" ">blank</option>
-						 				  <option value="X">X</option>
+						            	<select class="inputTextMediumBlue" name="wsTLKU" id="wsTLKU" >
+						 				  <option value=" " <c:if test="${model.record.wsTLKU == ' ' || empty model.record.wsTLKU }"> selected </c:if> >blank</option>
+						 				  <option value="X" <c:if test="${model.record.wsTLKU == 'X'}"> selected </c:if> >X</option>
 										</select>							            	
 						            </td>
 						        </tr>
 						        <tr >
-					 				<td class="text14" align="left">&nbsp;Dato (DDMMÅÅ)</td>
+					 				<td title="wsDTG" class="text14" align="left">&nbsp;Dato (DDMMÅÅ)</td>
 					                <td class="text14" align="left">
-					                		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue"  name="todo" id="todo" size="8" maxlength="6" value='${Xmodel.record.todo}'>
+					                		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue"  name="wsDTG" id="wsDTG" size="8" maxlength="6" value='${model.record.wsDTG}'>
 					                </td>
 					            </tr>
 						        <tr >
-					 				<td class="text14" align="left">&nbsp;Nytt godsnr/tollpass</td>
+					 				<td title="wsGNN" class="text14" align="left">&nbsp;Nytt godsnr/tollpass</td>
 					                <td class="text14" align="left">
-					                		<input type="text" class="inputTextMediumBlue"  name="todo" id="todo" size="17" maxlength="15" value='${Xmodel.record.todo}'>
+					                		<input type="text" class="inputTextMediumBlue"  name="wsGNN" id="wsGNN" size="17" maxlength="15" value='${model.record.wsGNN}'>
 					                </td>
 					            </tr>
 						        <tr height="5"><td class="text" align="left"></td></tr>

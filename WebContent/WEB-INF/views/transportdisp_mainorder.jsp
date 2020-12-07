@@ -365,12 +365,17 @@
 				 								<img title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
 				 							</a>
 				 							 --%>
-				 							<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print"> 
+				 							<img id="printImg" name="printImg" title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer3.png" width="28px" height="28px" border="0" alt="Print">
+				 							
+				 							
 				 						</td>
+				 						
 			 						</c:if>
 			 						<td width="25"></td>
 			 						<td class="text14">
 				 						<c:if test="${not empty model.record.heopd}">
+				 							<img id="merkMottImg" name="merkMottImg" title="Merk mottat/lnr" style="vertical-align: middle;cursor:pointer;" src="resources/images/testsuites.png" width="26px" height="26px" border="0" alt="Merk mottat">
+				 								
 					 						<button name="smsButton" id="smsButton" class="buttonGrayWithGreenFrame" type="button" >Send SMS</button>
 					 						<button name="emailButton" id="emailButton" class="buttonGrayWithGreenFrame" type="button" >Send Mail</button>
 					 						<button name="budgetButton" id="budgetButton" class="buttonGrayWithGreenFrame" type="button" >Budsjett/rekv.</button>

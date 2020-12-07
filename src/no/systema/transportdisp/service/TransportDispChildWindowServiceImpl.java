@@ -15,6 +15,7 @@ import no.systema.transportdisp.mapper.jsonjackson.JsonTransportDispWorkflowSpec
 
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispCustomerContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispLoadUnloadPlacesContainer;
+import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispMerkMottContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispDangerousGoodsContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispPackingCodesContainer;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispSendSmsContainer;
@@ -314,5 +315,17 @@ public class TransportDispChildWindowServiceImpl implements TransportDispChildWi
 		return container;
 	}
 	
+	public JsonTransportDispMerkMottContainer getMerkMottContainer(String utfPayload){
+		JsonTransportDispMerkMottContainer container = null;
+		try{
+			JsonTransportDispChildWindowMapper mapper = new JsonTransportDispChildWindowMapper();
+			container = mapper.getMerkMottContainer(utfPayload);
+		}catch(Exception e){
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+		}
+		
+		return container;
+	}
 	
 }

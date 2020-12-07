@@ -24,7 +24,16 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		
-		<title>eSpedsg - Work with Trips Search</title>
+		<c:choose>
+		<c:when test="${not empty model.htmlTitleMerkMott}">
+			
+		</c:when>
+		<c:otherwise>
+			<title>eSpedsg - Transportmodul<c:if test="${not empty model.htmlTitleSuffix}">&nbsp;-&nbsp;${model.htmlTitleSuffix}</c:if></title>
+		</c:otherwise>
+		</c:choose>
+		
+		
 		
 	</head>
 	<body>
