@@ -295,6 +295,7 @@
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.til"/>&nbsp;</th>
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.avsender"/>&nbsp;</th>
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.mottaker"/>&nbsp;</th>
+	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.frankatur"/>&nbsp;</th>
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.prKD"/>&nbsp;</th>
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.antall"/>&nbsp;</th>
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.vekt"/>&nbsp;</th>
@@ -333,6 +334,7 @@
 		               <td class="text14">&nbsp;${topic.hesdt}</td>
             		   <td class="text14">&nbsp;${topic.henas}</td>
 		               <td class="text14">&nbsp;${topic.henak}</td>
+		               <td class="text14">&nbsp;${topic.hefr}</td>
 		               <td class="text14">&nbsp;${topic.hekdpl}</td>
 		               <td class="text14">&nbsp;${topic.hent}</td>
 		               <td class="text14">&nbsp;${topic.hevkt}</td>

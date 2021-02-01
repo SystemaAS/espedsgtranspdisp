@@ -78,27 +78,30 @@ public class MainListExcelBuilder extends AbstractXlsView {
         
         header.createCell(7).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.mottaker", new Object[0], locale));
         header.getCell(7).setCellStyle(style);
-        
-        header.createCell(8).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.prKD", new Object[0], locale));
+       
+        header.createCell(8).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.frankatur", new Object[0], locale));
         header.getCell(8).setCellStyle(style);
-        
-        header.createCell(9).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.antall", new Object[0], locale));
+       
+        header.createCell(9).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.prKD", new Object[0], locale));
         header.getCell(9).setCellStyle(style);
         
-        header.createCell(10).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.vekt", new Object[0], locale));
+        header.createCell(10).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.antall", new Object[0], locale));
         header.getCell(10).setCellStyle(style);
         
-        header.createCell(11).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.kubikk", new Object[0], locale));
+        header.createCell(11).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.vekt", new Object[0], locale));
         header.getCell(11).setCellStyle(style);
         
-        header.createCell(12).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.lm", new Object[0], locale));
+        header.createCell(12).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.kubikk", new Object[0], locale));
         header.getCell(12).setCellStyle(style);
         
-        header.createCell(13).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.levert", new Object[0], locale));
+        header.createCell(13).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.lm", new Object[0], locale));
         header.getCell(13).setCellStyle(style);
         
-        header.createCell(14).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.faktsum", new Object[0], locale));
+        header.createCell(14).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.levert", new Object[0], locale));
         header.getCell(14).setCellStyle(style);
+        
+        header.createCell(15).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.faktsum", new Object[0], locale));
+        header.getCell(15).setCellStyle(style);
         
         
         // create data rows
@@ -116,13 +119,14 @@ public class MainListExcelBuilder extends AbstractXlsView {
             aRow.createCell(5).setCellValue(record.getHesdt());
             aRow.createCell(6).setCellValue(record.getHenas());
             aRow.createCell(7).setCellValue(record.getHenak());
-            aRow.createCell(8).setCellValue(record.getHekdpl());
-            aRow.createCell(9).setCellValue(record.getHent());
-            aRow.createCell(10).setCellValue(record.getHevkt());
-            aRow.createCell(11).setCellValue(record.getHem3());
-            aRow.createCell(12).setCellValue(record.getHelm());
-            aRow.createCell(13).setCellValue(record.getPoddato());
-            aRow.createCell(14).setCellValue(record.getFaktsum());
+            aRow.createCell(8).setCellValue(record.getHefr());
+            aRow.createCell(9).setCellValue(record.getHekdpl());
+            aRow.createCell(10).setCellValue(record.getHent());
+            aRow.createCell(11).setCellValue(record.getHevkt());
+            aRow.createCell(12).setCellValue(record.getHem3());
+            aRow.createCell(13).setCellValue(record.getHelm());
+            aRow.createCell(14).setCellValue(record.getPoddato());
+            aRow.createCell(15).setCellValue(record.getFaktsum());
             
         }
     }
