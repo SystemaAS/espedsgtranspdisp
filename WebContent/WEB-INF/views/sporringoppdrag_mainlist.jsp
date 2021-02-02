@@ -304,7 +304,16 @@
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.lm"/>&nbsp;</th>
 	                    <th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.levert"/>&nbsp;</th>
 	                    <c:if test="${model.container.visFaktSum=='J'}">
-	                    	<th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.faktsum"/>&nbsp;</th>
+	                    		<th class="text14">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.column.label.faktsum"/>&nbsp;</th>
+	                    </c:if>
+	                    <c:if test="${not empty model.container.custFld1Name}">
+	                    		<th class="text14">${model.container.custFld1Name}</th>
+	                    </c:if>
+	                    <c:if test="${not empty model.container.custFld2Name}">
+	                    		<th class="text14">${model.container.custFld2Name}</th>
+	                    </c:if>
+	                    <c:if test="${not empty model.container.custFld3Name}">
+	                    		<th class="text14">${model.container.custFld3Name}</th>
 	                    </c:if>
 	                </tr> 
 	                </thead>
@@ -336,13 +345,22 @@
 		               <td class="text14">&nbsp;${topic.henak}</td>
 		               <td class="text14">&nbsp;${topic.hefr}</td>
 		               <td class="text14">&nbsp;${topic.hekdpl}</td>
-		               <td class="text14">&nbsp;${topic.hent}</td>
-		               <td class="text14">&nbsp;${topic.hevkt}</td>
-		               <td class="text14">&nbsp;${topic.hem3}</td>
-		               <td class="text14">&nbsp;${topic.helm}</td>
+		               <td align="right" class="text14">&nbsp;${topic.hent}</td>
+		               <td align="right" class="text14">&nbsp;${topic.hevkt}</td>
+		               <td align="right" class="text14">&nbsp;${topic.hem3}</td>
+		               <td align="right" class="text14">&nbsp;${topic.helm}</td>
 		               <td class="text14">&nbsp;${topic.poddato}</td>
 		               <c:if test="${model.container.visFaktSum=='J'}">
-	                    	<td class="text14">&nbsp;${topic.faktsum}</td>
+	                    		<td class="text14">&nbsp;${topic.faktsum}</td>
+	                    </c:if>
+	                    <c:if test="${not empty model.container.custFld1Name}">
+	                    		<td class="text14">${topic.custFld1Value}</th>
+	                    </c:if>
+	                    <c:if test="${not empty model.container.custFld2Name}">
+	                    		<td class="text14">${topic.custFld2Value}</th>
+	                    </c:if>
+	                    <c:if test="${not empty model.container.custFld3Name}">
+	                    		<td class="text14">${topic.custFld3Value}</th>
 	                    </c:if>
 		            </tr> 
 		            </c:forEach>

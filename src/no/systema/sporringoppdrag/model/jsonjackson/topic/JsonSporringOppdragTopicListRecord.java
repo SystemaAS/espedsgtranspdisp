@@ -8,11 +8,14 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import lombok.Data;
+
 /**
  * @author oscardelatorre
  * @date Feb 11, 2015
  *
  */
+@Data
 public class JsonSporringOppdragTopicListRecord extends JsonAbstractGrandFatherRecord {
 	
 	private String heavd = null;
@@ -86,6 +89,12 @@ public class JsonSporringOppdragTopicListRecord extends JsonAbstractGrandFatherR
 	private String faktsum = null;
 	public void setFaktsum(String value) {  this.faktsum = value; }
 	public String getFaktsum() { return this.faktsum;}
+	
+	private String custFld1Value = null;
+	private String custFld2Value = null;
+	private String custFld3Value = null;
+	private String custFld4Value = null;
+	private String custFld5Value = null;
 	
 	
 	/**

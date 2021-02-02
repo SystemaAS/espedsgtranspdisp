@@ -163,12 +163,12 @@ public class SporringOppdragMainListController {
 			    	if(jsonPayload!=null){
 			    		
 			    		JsonSporringOppdragTopicListContainer jsonSporringOppdragTopicListContainer = this.sporringOppdragTopicListService.getSporringOppdragTopicListContainer(jsonPayload);
-			    		
 			    		//-----------------------------------------------------------
 						//now filter the topic list with the search filter (if applicable)
 						//-----------------------------------------------------------
 			    		
 			    		if(jsonSporringOppdragTopicListContainer!=null ){
+			    			
 			    			//default search (when applicable)
 	    					outputList = jsonSporringOppdragTopicListContainer.getQryoppdrag();	
 	    					this.setDomainObjectsInView(session, model, jsonSporringOppdragTopicListContainer);
