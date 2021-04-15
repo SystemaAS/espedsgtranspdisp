@@ -1699,9 +1699,11 @@ public class TransportDispMainOrderController {
 		 		JsonTransportDispWorkflowSpecificOrderArchivedDocsContainer container = this.transportDispWorkflowSpecificOrderService.getOrderArchivedDocsContainer(jsonPayload);
 				if(container!=null){
 					archivedDocList = container.getGetdoc();
+					
 					for(JsonTransportDispWorkflowSpecificOrderArchivedDocsRecord record : container.getGetdoc()){
 						//DEBUG -->logger.info("####Link:" + record.getDoclnk());
 					}
+					
 				}
 				
 		 	}catch(Exception e){

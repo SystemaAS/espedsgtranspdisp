@@ -381,7 +381,7 @@
 																	    	</tr>
 																	    	<tr>
 																	    		<td class="text14" ><span title="fabær">Bærer</span></td>
-																    			<td class="tableCell" style="background-color:#FFFFFF;"  align="left"><label name="v_todo" id="v_fabær">&nbsp;${record.fabær}&nbsp;</label></td>
+																	    		<td class="tableCell" style="background-color:#FFFFFF;"  align="left"><label name="v_todo" id="v_fabær">&nbsp;${record.fabær}&nbsp;</label></td>
 															    			</tr>
 																    	<tr height="10"><td></td></tr>
 																    	</table>
@@ -916,17 +916,29 @@
 					 						<tr class="text14 tableRow">
 					 							<td class="tableCellFirst" style="white-space:nowrap">${record.doctyp}</td>
 				   								<td class="tableCell" style="white-space:nowrap">
-						 						<a target="_blank" href="transportdisp_workflow_renderArchivedDocs.do?doclnk=${record.doclnk}">
-						 							<c:choose>
-			    		    							<c:when test="${fn:contains(record.doclnk, '.pdf')}">
-			    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/pdf.png" width="14" height="14" border="0" alt="PDF arch.">
-			    		    							</c:when>
-			    		    							<c:otherwise>
-			    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/jpg.png" width="14" height="14" border="0" alt="Other arch.">
-			    		    							</c:otherwise>
-		    		    							</c:choose>
-		    		    							${record.doctxt}
-				   								</a>
+						 						
+						 						<c:choose>
+				    		    							<c:when test="${fn:contains(record.doclnk, 'http')}">
+				    		    								<a target="_blank" href="${record.doclnk}">
+				    		    									<img title="Archive" style="vertical-align:middle;" src="resources/images/pdf.png" width="14" height="14" border="0" alt="PDF arch.">
+				    		    									${record.doctxt}	
+				    		    								</a>
+				    		    							</c:when>
+				    		    							<c:otherwise>
+						 								<a target="_blank" href="transportdisp_workflow_renderArchivedDocs.do?doclnk=${record.doclnk}">
+								 							<c:choose>
+					    		    							<c:when test="${fn:contains(record.doclnk, '.pdf')}">
+					    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/pdf.png" width="14" height="14" border="0" alt="PDF arch.">
+					    		    							</c:when>
+					    		    							<c:otherwise>
+					    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/jpg.png" width="14" height="14" border="0" alt="Other arch.">
+					    		    							</c:otherwise>
+				    		    							</c:choose>
+				    		    							${record.doctxt}
+					   								</a>
+					   								</c:otherwise>
+				   								</c:choose>
+				   								
 				   								</td>
 				   								<td class="tableCell" style="white-space:nowrap">${record.docdat}&nbsp;${record.doctim}</td>
 			   								</tr>
