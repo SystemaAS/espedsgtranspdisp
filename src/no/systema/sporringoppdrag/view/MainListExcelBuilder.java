@@ -104,6 +104,16 @@ public class MainListExcelBuilder extends AbstractXlsView {
         header.getCell(15).setCellStyle(style);
         
         
+        header.createCell(16).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.euroc", new Object[0], locale));
+        header.getCell(16).setCellStyle(style);
+        
+        header.createCell(17).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.co2", new Object[0], locale));
+        header.getCell(17).setCellStyle(style);
+        
+        header.createCell(18).setCellValue(this.context.getMessage("systema.sporringoppdrag.mainlist.column.label.other", new Object[0], locale));
+        header.getCell(18).setCellStyle(style);
+        
+        
         // create data rows
         int rowCount = 1;
          
@@ -128,6 +138,9 @@ public class MainListExcelBuilder extends AbstractXlsView {
             aRow.createCell(14).setCellValue(record.getPoddato());
             aRow.createCell(15).setCellValue(record.getFaktsum());
             
+            aRow.createCell(16).setCellValue(record.getCustFld1Value());
+            aRow.createCell(17).setCellValue(record.getCustFld2Value());
+            aRow.createCell(18).setCellValue(record.getCustFld3Value());
         }
     }
 	
