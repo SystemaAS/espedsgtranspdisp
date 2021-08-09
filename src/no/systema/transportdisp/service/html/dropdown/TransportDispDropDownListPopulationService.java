@@ -98,6 +98,17 @@ public class TransportDispDropDownListPopulationService {
 		return list;
 	}
 	
+	public List<String> getCountryList(){
+		String LIST_FILE = "countryList.txt";
+		List<String> list = textFileReaderService.getFileLines(TdsServletContext.getTdsServletContext().getResourceAsStream(this.FILE_RESOURCE_PATH + LIST_FILE));
+		//Debug
+		/*
+		for(String record : list){
+			logger.info(record + "X");
+		}*/
+		return list;
+	}
+	
 	/**
 	 * 	
 	 * @param utfPayload

@@ -1,14 +1,18 @@
 package no.systema.sporringoppdrag.controller;
 
 import java.lang.reflect.Field;
+import java.net.URI;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -17,6 +21,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,6 +42,7 @@ import no.systema.main.util.io.PayloadContentFlusher;
 import no.systema.main.model.SystemaWebUser;
 //
 import no.systema.sporringoppdrag.util.SporringOppdragConstants;
+import no.systema.transportdisp.service.html.dropdown.TransportDispDropDownListPopulationService;
 import no.systema.sporringoppdrag.filter.SearchFilterSporringOppdragSpecificTopic;
 import no.systema.sporringoppdrag.model.jsonjackson.topic.JsonSporringOppdragSpecificTopicContainer;
 import no.systema.sporringoppdrag.model.jsonjackson.topic.JsonSporringOppdragSpecificTopicRecord;
@@ -72,6 +82,8 @@ public class SporringOppdragSpecificTopicController {
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();
 	
+	
+	private RestTemplate restTemplate = new RestTemplate();
 	/**
 	 * 
 	 * @param session
@@ -141,16 +153,17 @@ public class SporringOppdragSpecificTopicController {
 			    	if(jsonPayload!=null){
 			    		JsonSporringOppdragSpecificTopicContainer jsonSporringOppdragSpecificTopicContainer = this.sporringOppdragSpecificTopicService.getSporringOppdragSpecificTopicContainer(jsonPayload);
 			    		jsonSporringOppdragSpecificTopicContainer.setKnavn(knavn);
-			    		//------------------------
+			    	//------------------------
 					//populate gui child list
 					//------------------------
-			    		this.populateChildDocumentsFromJsonString(model, appUser, jsonSporringOppdragSpecificTopicContainer);
+			    	this.populateHtmlDropDownsFromFile(model);
+			    	this.populateChildDocumentsFromJsonString(model, appUser, jsonSporringOppdragSpecificTopicContainer);
 					this.populateChildFreetextFromJsonString(model, appUser, jsonSporringOppdragSpecificTopicContainer);
 					this.populateChildInvoiceFromJsonString(model, appUser, jsonSporringOppdragSpecificTopicContainer);
 					this.populateChildFriesokeVeierFromJsonString(model, appUser, jsonSporringOppdragSpecificTopicContainer);
 					this.populateChildHendelseslogFromJsonString(model, appUser, jsonSporringOppdragSpecificTopicContainer);
 					//set domain objects now
-			    		this.setDomainObjectsInView(session,model,jsonSporringOppdragSpecificTopicContainer);	
+		    		this.setDomainObjectsInView(session,model,jsonSporringOppdragSpecificTopicContainer);	
 			    		
 					//--------------------------------------
 					//Final successView with domain objects
@@ -233,7 +246,87 @@ public class SporringOppdragSpecificTopicController {
 			
 		}
 			
-	}	
+	}
+	
+	
+	/**
+	 * This method is used only for service desk purposes ... in order to send a calculation request and see if the result is ok	
+	 * @param session
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="renderETWCalculatorResult.do", method={ RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView doRenderETWCalculatorResult(HttpSession session, HttpServletRequest request){
+		ModelAndView successView = new ModelAndView("sporringoppdrag_childwindow_co2calculator");
+		Map model = new HashMap();
+		
+		try {
+			logger.warn("Inside renderETWCalculatorResult...");
+			SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+			logger.warn(request.getParameter("ttype"));
+			
+			String transportType=request.getParameter("ttype");
+			String soapAction=request.getParameter("soapAction");
+			String ttavd=request.getParameter("avd");
+			String ttopd=request.getParameter("opd");
+			String weight=request.getParameter("weight");
+			String uom="kg";
+			String countryCodeDeparture=request.getParameter("avslk");
+			String zipCodeDeparture=request.getParameter("avspk");
+			String countryCodeDestination=request.getParameter("motlk");
+			String zipCodeDestination=request.getParameter("motpk");
+			//always test in this UC
+			String testCalc = request.getParameter("testCalc");
+			
+			if(appUser==null){
+				return this.loginView;
+				
+			}else {
+				
+    			String url = AppConstants.HTTP_ROOT_SERVLET_JSERVICES;
+    			URI uri = UriComponentsBuilder
+    					.fromUriString(url)
+    					.path("/espedsguxternal/api/ux_etwstandard.do")
+    					.queryParam("transportType", transportType)
+    					.queryParam("soapAction", soapAction)
+    					.queryParam("ttavd", ttavd)
+    					.queryParam("ttopd", ttopd)
+    					.queryParam("weight", weight)
+    					.queryParam("uom", "kg")
+    					.queryParam("weight", weight)
+    					.queryParam("countryCodeDeparture", countryCodeDeparture)
+    					.queryParam("zipCodeDeparture", zipCodeDeparture)
+    					.queryParam("countryCodeDestination", countryCodeDestination)
+    					.queryParam("zipCodeDestination", zipCodeDestination)
+    					.queryParam("testCalc", testCalc) //this is mandatory when a test calculation is executed (to avoid TRACKF update on the back-end)
+    					
+    					.build()
+    					.toUri();
+    			
+    			
+				HttpHeaders headerParams = new HttpHeaders();
+				headerParams.add("Accept", "*/*");
+				HttpEntity<?> entity = new HttpEntity<>(headerParams);
+			
+				ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
+				String json = response.getBody();
+				logger.warn(json);
+				model.put("content", json);
+				
+				successView.addObject(SporringOppdragConstants.DOMAIN_MODEL , model);
+	    				
+			}
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+			logger.error(e.toString());
+		}
+		
+		return successView;
+		
+	}
+		
 
 	/**
 	 * 
@@ -472,23 +565,40 @@ public class SporringOppdragSpecificTopicController {
 		model.put(SporringOppdragConstants.DOMAIN_CONTAINER, container);
 		
 	}
+	
+	/**
+	 * 
+	 * @param model
+	 */
+	private void populateHtmlDropDownsFromFile(Map model){
+		//fill in html lists here
+		//model.put(TdsConstants.RESOURCE_MODEL_KEY_CURRENCY_LIST, this.dropDownListPopulationService.getCurrencyList());
+		//model.put(TdsConstants.RESOURCE_MODEL_KEY_COUNTRY_LIST, this.dropDownListPopulationService.getCountryList());
+		model.put(SporringOppdragConstants.RESOURCE_MODEL_KEY_COUNTRY_LIST, this.dropDownListPopulationService.getCountryList());
+		
+		
+	}
 
 	//SERVICES
-	@Qualifier ("urlCgiProxyService")
+	//@Qualifier ("urlCgiProxyService")
 	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
-	@Required
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
 	
-	@Qualifier ("sporringOppdragSpecificTopicService")
+	//@Qualifier ("sporringOppdragSpecificTopicService")
 	private SporringOppdragSpecificTopicService sporringOppdragSpecificTopicService;
 	@Autowired
-	@Required
 	public void setSporringOppdragSpecificTopicService (SporringOppdragSpecificTopicService value){ this.sporringOppdragSpecificTopicService = value; }
 	public SporringOppdragSpecificTopicService getSporringOppdragSpecificTopicService(){ return this.sporringOppdragSpecificTopicService; }
 	
+	@Autowired
+	private TransportDispDropDownListPopulationService dropDownListPopulationService;
+	public void setDropDownListPopulationService (TransportDispDropDownListPopulationService value){ this.dropDownListPopulationService=value; }
+	public TransportDispDropDownListPopulationService getDropDownListPopulationService(){return this.dropDownListPopulationService;}
+	 
+
 	
 	
 	

@@ -90,8 +90,31 @@
 							 			<spring:message code="systema.sporringoppdrag.mainlist.topic.header.customerName"/>
 							 			<font class="text14White">&nbsp;${model.container.knavn}&nbsp;&nbsp;/&nbsp;&nbsp;</font>
 							 			Logged on:<font class="text14White">&nbsp;${user.user}</font>
+							 			
 						 			</td>
-						    		</tr>
+						 			<%-- LOCALHOST --%> 
+							 		 <c:if test="${user.servletHostWithoutHttpPrefix == 'localhost'}">
+										<c:set var="co2Exists" value="1"/>
+							 		 </c:if>
+						 			<%-- SYSTEMA --%>
+						 			<c:if test="${user.servletHostWithoutHttpPrefix == 'gw.systema.no'}">
+						 				<c:set var="co2Exists" value="1"/>
+							 		</c:if>
+							 		<%-- NORTRAIL  --%>  
+							 		<c:if test="${user.servletHostWithoutHttpPrefix == 'esped.nortrail.no'}">
+							 		 	<c:set var="co2Exists" value="1"/>
+							 		</c:if>
+							 		 
+							 		
+							 		<c:if test="${not empty co2Exists}">
+							 		 <td align="right" class="text14">
+							 				<span id="imgLinkETWcalc" style="cursor:pointer;">
+							 				<font class="text14White">CO2-Calculator</font>
+							 				&nbsp;<img style="vertical-align: bottom;background-color: white;border-radius: 100%;" src="resources/images/ETWlogo.svg" width="20" height="20" border="0" alt="co2-calc">
+							 				</span>
+								 		</td>
+							 		</c:if>
+					    		</tr>
 					 		</table>
 						</td>
 					</tr>	
@@ -104,8 +127,8 @@
 					 			<tr height="10"><td >&nbsp;</td></tr>
 				 				<tr>
 					 				<td colspan="10">
-					 				<table class="tableBorderWithRoundCorners">
-					 				<tr>
+					 					<table class="tableBorderWithRoundCorners">
+					 					<tr>
 								    		<td class="text14MediumBlue" title="henas"><spring:message code="systema.sporringoppdrag.mainlist.topic.header.label.avsender"/></td>
 								    		<td class="text14">
 								    			<div>
@@ -621,6 +644,90 @@
          </td>
     </tr>
     
+    
+    
+    	<%-- ------------------------- --%>
+		<%-- DIALOG render ETW Calculator   --%>
+		<%-- ------------------------- --%>
+		<tr>
+		<td>
+			<div id="dialogETWcalculator" title="Dialog" style="display:none">
+				<form id="formETWcalculator" action="renderETWCalculatorResult.do" target="_blank" onsubmit="target_popup(this)">
+				<input type="hidden" name="testCalc" id="testCalc" value='1'>
+			 	<table>
+			 		<tr>
+				 		<td class="text12" align="left" >Avd&nbsp;</td>
+						<td class="text12" align="left" ><input type="text" class="inputText12LightYellow" id="avd" name="avd" size="8" maxlength="8" value='${model.record.heavd}'></td>
+				
+  						<td class="text12" align="left" >Opd&nbsp;</td>
+  						<td class="text12" align="left" ><input type="text" class="inputText12LightYellow" id="opd" name="opd" size="8" maxlength="8" value='${model.record.heopd}'></td>
+		  			</tr>
+		  			<tr>
+		  				<td class="text12" align="left" >Transporttype&nbsp;</td>
+						<td class="text12" align="left" >
+							<select class="inputText12LightYellow" name="ttype" id="ttype">
+						         <option value="road" >ROAD
+				         	</select>
+						</td>
+						<td class="text12" align="left" >SoapAction&nbsp;</td>
+						<td class="text12" align="left" >
+							<select class="inputText12LightYellow" name="soapAction" id="soapAction">
+						         <option value="s" >SIMPLE
+				         	</select>
+						</td>
+  					</tr>
+  					<tr>
+						<td class="text12" align="left" >Vekt&nbsp;</td>
+						<td colspan="4" class="text12" align="left" ><input onKeyPress="return amountKey(event)" type="text" class="inputText12LightYellow" id="weight" name="weight" size="15" maxlength="15" value=''></td>
+  					</tr>
+					
+					<tr height="25"><td></td></tr>
+  					<tr ><td class="text14MediumBlue">Avsender</td></tr>
+					<tr>
+						<td class="text12" align="left" > Landkode&nbsp;</td>
+						<td class="text12" align="left" >
+							<input size="5" maxlength="2" class="selectMediumBlueE2" list="avslk_list" id="avslk" name="avslk" value="">
+							<datalist class="inputText12LightYellow" name="avslk_list" id="avslk_list">
+						        <option value="">-Velg-</option>
+			 				  	<c:forEach var="country" items="${model.countryList}" >
+                               	 	<option value="${country}">${country}</option>
+								</c:forEach> 
+				         	</datalist>
+						</td>	
+						<td class="text12" align="left" > Postnr.&nbsp;</td>
+						<td class="text12" align="left" ><input type="text" class="inputText12LightYellow" id="avspk" name="avspk" size="8" maxlength="8" value=''></td>
+					</tr>
+					
+					<tr height="10"><td></td></tr>
+					<tr ><td class="text14MediumBlue">Mottaker</td></tr>
+					<tr>
+					
+						<td class="text12" align="left" > Landkode&nbsp;</td>
+						<td class="text12" align="left" >
+							<input size="5" maxlength="2" class="selectMediumBlueE2" list="motlk_list" id="motlk" name="motlk" value="">
+							<datalist class="inputText12LightYellow" name="motlk_list" id="motlk_list">
+					         	<option value="">-Velg-</option>
+			 				  	<c:forEach var="country" items="${model.countryList}" >
+                               	 	<option value="${country}">${country}</option>
+								</c:forEach> 
+				         	</datalist>
+						</td>
+						
+						<td class="text12" align="left" > Postnr.&nbsp;</td>
+						<td class="text12" align="left" ><input type="text" class="inputText12LightYellow" id="motpk" name="motpk" size="8" maxlength="8" value=''></td>
+					</tr>
+					<tr>	
+  						
+  					</tr>
+					
+  					
+					<tr height="10"><td></td></tr>
+					
+				</table>
+				</form>
+			</div>
+		</td>
+		</tr>
     
 	<%-- Validation errors --%>
 	<spring:hasBindErrors name="record"> <%-- name must equal the command object name in the Controller --%>
