@@ -109,6 +109,16 @@ public class TransportDispWorkflowSpecificOrderValidator implements Validator {
 			}
 
 		}
+		//Booking time
+		if(record!=null){
+			if(record.getWsco2()!=null && !"".equals(record.getWsco2())){
+				String tmp = record.getWsco2().replace(",", ".");
+				double maxValue = Double.parseDouble(tmp);
+				if(maxValue>999.999) {
+					errors.rejectValue("wsco2", "systema.transportdisp.orders.form.error.rule.time.wsco2.invalid");
+				}
+			}
+		}
 		//Dates ETD/ETA
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "wsetdd", "systema.transportdisp.orders.form.error.null.etd.datetime");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "wsetad", "systema.transportdisp.orders.form.error.null.eta.datetime");

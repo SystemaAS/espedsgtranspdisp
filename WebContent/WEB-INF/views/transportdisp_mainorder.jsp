@@ -576,6 +576,10 @@
 						 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="wsbotm" id="wsbotm" size="4" maxlength="4" value="${model.record.wsbotm}">
 						 				&nbsp;<span title="hestn7"><font <c:if test="${model.record.hestn7 == 'P'}"> style="font-weight:bold;"   </c:if>><spring:message code="systema.transportdisp.orders.form.update.label.prebooking"/></font></span>
 						 				<input style="width:14px; height:14px;" type="checkbox" id="hestn7" name="hestn7" value="P" <c:if test="${model.record.hestn7 == 'P'}"> checked </c:if>>
+						 				
+						 				&nbsp;&nbsp;<span title="wsco2">CO2 tonn:</span>
+						 				<input autocomplete="off" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue" name="wsco2" id="wsco2" size="7" maxlength="7" value="${model.record.wsco2}">
+						 				
 						 			</td>	
 				 				</tr>
 				 				

@@ -467,8 +467,8 @@ public class TransportDispMainOrderController {
 			    			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
 			    			String urlRequestParamsOrder = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
 			    			String urlRequestParams = urlRequestKeyParams.toString() + urlRequestParamsOrder;
-					    	logger.info("URL: " + UPDATE_BASE_URL);
-					    	logger.info("URL PARAMS: " + urlRequestParams );
+					    	logger.warn("URL: " + UPDATE_BASE_URL);
+					    	logger.warn("URL PARAMS: " + urlRequestParams );
 					    	//----------------------------------------------------------------------------
 					    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
 					    	//----------------------------------------------------------------------------

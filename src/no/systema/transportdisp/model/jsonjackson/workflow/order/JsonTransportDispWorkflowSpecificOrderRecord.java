@@ -188,7 +188,12 @@ public class JsonTransportDispWorkflowSpecificOrderRecord extends JsonAbstractGr
 	private String wsbotm = null;
 	public void setWsbotm(String value) {  this.wsbotm = value; }
 	public String getWsbotm() {return this.wsbotm;}
+
+	private String wsco2 = null;
+	public void setWsco2(String value) {  this.wsco2 = value; }
+	public String getWsco2() {return this.wsco2;}
 	
+
 	private String hegnn = null;
 	public void setHegnn(String value) {  this.hegnn = value; }
 	public String getHegnn() {return this.hegnn;}
