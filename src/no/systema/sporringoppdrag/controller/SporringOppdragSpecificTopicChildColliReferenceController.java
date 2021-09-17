@@ -67,7 +67,7 @@ public class SporringOppdragSpecificTopicChildColliReferenceController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="sporringoppdrag_show_collireference", params="action=doShow",  method={RequestMethod.GET, RequestMethod.POST} )
+	@RequestMapping(value="sporringoppdrag_show_collireference.do", params="action=doShow",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doShow(@ModelAttribute ("record") SearchFilterSporringOppdragSpecificTopic recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
 		Map model = new HashMap();
@@ -96,12 +96,12 @@ public class SporringOppdragSpecificTopicChildColliReferenceController {
 	    		session.setAttribute(SporringOppdragConstants.ACTIVE_URL_RPG_SPORRING_OPPDRAG, BASE_URL + "==>params: " + urlRequestParams.toString()); 
 	    		
 		    	logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.info("URL: " + BASE_URL);
-		    	logger.info("URL PARAMS: " + urlRequestParams);
+		    	logger.warn("URL: " + BASE_URL);
+		    	logger.warn("URL PARAMS: " + urlRequestParams);
 		    	
 		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 		    	
-	        this.jsonDebugger.debugJsonPayload(jsonPayload);
+		    	logger.warn(jsonPayload);
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 			
 		    	if(jsonPayload!=null){

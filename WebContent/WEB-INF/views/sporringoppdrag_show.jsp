@@ -416,9 +416,19 @@
 							    			<div class="inputTextForShowLabel">
 							    				<label>
 												<c:if test="${not empty model.record.clis}">
-						    							<a href="sporringoppdrag_show_collireference.do?action=doShow&user=${user.user}&knavn=${model.container.knavn}&heavd=${model.record.heavd}&heopd=${model.record.heopd}">${model.record.clis}</a>
-						    						</c:if>
-						    						&nbsp;
+													<a href="sporringoppdrag_show_collireference.do?action=doShow&user=${user.user}&knavn=${model.container.knavn}&heavd=${model.record.heavd}&heopd=${model.record.heopd}">
+														<spring:message code="systema.sporringoppdrag.mainlist.topic.header.label.antalVekt.kollilegend"/>
+														<c:choose>
+															<c:when test="${fn:containsIgnoreCase(model.record.clis, 'avvik')}">
+																&nbsp;<font class="text14" style="color:red;"><b>${model.record.clis}</b></font>
+															</c:when>
+															<c:otherwise>
+																&nbsp;${model.record.clis}	
+															</c:otherwise>
+														</c:choose>
+													</a>
+					    						</c:if>
+						    					&nbsp;
 							    				</label>
 							    			</div>
 							    		</td>

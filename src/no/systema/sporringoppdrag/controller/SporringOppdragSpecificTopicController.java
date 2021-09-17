@@ -99,6 +99,7 @@ public class SporringOppdragSpecificTopicController {
 		ModelAndView successView = new ModelAndView("sporringoppdrag_show");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		String knavn = request.getParameter("knavn");
+		
 		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
@@ -142,8 +143,8 @@ public class SporringOppdragSpecificTopicController {
 		    		session.setAttribute(SporringOppdragConstants.ACTIVE_URL_RPG_SPORRING_OPPDRAG, BASE_URL + "==>params: " + urlRequestParams.toString()); 
 		    		
 			    	logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-			    	logger.info("URL: " + BASE_URL);
-			    	logger.info("URL PARAMS: " + urlRequestParams);
+			    	logger.warn("URL: " + BASE_URL);
+			    	logger.warn("URL PARAMS: " + urlRequestParams);
 			    	
 			    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 				//Debug --> 

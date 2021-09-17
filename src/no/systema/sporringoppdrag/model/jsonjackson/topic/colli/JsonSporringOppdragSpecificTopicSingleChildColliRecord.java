@@ -63,6 +63,14 @@ public class JsonSporringOppdragSpecificTopicSingleChildColliRecord extends Json
 	public void setFvekt(String value) {  this.fvekt = value; }
 	public String getFvekt() {return this.fvekt;}
 	
+	private String avvik1 = null;
+	public void setAvvik1(String value) {  this.avvik1 = value; }
+	public String getAvvik1() {return this.avvik1;}
+	
+	private String avvik2 = null;
+	public void setAvvik2(String value) {  this.avvik2 = value; }
+	public String getAvvik2() {return this.avvik2;}
+	
 	private String bilde1u = null;
 	public void setBilde1u(String value) {  this.bilde1u = value; }
 	public String getBilde1u() {return this.bilde1u;}

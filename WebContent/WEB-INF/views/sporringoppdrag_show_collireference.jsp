@@ -109,7 +109,8 @@
 					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.height"/>&nbsp;</th> 
 					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.m3"/>&nbsp;</th>
 					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.lm"/>&nbsp;</th>
-					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.fvekt"/>&nbsp;</th> 
+					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.fvekt"/>&nbsp;</th>
+					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.avvik"/>&nbsp;</th>
 					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.pic"/>&nbsp;</th> 
 					               	</tr> 
 					               	</thead>
@@ -132,12 +133,12 @@
 						    						<c:if test="${not empty record.innti}">
 							               			<c:choose>
 								               			<c:when test="${fn:length(record.innti)==5}">
-								               				<fmt:parseDate value="${record.innti}" var="innTime" pattern="hmmss" />
-								               				&nbsp;&nbsp;<fmt:formatDate type="time" pattern="hh:mm" value="${innTime}" />
+								               				<fmt:parseDate value="${record.innti}" var="innTime" pattern="Hmmss" />
+								               				&nbsp;&nbsp;<fmt:formatDate type="time" pattern="HH:mm" value="${innTime}" />
 								               			</c:when>
 								               			<c:otherwise>
-								               				<fmt:parseDate value="${record.innti}" var="innTime" pattern="hhmmss" />
-								               				&nbsp;&nbsp;<fmt:formatDate type="time" pattern="hh:mm" value="${innTime}" />
+								               				<fmt:parseDate value="${record.innti}" var="innTime" pattern="HHmmss" />
+								               				&nbsp;&nbsp;<fmt:formatDate type="time" pattern="HH:mm" value="${innTime}" />
 								               			</c:otherwise>
 							               			</c:choose>
 						    						</c:if>
@@ -167,7 +168,28 @@
 							               <td align="right" class="tableCell">&nbsp;${record.komm3}&nbsp;</td>
 							               <td align="right" class="tableCell">&nbsp;${record.komlm}&nbsp;</td>
 							               <td align="right" class="tableCell">&nbsp;${record.fvekt}&nbsp;</td>
-							               <td align="right" class="tableCell">&nbsp;${record.bilde1u}&nbsp;</td>
+							               <td align="right" class="tableCell">&nbsp;${record.avvik1}&nbsp;</td>
+							               <td align="right" class="tableCell">
+							               		<c:if test="${not empty record.bilde1u}">
+								               		<c:set var = "bildUrl" scope = "request" value = "${record.bilde1u}"/>
+								               		<c:if test="${!fn:containsIgnoreCase(record.bilde1u,'http')}">
+								               			<c:set var = "bildUrl" scope = "request" value = "${user.httpJQueryDocRoot}${bildUrl}"/>
+								               		</c:if>
+								               		
+								               		<c:choose>
+									               		<c:when test="${not empty bildUrl}">
+										               		<a href="${bildUrl}" target="_blank">
+										               			<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.pic"/>TEI	
+										               		</a>
+									               		</c:when>
+									               		<c:otherwise>
+									               			<a href="${bildUrl}" target="_blank">
+										               			<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.pic"/>TEI	
+										               		</a>
+								               			</c:otherwise>
+								               		</c:choose>
+							               		</c:if>
+							               </td>
 							               <%-- own variables for further processing down the line --%>
 							               <c:set var="myCounter" value="${counter.count}" scope="request" />
 							               <c:set var="mySumvkt" value="${record.sumvkt}" scope="request" />
@@ -188,7 +210,8 @@
 						                    <td align="right" class="tableHeaderField">&nbsp;&nbsp;</td> 
 						                    <td align="right" class="tableHeaderField">&nbsp;${mySumm3}&nbsp;</td> 
 						                    <td align="right" class="tableHeaderField">&nbsp;${mySumlm}&nbsp;</td> 
-						                    <td align="right" class="tableHeaderField">&nbsp;${mySumfvekt}&nbsp;</td> 
+						                    <td align="right" class="tableHeaderField">&nbsp;${mySumfvekt}&nbsp;</td>
+						                     <td align="right" class="tableHeaderField">&nbsp;&nbsp;</td>
 						                    <td align="right" class="tableHeaderField">&nbsp;&nbsp;</td> 
 						               	</tr>
 					               	</c:if>
