@@ -110,8 +110,8 @@
 					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.m3"/>&nbsp;</th>
 					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.lm"/>&nbsp;</th>
 					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.fvekt"/>&nbsp;</th>
-					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.avvik"/>&nbsp;</th>
-					                    <th align="right" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.pic"/>&nbsp;</th> 
+					                    <th align="left" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.avvik"/>&nbsp;</th>
+					                    <th align="left" class="tableHeaderField">&nbsp;<spring:message code="systema.sporringoppdrag.mainlist.topic.header.colliref.label.pic"/>&nbsp;</th> 
 					               	</tr> 
 					               	</thead>
 					               	<tbody>
@@ -168,8 +168,8 @@
 							               <td align="right" class="tableCell">&nbsp;${record.komm3}&nbsp;</td>
 							               <td align="right" class="tableCell">&nbsp;${record.komlm}&nbsp;</td>
 							               <td align="right" class="tableCell">&nbsp;${record.fvekt}&nbsp;</td>
-							               <td align="right" class="tableCell">&nbsp;${record.avvik1}&nbsp;</td>
-							               <td align="right" class="tableCell">
+							               <td align="left" class="tableCell">&nbsp;${record.avvik1}&nbsp;</td>
+							               <td align="left" class="tableCell">
 							               		<c:if test="${not empty record.bilde1u}">
 								               		<c:set var = "bildUrl" scope = "request" value = "${record.bilde1u}"/>
 								               		<c:if test="${!fn:containsIgnoreCase(record.bilde1u,'http')}">
