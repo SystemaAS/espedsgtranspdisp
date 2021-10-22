@@ -114,7 +114,7 @@ public class TransportDispWorkflowSpecificOrderValidator implements Validator {
 			if(record.getWsco2()!=null && !"".equals(record.getWsco2())){
 				String tmp = record.getWsco2().replace(",", ".");
 				double maxValue = Double.parseDouble(tmp);
-				if(maxValue>999.999) {
+				if(maxValue>999.9999) {
 					errors.rejectValue("wsco2", "systema.transportdisp.orders.form.error.rule.time.wsco2.invalid");
 				}
 			}
