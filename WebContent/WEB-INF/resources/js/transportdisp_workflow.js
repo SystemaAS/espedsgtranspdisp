@@ -1167,10 +1167,15 @@
 			  						height: '14px'
 		  		  			  	}).appendTo(td_2);
 			  					
+								//Check for google cloud archive or not
+								var pdfLinkStr = "transportdisp_workflow_renderArchivedDocs.do?doclnk="+data[i].getdoctrip[j].doclnk;
+								if(data[i].getdoctrip[j].doclnk.indexOf("http")>0 ){
+									pdfLinkStr = data[i].getdoctrip[j].doclnk;
+								}
 			  					jq('<a>',{
 					  			    text: documentText,
 					  			    target: '_blank',
-					  			    href: 'transportdisp_workflow_renderArchivedDocs.do?doclnk='+data[i].getdoctrip[j].doclnk,
+					  			    href: pdfLinkStr,
 					  			    click: function(){ BlahFunc( options.rowId );return false;}
 			  					}).appendTo(td_2);
 			  					row.append(td_2);
