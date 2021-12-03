@@ -1392,11 +1392,13 @@
 							           			<p>Kode/Valuta/beløp</p>
 							           			<ul>
 							           				<li><b>blankt</b>=Frakt er ennå ikke kalkulert</li>
-							           			    <li><b>M</b>=Maskinellt beregnet frakt.<br>
+							           				<li><b>N</b>=Nei / Ingen frakt må være tillatt</li>
+							           				<li><b>M</b>=Maskinellt beregnet frakt.<br>
 							           			    		Ved kode blank og M vil systemet alltid rekalkulere frakten hver gang<br>
 							           			    		en er inne på oppdragsbildet (Enter / avslutning).
 			           			    				 	</li>
 							           			    <li><b>A</b>=Avtalt fraktbeløp (meglet)</li>
+							           			    <li><b>B</b>=Beskyttet</li>
 							           			    <li><b>E</b>=Estimert fraktbeløp - kun info for senere prising</li>
 							           			</ul>	
 							           			<p>Valutakode - <b>NOK</b> foreslås (Dette er IKKE valutaen for fakturautskrift<br> 
@@ -1412,8 +1414,10 @@
 						 			<td class="text14">
 						 				<select class="inputTextMediumBlue" name="trfrak" id="trfrak">
 					 						<option value="">-select-</option>
+					 						<option value="N" <c:if test="${model.record.trfrak == 'N'}"> selected </c:if> >N</option>
 					 						<option value="M" <c:if test="${model.record.trfrak == 'M'}"> selected </c:if> >M</option>
 					 						<option value="A" <c:if test="${model.record.trfrak == 'A'}"> selected </c:if> >A</option>
+					 						<option value="B" <c:if test="${model.record.trfrak == 'B'}"> selected </c:if> >B</option>
 					 						<option value="E" <c:if test="${model.record.trfrak == 'E'}"> selected </c:if> >E</option>
 										</select>
 					 				</td>									
