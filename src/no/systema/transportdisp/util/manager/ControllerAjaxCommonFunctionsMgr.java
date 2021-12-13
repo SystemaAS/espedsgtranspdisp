@@ -5,7 +5,7 @@ package no.systema.transportdisp.util.manager;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.model.jsonjackson.general.postalcodes.JsonPostalCodesContainer;
@@ -51,7 +51,7 @@ import no.systema.transportdisp.service.html.dropdown.TransportDispDropDownListP
  * 
  */
 public class ControllerAjaxCommonFunctionsMgr {
-	private static final Logger logger = Logger.getLogger(ControllerAjaxCommonFunctionsMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(ControllerAjaxCommonFunctionsMgr.class.getName());
 	private UrlCgiProxyService urlCgiProxyService;
 	private TransportDispWorkflowSpecificTripService transportDispWorkflowSpecificTripService;
 	private TransportDispChildWindowService transportDispChildWindowService;

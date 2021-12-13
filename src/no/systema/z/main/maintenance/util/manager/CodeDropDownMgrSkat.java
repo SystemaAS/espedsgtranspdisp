@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.external.tvinn.sad.z.maintenance.model.JsonMaintSadExportKodts9Container;
 import no.systema.external.tvinn.sad.z.maintenance.model.JsonMaintSadExportKodts9Record;
@@ -46,7 +46,7 @@ import no.systema.external.skat.z.maintenance.model.JsonMaintDkxkodfRecord;
  * 
  */
 public class CodeDropDownMgrSkat {
-	private static final Logger logger = Logger.getLogger(CodeDropDownMgrSkat.class.getName());
+	private static final Logger logger = LogManager.getLogger(CodeDropDownMgrSkat.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
 
 	/**

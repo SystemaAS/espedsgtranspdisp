@@ -1,6 +1,6 @@
 package no.systema.transportdisp.validator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -17,7 +17,7 @@ import no.systema.main.util.NumberFormatterLocaleAware;
  */
 public class TransportDispWorkflowSpecificFrisokveiValidator implements Validator {
 	private DateValidator dateValidator = new DateValidator();
-	private static Logger logger = Logger.getLogger(TransportDispWorkflowSpecificFrisokveiValidator.class.getName());
+	private static Logger logger = LogManager.getLogger(TransportDispWorkflowSpecificFrisokveiValidator.class.getName());
 	private NumberFormatterLocaleAware formatter = new NumberFormatterLocaleAware();
 	
 	/**

@@ -3,8 +3,8 @@ package no.systema.transportdisp.controller;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+  
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,7 +73,7 @@ import no.systema.external.tvinn.sad.z.maintenance.service.MaintSadImportKodts4S
 @Scope("session")
 public class TransportDispWorkflowHeaderController {
 	
-	private static Logger logger = Logger.getLogger(TransportDispWorkflowHeaderController.class.getName());
+	private static Logger logger = LogManager.getLogger(TransportDispWorkflowHeaderController.class.getName());
 	
 	private TransportDispJspViewManager jspMgr = new TransportDispJspViewManager();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
@@ -92,7 +92,7 @@ public class TransportDispWorkflowHeaderController {
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
-			logger.setLevel(Level.DEBUG);
+			 
 		}
 	}
 	

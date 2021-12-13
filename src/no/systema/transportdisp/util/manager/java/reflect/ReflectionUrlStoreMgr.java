@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.lang.reflect.Field;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.util.JsonDebugger;
 import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
@@ -31,7 +31,7 @@ import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
  * 
  */
 public class ReflectionUrlStoreMgr {
-	private static final Logger logger = Logger.getLogger(ReflectionUrlStoreMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(ReflectionUrlStoreMgr.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(500);
 	
 	

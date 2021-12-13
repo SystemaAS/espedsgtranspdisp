@@ -9,7 +9,7 @@ import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.util.JsonDebugger;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDispWorkflowSpecificOrderFraktbrevRecord;
@@ -31,7 +31,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDi
  * 
  */
 public class ReflectionSpecificOrderHeaderMgr {
-	private static final Logger logger = Logger.getLogger(ReflectionSpecificOrderHeaderMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(ReflectionSpecificOrderHeaderMgr.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(500);
 	
 	private List<JsonTransportDispWorkflowSpecificOrderFraktbrevRecord> targetFraktbrevListUpdated = new ArrayList<JsonTransportDispWorkflowSpecificOrderFraktbrevRecord>();

@@ -1,6 +1,6 @@
 package no.systema.transportdisp.validator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 
@@ -20,7 +20,7 @@ import no.systema.main.util.StringManager;
  */
 public class TransportDispWorkflowSpecificMerkMottValidator implements Validator {
 	private DateValidator dateValidator = new DateValidator();
-	private static Logger logger = Logger.getLogger(TransportDispWorkflowSpecificMerkMottValidator.class.getName());
+	private static Logger logger = LogManager.getLogger(TransportDispWorkflowSpecificMerkMottValidator.class.getName());
 	private NumberFormatterLocaleAware formatter = new NumberFormatterLocaleAware();
 	private StringManager strMgr = new StringManager();
 	

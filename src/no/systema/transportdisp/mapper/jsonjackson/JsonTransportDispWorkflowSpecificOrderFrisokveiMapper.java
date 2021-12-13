@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson;
 
 //jackson library
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.childwindow.JsonTransportDispFrisokveiGiltighetsListContainer;
@@ -19,7 +19,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.frisokvei.JsonT
  * 
  */
 public class JsonTransportDispWorkflowSpecificOrderFrisokveiMapper extends ObjectMapperAbstractGrandFather{
-	private static final Logger logger = Logger.getLogger(JsonTransportDispWorkflowSpecificOrderFrisokveiMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowSpecificOrderFrisokveiMapper.class.getName());
 	/**
 	 * 
 	 * @param utfPayload

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.JsonDebugger;
@@ -52,7 +52,7 @@ import no.systema.external.tds.z.maintenance.model.JsonMaintSvxkodfRecord;
  * 
  */
 public class CodeDropDownMgrTds {
-	private static final Logger logger = Logger.getLogger(CodeDropDownMgrTds.class.getName());
+	private static final Logger logger = LogManager.getLogger(CodeDropDownMgrTds.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
 
 	/**

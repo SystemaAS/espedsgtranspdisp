@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson.frankatur;
 
 //jackson library
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -20,7 +20,7 @@ import java.util.*;
  * 
  */
 public class JsonTransportDispFrankaturMapper extends ObjectMapperAbstractGrandFather{
-	private static final Logger logger = Logger.getLogger(JsonTransportDispFrankaturMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(JsonTransportDispFrankaturMapper.class.getName());
 	
 	/**
 	 * 

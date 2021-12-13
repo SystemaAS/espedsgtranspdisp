@@ -4,7 +4,7 @@
 package no.systema.sporringoppdrag.mapper.jsonjackson;
 
 //jackson library
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -19,7 +19,7 @@ import no.systema.sporringoppdrag.model.jsonjackson.topic.JsonSporringOppdragTop
  * 
  */
 public class SporringOppdragTopicListMapper extends ObjectMapperAbstractGrandFather{
-	private static final Logger logger = Logger.getLogger(SporringOppdragTopicListMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(SporringOppdragTopicListMapper.class.getName());
 	
 	public JsonSporringOppdragTopicListContainer getContainer(String utfPayload) throws Exception{
 		//At this point we now have an UTF-8 payload

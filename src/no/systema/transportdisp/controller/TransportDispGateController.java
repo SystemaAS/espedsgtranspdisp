@@ -3,7 +3,7 @@ package no.systema.transportdisp.controller;
 import java.net.InetAddress;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +36,7 @@ import no.systema.main.util.AppConstants;
 
 @Controller
 public class TransportDispGateController {
-	private static final Logger logger = Logger.getLogger(TransportDispGateController.class.getName());
+	private static final Logger logger = LogManager.getLogger(TransportDispGateController.class.getName());
 	private ModelAndView loginView = new ModelAndView("login");
 	
 	/**

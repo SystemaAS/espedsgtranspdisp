@@ -9,8 +9,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+  
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -77,7 +77,7 @@ import no.systema.transportdisp.validator.TransportDispWorkflowSpecificOrderInvo
 @Scope("session")
 public class TransportDispMainOrderInvoiceController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
-	private static Logger logger = Logger.getLogger(TransportDispMainOrderInvoiceController.class.getName());
+	private static Logger logger = LogManager.getLogger(TransportDispMainOrderInvoiceController.class.getName());
 	private ModelAndView loginView = new ModelAndView("login");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();
@@ -100,7 +100,7 @@ public class TransportDispMainOrderInvoiceController {
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
-			logger.setLevel(Level.DEBUG);
+			 
 		}
 	}
 	/**

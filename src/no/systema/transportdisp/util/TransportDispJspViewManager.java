@@ -1,13 +1,13 @@
 package no.systema.transportdisp.util;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.transportdisp.controller.TransportDispMainOrderController;
 
 public class TransportDispJspViewManager {
-	private static Logger logger = Logger.getLogger(TransportDispJspViewManager.class.getName());
+	private static Logger logger = LogManager.getLogger(TransportDispJspViewManager.class.getName());
 	
 	/**
 	 * If there are any adaptations, the Controller will redirect to this JSP-view

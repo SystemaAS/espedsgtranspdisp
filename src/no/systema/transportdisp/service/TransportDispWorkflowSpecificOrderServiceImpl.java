@@ -6,7 +6,7 @@ package no.systema.transportdisp.service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.transportdisp.mapper.jsonjackson.JsonTransportDispWorkflowSpecificOrderMapper;
 import no.systema.transportdisp.mapper.jsonjackson.JsonTransportDispWorkflowSpecificOrderInvoiceMapper;
@@ -37,7 +37,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.validationbacke
  * 
  */
 public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportDispWorkflowSpecificOrderService {
-	private static final Logger logger = Logger.getLogger(JsonTransportDispWorkflowSpecificOrderMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowSpecificOrderMapper.class.getName());
 	/**
 	 * 
 	 */

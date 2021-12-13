@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,7 +18,7 @@ import no.systema.transportdisp.util.manager.Log4jMgr;
 
 @Controller
 public class LogoutController {
-	private static final Logger logger = Logger.getLogger(LogoutController.class.getName());
+	private static final Logger logger = LogManager.getLogger(LogoutController.class.getName());
 	
 	@RequestMapping("logout.do")
 	public void logout(HttpSession session, HttpServletResponse response, HttpServletRequest request){

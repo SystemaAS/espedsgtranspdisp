@@ -1,6 +1,6 @@
 package no.systema.transportdisp.validator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -17,7 +17,7 @@ import no.systema.transportdisp.filter.SearchFilterTransportDispWorkflowTripList
  */
 public class TransportDispWorkflowTripListValidator implements Validator {
 	private DateValidator dateValidator = new DateValidator();
-	private static Logger logger = Logger.getLogger(TransportDispWorkflowSpecificOrderValidator.class.getName());
+	private static Logger logger = LogManager.getLogger(TransportDispWorkflowSpecificOrderValidator.class.getName());
 	
 	/**
 	 * 

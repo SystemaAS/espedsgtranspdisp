@@ -2,7 +2,7 @@ package no.systema.transportdisp.controller;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -48,7 +48,7 @@ import no.systema.main.util.StringManager;
 
 @Controller
 public class TransportDispPrintController {
-	private static final Logger logger = Logger.getLogger(TransportDispPrintController.class.getName());
+	private static final Logger logger = LogManager.getLogger(TransportDispPrintController.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(1500);
 	private DateTimeManager dateTimeMgr = new DateTimeManager();
 	private ModelAndView loginView = new ModelAndView("login");

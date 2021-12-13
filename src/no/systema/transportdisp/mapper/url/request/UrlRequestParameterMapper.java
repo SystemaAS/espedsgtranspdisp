@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowSpecificTripRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowSpecificTripShipRecord;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDispWorkflowSpecificOrderRecord;
@@ -22,7 +22,7 @@ import no.systema.transportdisp.util.TransportDispConstants;
  * 
  */
 public class UrlRequestParameterMapper {
-	private static final Logger logger = Logger.getLogger(UrlRequestParameterMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(UrlRequestParameterMapper.class.getName());
 	
 	/**
 	 * Builds the final url parameter list (to send with a GET or POST form method)

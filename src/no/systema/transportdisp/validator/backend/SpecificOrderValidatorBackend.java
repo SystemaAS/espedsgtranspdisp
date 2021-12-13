@@ -10,7 +10,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
@@ -42,7 +42,7 @@ import no.systema.transportdisp.service.TransportDispWorkflowSpecificOrderServic
  * 
  */
 public class SpecificOrderValidatorBackend {
-	private static final Logger logger = Logger.getLogger(SpecificOrderValidatorBackend.class.getName());
+	private static final Logger logger = LogManager.getLogger(SpecificOrderValidatorBackend.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(1000);
 	private UrlCgiProxyService urlCgiProxyService;
 	private TransportDispWorkflowSpecificOrderService transportDispWorkflowSpecificOrderService;

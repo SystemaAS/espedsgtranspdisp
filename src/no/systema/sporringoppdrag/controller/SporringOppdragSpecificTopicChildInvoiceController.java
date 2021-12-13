@@ -3,7 +3,7 @@ package no.systema.sporringoppdrag.controller;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -58,7 +58,7 @@ import no.systema.sporringoppdrag.url.store.SporringOppdragUrlDataStore;
 @Scope("session")
 public class SporringOppdragSpecificTopicChildInvoiceController {
 	
-	private static final Logger logger = Logger.getLogger(SporringOppdragSpecificTopicChildInvoiceController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SporringOppdragSpecificTopicChildInvoiceController.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
