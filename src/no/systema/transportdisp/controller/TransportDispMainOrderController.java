@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -100,7 +100,7 @@ import no.systema.transportdisp.util.manager.java.reflect.ReflectionSpecificOrde
 @Scope("session")
 public class TransportDispMainOrderController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(1000);
-	private static Logger logger = LogManager.getLogger(TransportDispMainOrderController.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(TransportDispMainOrderController.class.getName());
 	
 	private TransportDispJspViewManager jspMgr = new TransportDispJspViewManager();
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();
@@ -1967,7 +1967,7 @@ public class TransportDispMainOrderController {
 			}catch(Exception e){
 				StringWriter errors = new StringWriter();
 				e.printStackTrace(new PrintWriter(errors));
-				logger.info(errors);
+				logger.info(errors.toString());
 			}
 		}
 		return totalNumberOfLines;

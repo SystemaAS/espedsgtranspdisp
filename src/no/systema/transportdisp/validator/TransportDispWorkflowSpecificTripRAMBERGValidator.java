@@ -1,6 +1,6 @@
 package no.systema.transportdisp.validator;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -17,7 +17,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWork
  */
 public class TransportDispWorkflowSpecificTripRAMBERGValidator implements Validator {
 	private DateValidator dateValidator = new DateValidator();
-	private static Logger logger = LogManager.getLogger(TransportDispWorkflowSpecificTripRAMBERGValidator.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(TransportDispWorkflowSpecificTripRAMBERGValidator.class.getName());
 	
 	/**
 	 * 

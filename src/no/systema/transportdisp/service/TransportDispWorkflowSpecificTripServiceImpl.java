@@ -3,7 +3,7 @@
  */
 package no.systema.transportdisp.service;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.transportdisp.mapper.jsonjackson.JsonTransportDispWorkflowSpecificTripMapper;
 import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWorkflowSpecificTripArchivedDocsContainer;
@@ -19,7 +19,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWork
  * 
  */
 public class TransportDispWorkflowSpecificTripServiceImpl implements TransportDispWorkflowSpecificTripService {
-	private static final Logger logger = LogManager.getLogger(TransportDispWorkflowSpecificTripServiceImpl.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TransportDispWorkflowSpecificTripServiceImpl.class.getName());
 	/**
 	 * 
 	 */

@@ -224,8 +224,8 @@
 						           		<div class="text12" align="left">
 						           			<b>${user.versionEspedsg}</b>
 						           			<p>
-						           				&nbsp;<a id="alinkLog4jLogger" ><font class="text14LightGreen" style="cursor:pointer;">log4j</font></a><br/>
-						           				&nbsp;<a href="renderLocalLog4j.do?tp=1" target="_blank"><font class="text14LightGreen" style="cursor:pointer;">log4j_transpModule</font></a>
+						           				&nbsp;<a id="alinkLog4jLogger" ><font class="text14LightGreen" style="cursor:pointer;">logsg</font></a><br/>
+						           				
 						           			</p>
 						           			<button name="versionInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('versionInfo');">Close</button> 
 						           		</div>

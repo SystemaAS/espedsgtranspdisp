@@ -6,7 +6,7 @@ package no.systema.transportdisp.service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.transportdisp.mapper.jsonjackson.JsonTransportDispWorkflowSpecificOrderMapper;
 import no.systema.transportdisp.mapper.jsonjackson.JsonTransportDispWorkflowSpecificOrderInvoiceMapper;
@@ -37,7 +37,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.validationbacke
  * 
  */
 public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportDispWorkflowSpecificOrderService {
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowSpecificOrderMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispWorkflowSpecificOrderMapper.class.getName());
 	/**
 	 * 
 	 */
@@ -49,7 +49,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		return container;
 	}
@@ -65,7 +65,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -84,7 +84,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -100,7 +100,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -117,7 +117,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -133,7 +133,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		return container;
 	}
@@ -150,7 +150,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -167,7 +167,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -184,7 +184,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -201,7 +201,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -218,7 +218,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;
@@ -234,7 +234,7 @@ public class TransportDispWorkflowSpecificOrderServiceImpl implements TransportD
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 		
 		return container;

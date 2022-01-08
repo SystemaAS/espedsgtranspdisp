@@ -6,7 +6,7 @@ package no.systema.transportdisp.filter;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * This search class is used at the GUI search behavior
@@ -19,7 +19,7 @@ import org.apache.logging.log4j.*;
  * 
  */
 public class SearchFilterTransportDispWorkflowTripList {
-	private static final Logger logger = LogManager.getLogger(SearchFilterTransportDispWorkflowTripList.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SearchFilterTransportDispWorkflowTripList.class.getName());
 	
 	private String wssavd = null;
 	public void setWssavd(String value) {  this.wssavd = value; }

@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 //application library
 import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDispWorkflowSpecificOrderArchivedDocsContainer;
@@ -29,7 +29,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDi
  * 
  */
 public class JsonTransportDispWorkflowSpecificOrderMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowSpecificOrderMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispWorkflowSpecificOrderMapper.class.getName());
 	/**
 	 * 
 	 * @param utfPayload

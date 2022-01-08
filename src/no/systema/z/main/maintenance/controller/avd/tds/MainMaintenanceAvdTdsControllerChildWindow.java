@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
   
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +50,7 @@ import no.systema.z.main.maintenance.util.MainMaintenanceConstants;
 @Scope("session")
 public class MainMaintenanceAvdTdsControllerChildWindow {
 	
-	private static final Logger logger = LogManager.getLogger(MainMaintenanceAvdTdsControllerChildWindow.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MainMaintenanceAvdTdsControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(800);
 	//customer
 	

@@ -5,7 +5,7 @@ package no.systema.transportdisp.util.manager;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.model.jsonjackson.general.postalcodes.JsonPostalCodesContainer;
@@ -48,7 +48,7 @@ import no.systema.transportdisp.service.html.dropdown.TransportDispDropDownListP
  * 
  */
 public class OppdragTypeParametersMgr {
-	private static final Logger logger = LogManager.getLogger(OppdragTypeParametersMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(OppdragTypeParametersMgr.class.getName());
 	private UrlCgiProxyService urlCgiProxyService;
 	private TransportDispDropDownListPopulationService transportDispDropDownListPopulationService;
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(4000);

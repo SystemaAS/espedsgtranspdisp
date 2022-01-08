@@ -20,7 +20,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.service.login.SystemaWebLoginService;
@@ -37,7 +37,7 @@ import no.systema.main.model.jsonjackson.JsonSystemaUserContainer;
 /*@SessionAttributes(Constants.APP_USER_KEY)
 @Scope("session")*/
 public class LoginController {
-	private static final Logger logger = LogManager.getLogger(LoginController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class.getName());
 	
 	private ModelAndView loginView = new ModelAndView("login");
 

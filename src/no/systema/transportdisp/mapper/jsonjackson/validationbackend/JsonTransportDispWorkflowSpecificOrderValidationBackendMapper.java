@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson.validationbackend;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 //application library
 import no.systema.transportdisp.model.jsonjackson.workflow.order.validationbackend.JsonTransportDispWorkflowSpecificOrderValidationBackendContainer;
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
@@ -16,7 +16,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDi
  * 
  */
 public class JsonTransportDispWorkflowSpecificOrderValidationBackendMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowSpecificOrderValidationBackendMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispWorkflowSpecificOrderValidationBackendMapper.class.getName());
 	/**
 	 * 
 	 * @param utfPayload

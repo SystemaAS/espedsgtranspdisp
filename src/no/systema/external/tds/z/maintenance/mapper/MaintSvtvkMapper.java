@@ -4,7 +4,7 @@
 package no.systema.external.tds.z.maintenance.mapper;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 import no.systema.external.tds.z.maintenance.model.JsonMaintSvtvkContainer;
@@ -15,7 +15,7 @@ import no.systema.external.tds.z.maintenance.model.JsonMaintSvtvkContainer;
  * 
  */
 public class MaintSvtvkMapper extends ObjectMapperAbstractGrandFather{
-	private static final Logger logger = LogManager.getLogger(MaintSvtvkMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSvtvkMapper.class.getName());
 	
 	public JsonMaintSvtvkContainer getContainer(String utfPayload) throws Exception{
 		//At this point we now have an UTF-8 payload

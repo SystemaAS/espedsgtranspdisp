@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -17,7 +17,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.dangerousgoods.
  * 
  */
 public class JsonTransportDispWorkflowSpecificOrderDangerousgoodsMapper extends ObjectMapperAbstractGrandFather{
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowSpecificOrderDangerousgoodsMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispWorkflowSpecificOrderDangerousgoodsMapper.class.getName());
 	/**
 	 * 
 	 * @param utfPayload

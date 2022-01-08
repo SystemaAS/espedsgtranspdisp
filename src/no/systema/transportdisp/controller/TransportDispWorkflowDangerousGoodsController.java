@@ -3,7 +3,7 @@ package no.systema.transportdisp.controller;
 import java.util.*;
 
   
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -63,7 +63,7 @@ import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
 @Scope("session")
 public class TransportDispWorkflowDangerousGoodsController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
-	private static final Logger logger = LogManager.getLogger(TransportDispWorkflowDangerousGoodsController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TransportDispWorkflowDangerousGoodsController.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	

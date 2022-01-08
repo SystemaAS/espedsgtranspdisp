@@ -5,7 +5,7 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
   
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -71,7 +71,7 @@ import no.systema.transportdisp.util.manager.CodeDropDownMgr;
 @SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
 public class TransportDispWorkflowTripListController {
-	private static Logger logger = LogManager.getLogger(TransportDispWorkflowTripListController.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(TransportDispWorkflowTripListController.class.getName());
 	
 	private TransportDispJspViewManager jspMgr = new TransportDispJspViewManager();
 	private RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
@@ -188,7 +188,7 @@ public class TransportDispWorkflowTripListController {
 					return successView;
 
 		    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 		    }
@@ -280,7 +280,7 @@ public class TransportDispWorkflowTripListController {
 		    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    		return successView;
 		    	}else{
-		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 		    		return loginView;
 			}
 		}
@@ -335,7 +335,7 @@ public class TransportDispWorkflowTripListController {
 		    			}
 		    		}
 		    	}else{
-		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 		    		return loginView;
 			}
 		    	return(null);

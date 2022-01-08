@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -18,7 +18,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.JsonTransportDispWork
  * 
  */
 public class JsonTransportDispWorkflowPostUpdateMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowPostUpdateMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispWorkflowPostUpdateMapper.class.getName());
 	/**
 	 * 
 	 * @param utfPayload

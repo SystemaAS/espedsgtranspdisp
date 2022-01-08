@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
 import com.fasterxml.jackson.core.JsonParser;
@@ -21,7 +21,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.shippinglists.JsonTra
  * 
  */
 public class JsonTransportDispWorkflowShippingPlanningOrdersListMapper {
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowShippingPlanningOrdersListMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispWorkflowShippingPlanningOrdersListMapper.class.getName());
 	/**
 	 * 
 	 * @param utfPayload

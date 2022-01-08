@@ -2,7 +2,7 @@ package no.systema.z.main.maintenance.controller.avd.skat;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -56,7 +56,7 @@ import no.systema.external.skat.z.maintenance.service.MaintDkxkodfService;
 
 @Controller
 public class MainMaintenanceAvdSkatNctsExportDkxstdController {
-	private static final Logger logger = LogManager.getLogger(MainMaintenanceAvdSkatNctsExportDkxstdController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MainMaintenanceAvdSkatNctsExportDkxstdController.class.getName());
 	private ModelAndView loginView = new ModelAndView("login");
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();

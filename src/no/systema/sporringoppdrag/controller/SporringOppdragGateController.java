@@ -1,6 +1,6 @@
 package no.systema.sporringoppdrag.controller;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ import no.systema.sporringoppdrag.util.SporringOppdragConstants;
 
 @Controller
 public class SporringOppdragGateController {
-	private static final Logger logger = LogManager.getLogger(SporringOppdragGateController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SporringOppdragGateController.class.getName());
 	private ModelAndView loginView = new ModelAndView("login");
 	private DateTimeManager dateTimeMgr = new DateTimeManager();
 	

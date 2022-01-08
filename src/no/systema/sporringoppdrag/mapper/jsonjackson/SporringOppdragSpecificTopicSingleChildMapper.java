@@ -4,7 +4,7 @@
 package no.systema.sporringoppdrag.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 //application library
 import no.systema.sporringoppdrag.model.jsonjackson.topic.invoice.JsonSporringOppdragSpecificTopicSingleChildInvoiceContainer;
@@ -22,7 +22,7 @@ import no.systema.sporringoppdrag.model.jsonjackson.topic.colli.JsonSporringOppd
  * 
  */
 public class SporringOppdragSpecificTopicSingleChildMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = LogManager.getLogger(SporringOppdragSpecificTopicSingleChildMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SporringOppdragSpecificTopicSingleChildMapper.class.getName());
 	/**
 	 * Invoice child
 	 * @param utfPayload

@@ -5,7 +5,7 @@ import java.net.URI;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -74,7 +74,7 @@ import no.systema.sporringoppdrag.url.store.SporringOppdragUrlDataStore;
 @Scope("session")
 public class SporringOppdragSpecificTopicController {
 	
-	private static final Logger logger = LogManager.getLogger(SporringOppdragSpecificTopicController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SporringOppdragSpecificTopicController.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
@@ -180,7 +180,7 @@ public class SporringOppdragSpecificTopicController {
 					return successView;
 					
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 		    }

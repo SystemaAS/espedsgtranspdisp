@@ -9,7 +9,7 @@ import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.util.JsonDebugger;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDispWorkflowSpecificOrderFraktbrevRecord;
@@ -31,7 +31,7 @@ import no.systema.transportdisp.model.jsonjackson.workflow.order.JsonTransportDi
  * 
  */
 public class ReflectionSpecificOrderHeaderMgr {
-	private static final Logger logger = LogManager.getLogger(ReflectionSpecificOrderHeaderMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(ReflectionSpecificOrderHeaderMgr.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(500);
 	
 	private List<JsonTransportDispWorkflowSpecificOrderFraktbrevRecord> targetFraktbrevListUpdated = new ArrayList<JsonTransportDispWorkflowSpecificOrderFraktbrevRecord>();
@@ -74,7 +74,7 @@ public class ReflectionSpecificOrderHeaderMgr {
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class ReflectionSpecificOrderHeaderMgr {
 		}catch (Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 			
 		}
 	}
@@ -159,7 +159,7 @@ public class ReflectionSpecificOrderHeaderMgr {
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 	}
 	
@@ -214,7 +214,7 @@ public class ReflectionSpecificOrderHeaderMgr {
 		}catch(Exception e){
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
-			logger.info(errors);
+			logger.info(errors.toString());
 		}
 	}
 	/**

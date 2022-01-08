@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
   
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,7 +75,7 @@ import no.systema.transportdisp.url.store.TransportDispUrlDataStore;
 @Scope("session")
 public class TransportDispWorkflowBudgetController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
-	private static final Logger logger = LogManager.getLogger(TransportDispWorkflowBudgetController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TransportDispWorkflowBudgetController.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	

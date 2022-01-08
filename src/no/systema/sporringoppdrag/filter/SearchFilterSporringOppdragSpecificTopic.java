@@ -6,7 +6,7 @@ package no.systema.sporringoppdrag.filter;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * This search class is used at the GUI search behavior
@@ -19,7 +19,7 @@ import org.apache.logging.log4j.*;
  * 
  */
 public class SearchFilterSporringOppdragSpecificTopic {
-	private static final Logger logger = LogManager.getLogger(SearchFilterSporringOppdragSpecificTopic.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SearchFilterSporringOppdragSpecificTopic.class.getName());
 	
 	private String heavd = null;
 	public void setHeavd(String value) {  this.heavd = value; }

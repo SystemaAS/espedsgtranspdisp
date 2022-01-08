@@ -2,7 +2,7 @@ package no.systema.transportdisp.controller.view;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -38,7 +38,7 @@ import no.systema.transportdisp.util.TransportDispConstants;
 
 @Controller
 public class WorkflowTripListViewController {
-	private static final Logger logger = LogManager.getLogger(WorkflowTripListViewController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(WorkflowTripListViewController.class.getName());
 	private ModelAndView loginView = new ModelAndView("login");
 	
 	/**

@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -20,7 +20,7 @@ import java.util.*;
  * 
  */
 public class JsonTransportDispWorkflowFellesutskriftMapper {
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispWorkflowFellesutskriftMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispWorkflowFellesutskriftMapper.class.getName());
 	
 	public JsonTransportDispWorkflowFellesutskriftContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

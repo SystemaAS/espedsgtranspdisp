@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
   
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +49,7 @@ import no.systema.external.skat.z.maintenance.url.store.SkatMaintenanceUrlDataSt
 @Scope("session")
 public class MainMaintenanceAvdSkatControllerChildWindow {
 	
-	private static final Logger logger = LogManager.getLogger(MainMaintenanceAvdSkatControllerChildWindow.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MainMaintenanceAvdSkatControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(800);
 	//customer
 	

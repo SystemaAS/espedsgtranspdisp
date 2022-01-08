@@ -10,7 +10,7 @@ import javax.annotation.PreDestroy;
 
 
   
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -77,7 +77,7 @@ import no.systema.transportdisp.validator.TransportDispWorkflowSpecificOrderInvo
 @Scope("session")
 public class TransportDispMainOrderInvoiceController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
-	private static Logger logger = LogManager.getLogger(TransportDispMainOrderInvoiceController.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(TransportDispMainOrderInvoiceController.class.getName());
 	private ModelAndView loginView = new ModelAndView("login");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();

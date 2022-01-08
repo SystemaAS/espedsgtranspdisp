@@ -4,7 +4,7 @@
 package no.systema.transportdisp.mapper.jsonjackson.oppdragstype;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -22,7 +22,7 @@ import java.util.*;
  * 
  */
 public class JsonTransportDispOppdragTypeMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = LogManager.getLogger(JsonTransportDispOppdragTypeMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTransportDispOppdragTypeMapper.class.getName());
 	
 	/**
 	 * 

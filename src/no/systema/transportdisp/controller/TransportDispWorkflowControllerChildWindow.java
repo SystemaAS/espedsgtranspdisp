@@ -7,7 +7,7 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
   
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -121,7 +121,7 @@ import no.systema.transportdisp.validator.TransportDispWorkflowSpecificTrackTrac
 @Scope("session")
 public class TransportDispWorkflowControllerChildWindow {
 	
-	private static final Logger logger = LogManager.getLogger(TransportDispWorkflowControllerChildWindow.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TransportDispWorkflowControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	private DateTimeManager dateTimeManager = new DateTimeManager();
 	private StringManager strMgr = new StringManager();
@@ -266,7 +266,7 @@ public class TransportDispWorkflowControllerChildWindow {
 					return successView;
 					
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 				
@@ -564,7 +564,7 @@ public class TransportDispWorkflowControllerChildWindow {
 					return successView;
 					
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 				
@@ -668,7 +668,7 @@ public class TransportDispWorkflowControllerChildWindow {
 					return successView;
 					
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 				
@@ -779,7 +779,7 @@ public class TransportDispWorkflowControllerChildWindow {
 	    			logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
 	    			return successView;
 		    	}else{
-		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 		    		return loginView;
 		    	}
 		    }
@@ -886,7 +886,7 @@ public class TransportDispWorkflowControllerChildWindow {
 					return successView;
 					
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 				
@@ -1090,7 +1090,7 @@ public class TransportDispWorkflowControllerChildWindow {
 					return successView;
 					
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 				
@@ -1298,7 +1298,7 @@ public class TransportDispWorkflowControllerChildWindow {
 					return successView;
 					
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 				
@@ -2018,7 +2018,7 @@ public class TransportDispWorkflowControllerChildWindow {
 	    			return successView;
 				
 		    	}else{
-		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 		    		return loginView;
 		    	}
 				
@@ -2125,7 +2125,7 @@ public class TransportDispWorkflowControllerChildWindow {
 	    			return successView;
 				
 		    	}else{
-		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 		    		return loginView;
 		    	}
 				
@@ -2230,7 +2230,7 @@ public class TransportDispWorkflowControllerChildWindow {
 	    			return successView;
 				
 		    	}else{
-		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 				
@@ -2412,7 +2412,7 @@ public class TransportDispWorkflowControllerChildWindow {
 					return successView;
 
 		    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 		    }

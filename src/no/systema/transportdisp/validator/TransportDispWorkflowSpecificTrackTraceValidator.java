@@ -1,6 +1,6 @@
 package no.systema.transportdisp.validator;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import no.systema.transportdisp.model.jsonjackson.workflow.order.logging.JsonTransportDispWorkflowSpecificOrderLoggingRecordEdit;
@@ -18,7 +18,7 @@ import no.systema.main.util.StringManager;
  */
 public class TransportDispWorkflowSpecificTrackTraceValidator implements Validator {
 	private DateValidator dateValidator = new DateValidator();
-	private static Logger logger = LogManager.getLogger(TransportDispWorkflowSpecificTrackTraceValidator.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(TransportDispWorkflowSpecificTrackTraceValidator.class.getName());
 	private NumberFormatterLocaleAware formatter = new NumberFormatterLocaleAware();
 	private StringManager strMgr = new StringManager();
 	
