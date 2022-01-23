@@ -705,7 +705,21 @@
 				        	<input onClick="setBlockUI(this);" class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.transportdisp.search"/>'>
 				        	<input onClick="setBlockUI(this);" class="inputFormSubmitStd" type="button" name="removeFilterButton" id="removeFilterButton" value='<spring:message code="systema.transportdisp.search.remove.filter"/>'>
 				        </td> 
+				        </tr>
 				        
+				        <tr>
+					        <td>	
+				        		&nbsp;<font title="wsfskod" class="text14">Frisøk.kode</font>
+					        </td>
+					        <td>	
+				        		<input type="text" class="inputText" name="wsfskod" id="wsfskod" size="4" maxlength="3" value='${searchFilter.wsfskod}'>
+					        </td>
+					        <td align="right">	
+				        		&nbsp;<font title="wsfssok" class="text14">Frisøk.txt</font>
+					        </td>
+					        <td colspan="3">	
+				        		<input type="text" class="inputText" name="wsfssok" id="wsfssok" size="10" maxlength="35" value='${searchFilter.wsfssok}'>
+					        </td>
 				        </tr>
 				        
 						<tr height="5"><td></td></tr>
