@@ -457,6 +457,7 @@ public class DashboardControllerSporrOppd {
 		appUser.setSignatur(jsonSystemaUserContainer.getSignatur());
 		appUser.setFiland(jsonSystemaUserContainer.getFiland());
 		appUser.setDftdg(jsonSystemaUserContainer.getDftdg());
+		logger.warn("DFTDG:" + appUser.getDftdg());
 		appUser.setAsavd(jsonSystemaUserContainer.getAsavd());
 		
 		//DEBUG

@@ -5,6 +5,9 @@ import java.util.*;
 import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+
+import javawebparts.core.org.apache.commons.lang.StringUtils;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -128,15 +131,25 @@ public class SporringOppdragMainListController {
 			            //binder.registerCustomEditor(...); // if needed
 			            binder.bind(request);
 			            
-			            
 			            if(searchFilter.getWsdtf()==null || "".equals(searchFilter.getWsdtf())){
 			            	//this (asChildwindowInit) will be active only in the first POST from a parent application. It will be remove in this same function below
 			            	if("J".equals(appUser.getIntern())){ 
-			            		searchFilter.setWsdtf(this.dateTimeMgr.getCurrentDate_ISO());			            		
-
+			            		searchFilter.setWsdtf(this.dateTimeMgr.getCurrentDate_ISO());
+			            		/*
+			            		if(StringUtils.isNotEmpty(appUser.getDftdg())){
+			            			int DEFAULT_NUMBER_OF_DAYS_BACK = Integer.parseInt(appUser.getDftdg()) * -1;
+			            			searchFilter.setWsdtf(this.dateTimeMgr.getSpecificDayFrom_CurrentDate_ISO(DEFAULT_NUMBER_OF_DAYS_BACK));
+			            		}*/
+			            		
 			            	}else{
-			            		int DEFAULT_NUMBER_OF_MONTHS_BACK = -1;
-			            		searchFilter.setWsdtf(this.dateTimeMgr.getSpecificMonthFrom_CurrentDate_ISO(DEFAULT_NUMBER_OF_MONTHS_BACK));			            		
+			            		//Check if the parameter is present in the user profile (AS400: -->go esped menu and option 8)(
+			            		if(StringUtils.isNotEmpty(appUser.getDftdg())){
+			            			int DEFAULT_NUMBER_OF_DAYS_BACK = Integer.parseInt(appUser.getDftdg()) * -1;
+			            			searchFilter.setWsdtf(this.dateTimeMgr.getSpecificDayFrom_CurrentDate_ISO(DEFAULT_NUMBER_OF_DAYS_BACK));
+			            		}else {
+			            			int DEFAULT_NUMBER_OF_MONTHS_BACK = -1;
+			            			searchFilter.setWsdtf(this.dateTimeMgr.getSpecificMonthFrom_CurrentDate_ISO(DEFAULT_NUMBER_OF_MONTHS_BACK));
+			            		}
 			            	}
 			            }
 			            //put the search filter in session in case we are wondering around in other tabs. This should always ensure

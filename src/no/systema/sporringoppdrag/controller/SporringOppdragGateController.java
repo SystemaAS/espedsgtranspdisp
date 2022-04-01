@@ -59,7 +59,7 @@ public class SporringOppdragGateController {
 			return this.loginView;
 		}else{
 			//appUser.setActiveMenu("INIT");
-			logger.info("Inside method: sporringoppdraggate");
+			logger.warn("Inside method: sporringoppdraggate");
 			logger.info("appUser user:" + appUser.getUser());
 			logger.info("appUser lang:" + appUser.getUsrLang());
 			logger.info("appUser userAS400:" + appUser.getUserAS400());
